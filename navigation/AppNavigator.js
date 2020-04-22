@@ -1,5 +1,6 @@
 import React from 'react';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+// import { NavigationContainer } from '@react-navigation/native';
 
 import MainTabNavigator from './MainTabNavigator';
 import AccessScreen from '../screens/AccessScreen';

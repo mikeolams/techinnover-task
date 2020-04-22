@@ -2,6 +2,10 @@ import React from 'react';
 import { Platform } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+// import { NavigationContainer } from '@react-navigation/native';
+// import { createBottomTabNavigator } from '@react-navigation/tabs';
+// import { createAppContainer } from 'react-navigation';
+// import { createStackNavigator } from '@react-navigation/stack';
 
 import TabBarIcon from '../components/TabBarIcon';
 import TabBarImage from '../components/TabBarImage';
@@ -18,6 +22,8 @@ const config = Platform.select({
   web: { headerMode: 'screen' },
   default: {},
 });
+
+// const Stack = createStackNavigator();
 
 const HomeStack = createStackNavigator(
   {
@@ -157,6 +163,22 @@ const tabNavigator = createBottomTabNavigator({
   // SettingsStack,
   // App: StoreScreen,
 });
+
+// const tabNavigator = createBottomTabNavigator(
+//   ()=>{
+//     return (<NavigationContainer>
+//       <Stack.Navigator initialRouteName="Home">
+//         <Stack.Screen name="Home" component={Dashboard} />
+//         <Stack.Screen name="Store" component={StoreScreen} />
+//         <Stack.Screen name="Transaction" component={TransactionScreen} />
+//         <Stack.Screen name="Wallet" component={WalletScreen} />
+//       </Stack.Navigator>
+//       </NavigationContainer> )
+//   }
+// );
+
+
+ 
 
 tabNavigator.path = '';
 

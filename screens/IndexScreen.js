@@ -230,11 +230,17 @@ const styles = StyleSheet.create({
     width: 160,
     height: 160,
     resizeMode: 'contain',
+    // zIndex:-2,
   },
   circleContainer:{
     flex:1,
     justifyContent:'center',
     // backgroundColor: '#aca',
+    // borderRadius: 160,
+    // borderColor: '#0C9121',
+    // borderWidth: 1,
+    // zIndex:7,
+    // height: 130
   },
   textContainer:{
     flex:1,

@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     Image,
     Platform,
@@ -13,6 +13,45 @@ import {
 import { MonoText } from '../components/StyledText';
 
 export default function StoreScreen() {
+
+    const [productsArray, setProductsArray] = useState([]);
+    const [productsReceived, setProductsReceived] = useState(false);
+
+    const fetchProducts =async () => {    
+        await fetch('https://farmcenta.com/api/v1/products')
+       .then(resp=>resp.json())
+       .then(json =>{
+    //      json.map((item)=> {
+    //     //  if(item.categories[0]===124){
+    //     //    // console.log(item.categories[0])
+    //     // //    setNewArray(newArray.push(item))
+    //     //  }
+    //    })
+    setProductsArray(json)
+    setProductsReceived(true)
+    // console.log(productsArray.products[0].category)
+    // console.log(productsArray.products[10])
+    // console.log(productsArray)
+    // console.log(productsReceived)
+    // console.log(productsArray) photo,category,amount,status, name,location,id,desc,
+
+        //  save(JSON.stringify(newArray));
+ 
+       } )
+       .catch(err=> {
+         console.log(err);
+         setProductsArray(err)
+         console.log(productsArray)
+        //  setNewsItems(newsItems.push(err.message));
+       });
+     };
+
+     useEffect(() => {
+        fetchProducts();
+           // retrieveData();
+        }, []);
+
+
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
@@ -25,15 +64,71 @@ export default function StoreScreen() {
                     />
                 </View>
                 <ScrollView
-                    style={styles.container}
+                    // style={styles.container}
                     contentContainerStyle={styles.contentContainer}>
 
                     <View style={styles.content2Container}>
                         <View style={{...styles.rowContainer, justifyContent:'center'}} >
                             <Text style={styles.text2}>Farm Store</Text>
                         </View>
+                        <View style={styles.productsContainer} >
+                        {productsReceived? productsArray.products.map((item)=>
+                            <TouchableOpacity key={item.id}style={styles.itemContainer}>
+                                <Image
+                                source={
+                                    {uri:'https://farmcenta.com'+item.photo}
+                                }
+                                style={styles.itemImage}
+                            />
+                            {/* {productsArray.products.map((item)=>{console.log(item.photo)})} */}
+                             <Text style={styles.itemTitle}>{item.name}</Text>
+                            {/* <Text>{productsArray.products[0].category}</Text> */}
+                            <View style={styles.itemTextBelow}>
+                                {/* <View><Text>N{item.amount}</Text></View> */}
+                                <View><Text>{item.location}</Text></View>
+                            </View>
+                            </TouchableOpacity>):null}
+                            </View>
+                        
+                        {/* <View style={styles.rowContainer} > */}
+                            
+                            {/* <Text>{productsArray.products[0].category}</Text> */}
+                            {/* <Image
+                                source={
+                                    {uri:'https://farmcenta.com'+productsArray.products[0].photo}
+                                }
+                                style={styles.logoImage}
+                            />
+                            <Image
+                                source={
+                                    require('../assets/images/ginger3x.png')
+                                }
+                                style={styles.logoImage}
+                            />
+                        </View>
 
                         <View style={styles.rowContainer} >
+                            <Image
+                                source={
+                                    require('../assets/images/cattle-farm3x.png')
+                                }
+                                style={styles.logoImage}
+                            />
+                            <Image
+                                source={
+                                    require('../assets/images/ginger3x.png')
+                                }
+                                style={styles.logoImage}
+                            />
+                            <Image
+                                source={
+                                    require('../assets/images/ginger3x.png')
+                                }
+                                style={styles.logoImage}
+                            />
+                        </View> */}
+
+                        {/* <View style={styles.rowContainer} >
                             <Image
                                 source={
                                     require('../assets/images/cattle-farm3x.png')
@@ -94,49 +189,7 @@ export default function StoreScreen() {
                                 }
                                 style={styles.logoImage}
                             />
-                        </View>
-
-                        <View style={styles.rowContainer} >
-                            <Image
-                                source={
-                                    require('../assets/images/cattle-farm3x.png')
-                                }
-                                style={styles.logoImage}
-                            />
-                            <Image
-                                source={
-                                    require('../assets/images/ginger3x.png')
-                                }
-                                style={styles.logoImage}
-                            />
-                            <Image
-                                source={
-                                    require('../assets/images/ginger3x.png')
-                                }
-                                style={styles.logoImage}
-                            />
-                        </View>
-
-                        <View style={styles.rowContainer} >
-                            <Image
-                                source={
-                                    require('../assets/images/cattle-farm3x.png')
-                                }
-                                style={styles.logoImage}
-                            />
-                            <Image
-                                source={
-                                    require('../assets/images/ginger3x.png')
-                                }
-                                style={styles.logoImage}
-                            />
-                            <Image
-                                source={
-                                    require('../assets/images/ginger3x.png')
-                                }
-                                style={styles.logoImage}
-                            />
-                        </View>
+                        </View> */}
                         
                     </View>
                 </ScrollView>
@@ -203,14 +256,49 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        // paddingTop:80
     },
     innerContainer: {
         flex: 1,
+        // paddingBottom:50
         // alignItems:'center',
     },
     contentContainer: {
-        flex: 1,
+        // flex: 1,
         alignItems: 'center',
+        // paddingBottom:200
+    },
+    productsContainer:{
+        flex: 1,
+        flexWrap:"wrap",
+        flexDirection: 'row',
+        // backgroundColor:'yellow',
+        justifyContent:'center'
+    },
+    itemContainer:{
+        // flex:1,
+        alignItems: 'center',
+        // textAlign: 'center',
+        // backgroundColor:'yellow'
+        width:'30%',
+        margin:4,
+        borderWidth:.7,
+        borderColor:'black',
+        borderRadius:20
+    },
+    itemTitle:{
+        textAlign:'center',
+        fontWeight:'bold'
+    },
+    itemTextBelow:{
+        // width:'100%',
+        // flex:2,
+        // backgroundColor:'white',
+        marginTop:15,
+        // flexDirection: 'row',
+        // justifyContent:'space-between',
+        // marginHorizontal:6
+        // alignContent:'space-between'
     },
     imageContainer: {
         // flex:1,
@@ -233,22 +321,28 @@ const styles = StyleSheet.create({
     },
     content2Container: {
         flex: 1,
-        paddingTop: 20,
+        paddingTop:10,
         marginVertical: 15,
         justifyContent: 'space-between',
         //   alignItems:'center',
         // backgroundColor: '#eee',
-        width: '90%',
-        borderRadius: 10,
+        width: '100%',
+        // borderRadius: 10,
         // height:"20%"
+        // paddingBottom:50
     },
 
     text2: {
         color: '#0E861C',
         fontWeight:'bold'
     },
-    
     logoImage: {
+        width: 180,
+        height: 50,
+        resizeMode: 'contain',
+        marginTop:40
+    },
+    itemImage: {
         width: 100,
         height: 100,
         resizeMode: 'contain',

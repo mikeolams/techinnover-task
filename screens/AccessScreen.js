@@ -46,25 +46,125 @@ export default function AccessScreen(props) {
   const handleSubmit = values => {
     if (values.email.length > 0 && values.password.length > 0) {
       // props.navigation.navigate('App')
-      setTimeout(() => {
-        props.navigation.navigate('App')
-      }, 3000)
+      // console.log(values);
+      console.log(JSON.stringify(values));
+      submitLogin(values);
+      // setTimeout(() => {https://farmcenta.com/api/v1/login/
+      //   props.navigation.navigate('App')
+      // }, 3000)ss
     }
-  }
+  };
+
+  const submitLogin =async (values) => {    
+    await fetch('https://farmcenta.com/api/v1/login',{
+      method: 'POST',
+      // mode: 'cors', // no-cors, *cors, same-origin
+      // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+      // credentials: 'same-origin', // include, *same-origin, omit
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      // redirect: 'follow', // manual, *follow, error
+      // referrerPolicy: 'no-referrer', // no-referrer, *client
+      body: JSON.stringify(values) // body data type must match "Content-Type" header
+    })
+  //  .then(resp=>console.log(JSON.parse(resp)))
+    .then(resp=>resp.json())
+    .then(resp=>{
+      // console.log(resp);
+      // console.log('name -'+resp.details.name);
+      // console.log('email -'+resp.details.email);
+      // console.log('pic -'+resp.details.avatar);
+      // console.log('token -'+resp.token);
+      // const data={
+      //   "name": resp.details.name,
+      //   "email": resp.details.email,
+      //   "avatar": resp.details.avatar,
+      //   "token": resp.token,
+      // }
+      // props.navigation.actions.setParams(data)
+      // props.navigation.setParams(data)
+      // console.log(props.screenProps)
+      // console.log(props)
+      
+      // props.navigation.getParam()
+      // props.navigation.navigate('Main',{data});
+      // props.navigation.navigate('Main', {
+      //   screen: 'Home',
+      //   params:{
+      //   "name": resp.details.name,
+      //   "email": resp.details.email,
+      //   "avatar": resp.details.avatar,
+      //   "token": resp.token
+      // }});
+console.log(resp.details.name)
+      props.navigation.navigate('Home', {
+        "name": resp.details.name,
+        "email": resp.details.email,
+        "avatar": resp.details.avatar,
+        "token": resp.token
+      });
+
+      // props.navigation.setParams({
+      //   "name": resp.details.name,
+      //   "email": resp.details.email,
+      //   "avatar": resp.details.avatar,
+      //   "token": resp.token,
+      // });
+      // props.navigation.navigate('Main');
+    })
+  //  .then(resp=>resp.json())JSON.stringify
+  //  .then(resp=>console.log(resp.json().stringify))
+   .catch(err=> {
+    //  console.log(err);
+     console.warn('Wrong password '+err )
+    //  setLoginState(fasle)
+   })
+ };
+
+//  async function postData(url = '', data = {}) {
+//   // Default options are marked with *
+//   const response = await fetch(url, {
+//     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+//     mode: 'cors', // no-cors, *cors, same-origin
+//     cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+//     credentials: 'same-origin', // include, *same-origin, omit
+//     headers: {
+//       'Content-Type': 'application/json'
+//       // 'Content-Type': 'application/x-www-form-urlencoded',
+//     },
+//     redirect: 'follow', // manual, *follow, error
+//     referrerPolicy: 'no-referrer', // no-referrer, *client
+//     body: JSON.stringify(data) // body data type must match "Content-Type" header
+//   });
+//   return response.json(); // parses JSON response into native JavaScript objects
+// }
 
   const goToSignup = () => {
     console.log('Signup')
     // props.navigation.navigate('Signup')
-  }
+  };
 
-  const [toggle, setToggle] = useState(true)
+  const [toggle, setToggle] = useState(true);
+  // const [loginState, setLoginState] = useState(false);
 
   const toggleHandler = () => {
     console.log('Signup')
     // props.navigation.navigate('Signup')
     setToggle(!toggle)
-  }
+  },
+  loginHandler = () => {
+    // props.navigation.navigate('Signup')
+    setToggle(true)
+  },
+  signUpHandler = () => {
+    // props.navigation.navigate('Signup')
+    setToggle(false)
+  };
 
+  // useEffect(() => {
+  //   console.log('test')
+  // }, [loginState]);
 
   return (
     <View style={styles.container}>
@@ -79,13 +179,15 @@ export default function AccessScreen(props) {
           />
 
 <View style={styles.authButtonContainer}>
-      <TouchableOpacity onPress={toggleHandler} style={styles.nextButton}>
+      <TouchableOpacity onPress={signUpHandler} style={styles.nextButton}>
+      {/* <TouchableOpacity onPress={toggleHandler} style={styles.nextButton}> */}
             <Text style={styles.helpLinkText}>
               Sign Up
             </Text>
           </TouchableOpacity>
-{/* <TouchableOpacity onPress={toggleHandler} style={styles.skipButton}> */}
-<TouchableOpacity onPress={()=>props.navigation.navigate('Main')} style={styles.skipButton}>
+{/* <TouchableOpacity style={styles.skipButton}> */}
+{/* <TouchableOpacity onPress={()=>props.navigation.navigate('Main')} style={styles.skipButton}> */}
+<TouchableOpacity onPress={loginHandler} style={styles.skipButton}>
             <Text style={styles.skipButtonText}>
               Login
             </Text>
@@ -358,7 +460,7 @@ function DevelopmentModeNotice() {
     );
   }
 }
-
+console.log(AccessScreen.data)
 function handleLearnMorePress() {
   // WebBrowser.openBrowserAsync(
   //   'https://docs.expo.io/versions/latest/workflow/development-mode/'
@@ -377,6 +479,9 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: '#fff',
   },
+  // signUpContainer:{
+  //   paddingTop:100
+  // },
   developmentModeText: {
     marginBottom: 20,
     color: 'rgba(0,0,0,0.4)',
@@ -454,8 +559,9 @@ const styles = StyleSheet.create({
     width:'70%'
   },
   formContainer: {
-    // flex: 1,
+    flex: 1,
     // backgroundColor: '#fff'
+    width:'80%'
   },
   signUpContainer: {
     marginTop:30,

@@ -25,6 +25,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": "An app use by farmers sponsor by farmcenta"
   }
 }

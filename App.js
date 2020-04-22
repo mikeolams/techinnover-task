@@ -15,6 +15,7 @@ import StoreScreen from './screens/StoreScreen';
 import TransactionScreen from './screens/TransactionScreen';
 import NotificationScreen from './screens/NotificationScreen';
 import WalletScreen from './screens/WalletScreen';
+// import { NavigationContainer } from '@react-navigation/native';
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -29,6 +30,7 @@ export default function App(props) {
     );
   } else {
     return (
+      // <NavigationContainer>
       <View style={styles.container}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <AppNavigator />
@@ -41,7 +43,8 @@ export default function App(props) {
         {/* <TransactionScreen/> */}
         {/* <NotificationScreen/> */}
         {/* <WalletScreen/> */}
-      </View>
+        </View>
+        // </NavigationContainer>
     );
   }
 }
