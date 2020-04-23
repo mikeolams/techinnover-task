@@ -42,8 +42,8 @@ export default function Dashboard(props) {
         const token = navigation.getParam('token', 'some default value');
 //TESTING
         // console.log(navigation)
-        // console.log(JSON.stringify(token))
-        console.log(userAvatar,userEmail)
+        console.log(JSON.stringify(token))
+        // console.log(userAvatar,userEmail)
 
         const getUserTransaction =async () => {    
           await fetch('https://farmcenta.com/api/v1/transactions?token='+token,{

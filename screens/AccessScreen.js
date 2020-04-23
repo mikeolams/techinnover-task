@@ -44,16 +44,31 @@ export default function AccessScreen(props) {
   // }
 
   const handleSubmit = values => {
-    if (values.email.length > 0 && values.password.length > 0) {
-      // props.navigation.navigate('App')
-      // console.log(values);
-      console.log(JSON.stringify(values));
-      submitLogin(values);
-      // setTimeout(() => {https://farmcenta.com/api/v1/login/
-      //   props.navigation.navigate('App')
-      // }, 3000)ss
-    }
+      // console.log(actionType);
+if(actionType==='login'){
+  // console.log(actionType)
+  if (values.email.length > 0 && values.password.length > 0) {
+   
+    console.log(JSON.stringify(values));
+    submitLogin(values);
+    // setTimeout(() => {https://farmcenta.com/api/v1/login/
+    //   props.navigation.navigate('App')
+    // }, 3000)ss
+  }
+}else{
+  // console.log(actionType);
+  console.log(JSON.stringify(values));
+  submitSignUp(values);
+}
+// if(actionType==='signup'){
+//   console.log(actionType);
+//   console.log(JSON.stringify(values));
+//   submitSignUp(values);
+// }
+    
   };
+
+  const [actionType, setActionType] = useState('');
 
   const submitLogin =async (values) => {    
     await fetch('https://farmcenta.com/api/v1/login',{
@@ -122,6 +137,26 @@ console.log(resp.details.name)
    })
  };
 
+//  Sign up logic
+const submitSignUp =async (values) => {    
+  await fetch('https://farmcenta.com/api/v1/signup',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: values // body data type must match "Content-Type" header
+    // body: JSON.stringify(values) // body data type must match "Content-Type" header
+  })
+  .then(resp=>resp.json())
+  .then(resp=>console.log(JSON.parse(resp)))
+//   .then(resp=>{
+// console.log(resp)
+//   })
+ .catch(err=> {
+   console.warn('Wrong parameters '+err )
+ })
+};
+
 //  async function postData(url = '', data = {}) {
 //   // Default options are marked with *
 //   const response = await fetch(url, {
@@ -155,10 +190,12 @@ console.log(resp.details.name)
   },
   loginHandler = () => {
     // props.navigation.navigate('Signup')
+    setActionType('login')
     setToggle(true)
   },
   signUpHandler = () => {
     // props.navigation.navigate('Signup')
+    setActionType('signup')
     setToggle(false)
   };
 
@@ -306,7 +343,7 @@ console.log(resp.details.name)
           //  style={{...styles.container,...styles.scrollContainer}}
            contentContainerStyle={styles.contentContainer}>
           <Formik
-          initialValues={{ email: '', password: '' }}
+          initialValues={{ name: '', email: '', password: '',password_confirmation: '' }}
           onSubmit={values => {handleSubmit(values)}}
           validationSchema={validationSchema}
         >
@@ -315,17 +352,17 @@ console.log(resp.details.name)
             <Fragment>
               {/* {console.log(formikProps)} */}
               <FormInput
-                name="fullname"
-                value={formikProps.values.email}
-                onChangeText={formikProps.handleChange('fullname')}
+                name="name"
+                value={formikProps.values.name}
+                onChangeText={formikProps.handleChange('name')}
                 placeholder="Enter Full Name"
                 // autoCapitalize="none"
                 // iconName="ios-mail"
                 iconColor="#2C384A"
                 touched
-                onBlur={formikProps.handleBlur('fullname')}
+                onBlur={formikProps.handleBlur('name')}
               />
-              <ErrorMessage errorValue={formikProps.errors.email} />
+              <ErrorMessage errorValue={formikProps.errors.name} />
                <FormInput
                 name="email"
                 value={formikProps.values.email}
@@ -350,47 +387,25 @@ console.log(resp.details.name)
                 onBlur={formikProps.handleBlur('password')}
               />
               <ErrorMessage errorValue={formikProps.errors.password} />
+
               <FormInput
-                name="birthday"
-                value={formikProps.values.email}
-                onChangeText={formikProps.handleChange('birthday')}
-                placeholder="Enter date of birth"
-                // autoCapitalize="none"
-                // iconName="ios-mail"
+                name="password_confirmation"
+                value={formikProps.values.password_confirmation}
+                onChangeText={formikProps.handleChange('password_confirmation')}
+                placeholder="confirm password"
+                secureTextEntry
+                iconName="ios-lock"
                 iconColor="#2C384A"
                 touched
-                onBlur={formikProps.handleBlur('birthday')}
+                onBlur={formikProps.handleBlur('password_confirmation')}
               />
-              <ErrorMessage errorValue={formikProps.errors.email} />
-              <FormInput
-                name="country"
-                value={formikProps.values.email}
-                onChangeText={formikProps.handleChange('country')}
-                placeholder="Enter Country"
-                // autoCapitalize="none"
-                // iconName="ios-mail"
-                iconColor="#2C384A"
-                touched
-                onBlur={formikProps.handleBlur('country')}
-              />
-              <ErrorMessage errorValue={formikProps.errors.email} />
-              <FormInput
-                name="state"
-                value={formikProps.values.email}
-                onChangeText={formikProps.handleChange('state')}
-                placeholder="Enter State"
-                // autoCapitalize="none"
-                // iconName="ios-mail"
-                iconColor="#2C384A"
-                touched
-                onBlur={formikProps.handleBlur('state')}
-              />
-              <ErrorMessage errorValue={formikProps.errors.email} />
+              <ErrorMessage errorValue={formikProps.errors.password} />
+              
               <View style={styles.buttonContainer}>
                 <FormButton
                   buttonType="outline"
                   onPress={formikProps.handleSubmit}
-                  title="Enter"
+                  title="Submit"
                   backgroundColor="#0C9121"
                   buttonColor = "#fff"
                   disabled={!formikProps.isValid || formikProps.isSubmitting}
