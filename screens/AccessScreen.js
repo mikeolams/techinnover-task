@@ -70,72 +70,129 @@ if(actionType==='login'){
 
   const [actionType, setActionType] = useState('');
 
-  const submitLogin =async (values) => {    
-    await fetch('https://farmcenta.com/api/v1/login',{
-      method: 'POST',
-      // mode: 'cors', // no-cors, *cors, same-origin
-      // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
-      // credentials: 'same-origin', // include, *same-origin, omit
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      // redirect: 'follow', // manual, *follow, error
-      // referrerPolicy: 'no-referrer', // no-referrer, *client
-      body: JSON.stringify(values) // body data type must match "Content-Type" header
-    })
-  //  .then(resp=>console.log(JSON.parse(resp)))
-    .then(resp=>resp.json())
-    .then(resp=>{
-      // console.log(resp);
-      // console.log('name -'+resp.details.name);
-      // console.log('email -'+resp.details.email);
-      // console.log('pic -'+resp.details.avatar);
-      // console.log('token -'+resp.token);
-      // const data={
-      //   "name": resp.details.name,
-      //   "email": resp.details.email,
-      //   "avatar": resp.details.avatar,
-      //   "token": resp.token,
-      // }
-      // props.navigation.actions.setParams(data)
-      // props.navigation.setParams(data)
-      // console.log(props.screenProps)
-      // console.log(props)
-      
-      // props.navigation.getParam()
-      // props.navigation.navigate('Main',{data});
-      // props.navigation.navigate('Main', {
-      //   screen: 'Home',
-      //   params:{
-      //   "name": resp.details.name,
-      //   "email": resp.details.email,
-      //   "avatar": resp.details.avatar,
-      //   "token": resp.token
-      // }});
-console.log(resp.details.name)
-      props.navigation.navigate('Home', {
-        "name": resp.details.name,
-        "email": resp.details.email,
-        "avatar": resp.details.avatar,
-        "token": resp.token
-      });
+  // multiple api call
+  // Created a function that returns a Promise.
+const loginCall= async (values)=> {
+  return await fetch('https://farmcenta.com/api/v1/login',{
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(values)
+  })
+  .then(res => res.json());
+},
 
-      // props.navigation.setParams({
-      //   "name": resp.details.name,
-      //   "email": resp.details.email,
-      //   "avatar": resp.details.avatar,
-      //   "token": resp.token,
-      // });
-      // props.navigation.navigate('Main');
-    })
-  //  .then(resp=>resp.json())JSON.stringify
-  //  .then(resp=>console.log(resp.json().stringify))
-   .catch(err=> {
-    //  console.log(err);
-     console.warn('Wrong password '+err )
-    //  setLoginState(fasle)
-   })
- };
+transactionsCall= (values)=> {
+      loginCall(values)
+        .then(login => {
+          fetch('https://farmcenta.com/api/v1/transactions?token='+login.token,{
+            method: 'POST'
+          })
+          .then(res => res.json())
+          .then(transactions => {
+            // console.log('token - '+login.token);
+          // console.log(login, transactions);
+          // if(transactions.transactions.length!=0){
+          //   console.log('yes');
+          //   console.log(transactions.transactions.length);
+          //   // setLoading(false)
+          //  };
+           
+          props.navigation.navigate('Home', {
+            "name": login.details.name,
+            "email": login.details.email,
+            "avatar": login.details.avatar,
+            "token": login.token,
+            "transactions":transactions
+          });
+        })
+        .catch(err=> {
+          console.warn('Wrong parameters '+err )
+        })
+        });
+};
+
+const submitLogin =async (values) => {
+  transactionsCall(values);
+ }
+//   const submitLogin =async (values) => {    
+//     await fetch('https://farmcenta.com/api/v1/login',{
+//       method: 'POST',
+//       // mode: 'cors', // no-cors, *cors, same-origin
+//       // cache: 'no-cache', // *default, no-cache, reload, force-cache, only-if-cached
+//       // credentials: 'same-origin', // include, *same-origin, omit
+//       headers: {
+//         // 'Accept': 'application/json, text/plain, */*',
+//         'Content-Type': 'application/json'
+//       },
+//       // redirect: 'follow', // manual, *follow, error
+//       // referrerPolicy: 'no-referrer', // no-referrer, *client
+//       // body: values // body data type must match "Content-Type" header
+//       body: JSON.stringify(values) // body data type must match "Content-Type" header
+//     })
+//   //  .then(resp=>console.log(JSON.parse(resp)))
+//     .then(resp=>resp.json())
+//     // .then(resp=>resp.text())
+//     // .then(resp=>JSON.parse(resp))
+//     .then(resp=>{
+//       // console.log(resp);
+//       // console.log('name -'+resp.details.name);
+//       // console.log('email -'+resp.details.email);
+//       // console.log('pic -'+resp.details.avatar);
+//       console.log('token - '+resp.token);
+//       // let transaction=[];
+//       // transactionCall;
+//       // let transactionCall =async()=> await fetch('https://farmcenta.com/api/v1/transactions?token='+resp.token,{
+//       //   method: 'POST'
+//       // }).then(resp=>resp.json()).then(resp=>transaction.push(resp));
+//       // console.log(transaction);
+      
+//       // const data={
+//       //   "name": resp.details.name,
+//       //   "email": resp.details.email,
+//       //   "avatar": resp.details.avatar,
+//       //   "token": resp.token,
+//       // }
+//       // props.navigation.actions.setParams(data)
+//       // props.navigation.setParams(data)
+//       // console.log(props.screenProps)
+//       // console.log(props)
+      
+//       // props.navigation.getParam()
+//       // props.navigation.navigate('Main',{data});
+//       // props.navigation.navigate('Main', {
+//       //   screen: 'Home',
+//       //   params:{
+//       //   "name": resp.details.name,
+//       //   "email": resp.details.email,
+//       //   "avatar": resp.details.avatar,
+//       //   "token": resp.token
+//       // }});
+// console.log(resp.details.name)
+//       props.navigation.navigate('Home', {
+//         "name": resp.details.name,
+//         "email": resp.details.email,
+//         "avatar": resp.details.avatar,
+//         "token": resp.token
+//       });
+
+//       // props.navigation.setParams({
+//       //   "name": resp.details.name,
+//       //   "email": resp.details.email,
+//       //   "avatar": resp.details.avatar,
+//       //   "token": resp.token,
+//       // });
+//       // props.navigation.navigate('Main');
+//     })
+//   //  .then(resp=>resp.json())JSON.stringify
+//   //  .then(resp=>console.log(resp.json().stringify))
+//    .catch(err=> {
+//     //  console.log(err);
+//      console.warn('Wrong password '+err )
+//     //  setLoginState(fasle)
+//    })
+//  };
 
 //  Sign up logic
 const submitSignUp =async (values) => {    

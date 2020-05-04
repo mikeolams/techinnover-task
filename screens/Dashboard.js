@@ -39,33 +39,45 @@ export default function Dashboard(props) {
         const userName = navigation.getParam('name', 'NO-Username');  
         const userEmail = navigation.getParam('email', 'NO-email');  
         const userAvatar = navigation.getParam('avatar', 'NO-User');  
-        const token = navigation.getParam('token', 'some default value');
+        // const token = navigation.getParam('token', 'some default value');
+        const transactions = navigation.getParam('transactions', 'some default value');
 //TESTING
         // console.log(navigation)
-        console.log(JSON.stringify(token))
+        // console.log(JSON.stringify(token))
+        // console.log(transactions.transactions);
         // console.log(userAvatar,userEmail)
+        const getUserTransaction = () => {
+          setTransaction(transactions);
+                 if(transactions.transactions.length!=0){
+                  // console.log('yes')
+                  setLoading(false)
+                 };
+         };
 
-        const getUserTransaction =async () => {    
-          await fetch('https://farmcenta.com/api/v1/transactions?token='+token,{
-            method: 'POST'
-          })
-        //  .then(resp=>console.log(JSON.parse(resp)))
-          .then(resp=>resp.json())
-          // .then(resp=>console.log(resp.json()))
-          .then(json=>{
-            setTransaction(json)
-            setLoading(false)
-            // console.log(json)
-            console.log(transaction)
-            console.log(transaction.transactions[0].amount)
+      //   const getUserTransaction =async () => {    
+      //     await fetch('https://farmcenta.com/api/v1/transactions?token='+token,{
+      //       method: 'POST'
+      //     })
+      //   //  .then(resp=>console.log(JSON.parse(resp)))
+      //     .then(resp=>resp.json())
+      //     // .then(resp=>resp.text())
+      //     // .then(resp=>console.log(resp.json()))
+      //     .then(json=>{
+      //       setTransaction(json)
+      //       // console.log(json)
+      //       console.log(transaction)
+      //       console.log(transaction.transactions[0].amount)
+      //       if(transaction.transactions[0]){
+      //         setLoading(false)
+      //       }
 
-          })
-        //  .then(resp=>resp.json())JSON.stringify
-        //  .then(resp=>console.log(resp.json().stringify))
-         .catch(err=> {
-           console.warn('Wrong password '+err )
-         })
-       };
+      //     })
+      //   //  .then(resp=>resp.json())JSON.stringify
+      //   //  .then(resp=>console.log(resp.json().stringify))
+      //    .catch(err=> {
+      //      console.warn('Error is: '+err )
+      //    })
+      //  };
 
        useEffect(() => {
         getUserTransaction();
@@ -84,35 +96,49 @@ export default function Dashboard(props) {
          
           </View>
           <View style={styles.id}>
-          <Text>{userName}</Text>
            <Image source={{uri:userAvatar}} style={styles.picImage}/>
+           <Text>{userName}</Text>
            </View>
             <ScrollView 
             style={styles.container}
             contentContainerStyle={styles.contentContainer}>
             <View style={styles.content1Container}>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text}>Total Investment</Text>
-                <Text style={styles.text}>Return</Text>
-                <Text style={styles.text}>Total Farm Units</Text>
+                <View style={styles.rowHeadContainer} >
+                  <View style={styles.colHeadings}>
+                    <Text style={styles.colText}>Total Investment:</Text>
+                  </View>
+                  <View style={styles.colHeadings}>
+                    <Text style={styles.colText}>Total Return:</Text>
+                  </View>
+                  <View style={styles.colHeadings}>
+                   <Text style={styles.colText}>Total Farm Units:</Text>
+                  </View>
                 </View>
-                <View style={styles.rowContainer} >
-                {loading?null: <Fragment>
-                  <Text style={styles.text}>{transaction.transactions[0].quantity}</Text>
-                <Text style={styles.text}>{transaction.transactions[0].return}</Text>
-                <Text style={styles.text}>{transaction.transactions[0].product}</Text>
-                </Fragment>
-                }
+                <View style={styles.rowContent} >
+                {/* {loading?null: <Fragment> */}
+                  <View style={styles.colHeadings}>
+                  <Text style={styles.text}>#{loading?0:transaction.transactions[0].amount}</Text>
+                  {/* <Text style={styles.text}>{transaction.transactions[0].product}</Text> */}
+                  </View>
+                  <View style={styles.colHeadings}>
+                  <Text style={styles.text}>#{loading?0:transaction.transactions[0].payback}</Text>
+                  {/* <Text style={styles.text}>{transaction.transactions[0].return}</Text> */}
+                  </View>
+                  <View style={styles.colHeadings}>
+                  <Text style={styles.text}>{loading?0:transaction.transactions[0].quantity}</Text>
+                  </View>
+                {/* </Fragment>
+                } */}
                 </View>
-                <View style={styles.rowContainer} >
+                {/* <View style={styles.rowContainer} >
                 <Text style={styles.text}>See More</Text>
                 <Text style={styles.text}>See More</Text>
                 <Text style={styles.text}>See More</Text>
-                </View>
-                <View style={styles.rowContainer} >
+                </View> */}
+                <View style={styles.rowHeadContainer} >
                 <View>
                 <Text style={styles.boldText}>Pay Back Date:</Text>
-                {loading?null:<Text style={styles.text}>{transaction.transactions[0].payback_date}</Text>}
+                {loading?null:<Text style={styles.payBackText}>{transaction.transactions[0].payback_date}</Text>}
                 </View>
                 {loading?null:<Text style={styles.boldText}>Amount: #{transaction.transactions[0].amount}</Text>}
                 </View>
@@ -128,17 +154,17 @@ export default function Dashboard(props) {
                 <Text style={styles.text2}>Status</Text>
                 </View>
                 <View style={styles.rowContainer} >
+                <Text style={styles.text2}>{loading?0:transaction.transactions[0].quantity}</Text>
+                <Text style={styles.text2}>{loading?0:transaction.transactions[0].payback_date}</Text>
+                <Text style={styles.text2}>{loading?0:'#'+transaction.transactions[0].amount}</Text>
+                <Text style={styles.text2}>{loading?0:transaction.transactions[0].status}</Text>
+                </View>
+                {/* <View style={styles.rowContainer} >
                 <Text style={styles.text2}>20 Carbon</Text>
                 <Text style={styles.text2}>27, Jan 2019</Text>
                 <Text style={styles.text2}>#3,000,000</Text>
                 <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>20 Carbon</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
+                </View> */}
                 <View style={{...styles.rowContainer,justifyContent:'flex-end'}} >
                 <TouchableOpacity 
                 // onPress={()=>
@@ -261,19 +287,54 @@ const styles = StyleSheet.create({
       flex:1,
       justifyContent:'space-around',
     // alignItems:'center',
-      backgroundColor: '#1BBC2E',
-      width:'90%',
+    backgroundColor:"#0E861C",
+      width:'95%',
       borderRadius:10,
-      paddingTop:20,
+      paddingVertical:4,
+  },
+  rowHeadContainer:{
+    flexDirection:"row",
+    justifyContent:'space-between',
+    paddingHorizontal:15,
+    backgroundColor:"#0E861C",
+    marginHorizontal:2
+    // flex:1
+  },
+  rowContent:{
+    flexDirection:"row",
+    justifyContent:'space-between',
+    paddingHorizontal:15,
+    // backgroundColor: '#1BBC2E',
+    backgroundColor: '#eee',
+    flex:1,
+    paddingTop:5
   },
   rowContainer:{
     flexDirection:"row",
     justifyContent:'space-between',
-    paddingHorizontal:15,
+    paddingHorizontal:15
+  },
+  colHeadings:{
+    flex:1,
+    // justifyContent: "center",
+    // alignItems: 'center',
+    // alignContent:'center',
+    // alignSelf: 'center'
   },
   text: {
-        color: 'white',
+        color: "#0E861C",
+        // backgroundColor:"#0E861C",
+        textAlign:"center"
       },
+      payBackText: {
+        color: "white",
+        textAlign:"center"
+      },
+  colText: {
+    color: 'white',
+    fontWeight:'bold',
+    textAlign:"center"
+  },
     boldText: {
     color: 'white',
     fontWeight:'bold'
@@ -285,7 +346,7 @@ const styles = StyleSheet.create({
         justifyContent:'space-between',
     //   alignItems:'center',
         backgroundColor: '#eee',
-        width:'90%',
+        width:'95%',
         borderRadius:10,
         // height:"20%"
     },
@@ -305,7 +366,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
 //   alignItems:'center',
     // backgroundColor: '#bec',
-    width:'90%',
+    width:'95%',
     borderRadius:10,
     // height:"20%"
 },
@@ -319,19 +380,20 @@ row3Container:{
         resizeMode: 'contain',
       },
       id:{
-        flexDirection:"row",
-        // backgroundColor:'blue'
+        // flexDirection:"row",
+        // backgroundColor:'blue',
         paddingHorizontal:10,
         marginBottom:2,
-        alignItems:'center',
-        justifyContent:'flex-end'
-        // width:'90%'
+        // alignItems:'center',
+        // justifyContent:'flex-end'
+        width:'30%'
       },
       picImage:{
         width: 30,
         height: 30,
         resizeMode: 'contain',
-        marginLeft:10
+        marginLeft:10,
+        borderRadius:20
       },
 //   developmentModeText: {
 //     marginBottom: 20,
