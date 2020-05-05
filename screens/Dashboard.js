@@ -17,6 +17,7 @@ import { Avatar } from 'react-native-elements';
 export default function Dashboard(props) {
 
   const [transaction, setTransaction] = useState('');
+  const [farms, setFarms] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // const [transaction, setTransaction] = useState({
@@ -40,9 +41,32 @@ export default function Dashboard(props) {
         const userEmail = navigation.getParam('email', 'NO-email');  
         const userAvatar = navigation.getParam('avatar', 'NO-User');  
         // const token = navigation.getParam('token', 'some default value');
+        const farmProducts = navigation.getParam('farmProducts', 'default');
         const transactions = navigation.getParam('transactions', 'some default value');
 //TESTING
         // console.log(navigation)
+        // console.log(farmProducts.products)
+      const latestFarm=()=>{
+        let date=[]
+        farmProducts.products.map(product=>{
+            date.push(product.created_at)
+            date.sort()
+            // console.log(date)
+            // console.log(date.length)
+        })
+        let farmArray=[];
+        farmProducts.products.map(product=>{
+          if(product.created_at===date[date.length-1] ||product.created_at===date[date.length-2] || product.created_at===date[date.length-3]){
+            // console.log(product.id);
+            farmArray.push(product);
+            setFarms(farmArray)
+            // console.log(farms)
+         }
+      })
+       } 
+
+
+
         // console.log(JSON.stringify(token))
         // console.log(transactions.transactions);
         // console.log(userAvatar,userEmail)
@@ -81,6 +105,7 @@ export default function Dashboard(props) {
 
        useEffect(() => {
         getUserTransaction();
+        latestFarm();
       }, []);
 
   return (
@@ -181,9 +206,19 @@ export default function Dashboard(props) {
                 <Text style={styles.text2}>Lastest Farm</Text>
                 </View>
                 <View style={styles.row3Container} >
-                <Image
+                {/* {farms.map(farm =>console.log(farm.location))} */}
+                {/* {Object.values(farms).map(value =>console.log(value))} */}
+                {farms.map(farm =><Image
+                key={farm.id}
             source={
-              require('../assets/images/cattle-farm3x.png')
+              {uri:"https://farmcenta.com"+farm.photo}
+              // require('../assets/images/cattle-farm3x.png')
+            }
+            style={styles.logoImage}
+          />)}
+          {/* <Image
+            source={
+              require('../assets/images/ginger3x.png')
             }
             style={styles.logoImage}
           />
@@ -192,13 +227,7 @@ export default function Dashboard(props) {
               require('../assets/images/ginger3x.png')
             }
             style={styles.logoImage}
-          />
-          <Image
-            source={
-              require('../assets/images/ginger3x.png')
-            }
-            style={styles.logoImage}
-          />
+          /> */}
                 </View>
             </View>
             </ScrollView>

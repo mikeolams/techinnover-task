@@ -13,6 +13,45 @@ import {
 import { MonoText } from '../components/StyledText';
 
 export default function WalletScreen() {
+
+  const loginCall= async (values)=> {
+    return await fetch('https://farmcenta.com/api/v1/login',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(values)
+    })
+    .then(res => res.json());
+  },
+  
+  transactionsCall= (values)=> {
+        loginCall(values)
+          .then(login => {
+            fetch('https://farmcenta.com/api/v1/wallet?token='+login.token,{
+              method: 'POST'
+            })
+            .then(res => res.json())
+            .then(transactions => {
+  
+              props.navigation.navigate('Home', {
+                "name": login.details.name,
+                "email": login.details.email,
+                "avatar": login.details.avatar,
+                "token": login.token,
+                "transactions":transactions
+              });
+          })
+          .catch(err=> {
+            console.warn('issues fetching trans parameters '+err )
+          })
+          })
+          .catch(err=> {
+            console.warn('issues fetching login parameters '+err )
+          });
+  };
+
+
   return (
     <View style={styles.container}>
         <View style={styles.innerContainer}>

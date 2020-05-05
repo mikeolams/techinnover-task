@@ -98,18 +98,29 @@ transactionsCall= (values)=> {
           //   console.log(transactions.transactions.length);
           //   // setLoading(false)
           //  };
-           
-          props.navigation.navigate('Home', {
-            "name": login.details.name,
-            "email": login.details.email,
-            "avatar": login.details.avatar,
-            "token": login.token,
-            "transactions":transactions
-          });
+          fetch('https://farmcenta.com/api/v1/products')
+          .then(resp=>resp.json())
+          .then(farmProducts=>{
+
+            props.navigation.navigate('Home', {
+              "name": login.details.name,
+              "email": login.details.email,
+              "avatar": login.details.avatar,
+              "token": login.token,
+              "transactions":transactions,
+              "farmProducts": farmProducts
+            });
+          })
+          .catch(err=> {
+            console.warn('issues fetching farmparameters '+err )
+          })
         })
         .catch(err=> {
-          console.warn('Wrong parameters '+err )
+          console.warn('issues fetching trans parameters '+err )
         })
+        })
+        .catch(err=> {
+          console.warn('issues fetching login parameters '+err )
         });
 };
 
