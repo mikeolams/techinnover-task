@@ -12,6 +12,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  AsyncStorage
 } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -19,6 +20,8 @@ import { MonoText } from '../components/StyledText';
 import FormButton from '../components/FormButton';
 import FormInput from '../components/FormInput';
 import ErrorMessage from '../components/ErrorMessage';
+// import UserToken from '../components/UserToken';
+// import AsyncStorage from '@react-native-community/async-storage';
 
 export default function AccessScreen(props) {
 
@@ -102,6 +105,7 @@ transactionsCall= (values)=> {
           .then(resp=>resp.json())
           .then(farmProducts=>{
 
+            // AsyncStorage.setItem('token', login.token);
             props.navigation.navigate('Home', {
               "name": login.details.name,
               "email": login.details.email,
