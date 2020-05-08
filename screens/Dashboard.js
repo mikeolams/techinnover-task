@@ -8,11 +8,14 @@ import {
   Text,
   TouchableOpacity,
   View,
+  AsyncStorage
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 import TabBarImage from '../components/TabBarImage';
 import { Avatar } from 'react-native-elements';
+// import UserToken from '../components/UserToken';
+// import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Dashboard(props) {
 
@@ -40,12 +43,17 @@ export default function Dashboard(props) {
         const userName = navigation.getParam('name', 'NO-Username');  
         const userEmail = navigation.getParam('email', 'NO-email');  
         const userAvatar = navigation.getParam('avatar', 'NO-User');  
-        // const token = navigation.getParam('token', 'some default value');
+        const token = navigation.getParam('token', 'some default value');
         const farmProducts = navigation.getParam('farmProducts', 'default');
         const transactions = navigation.getParam('transactions', 'some default value');
 //TESTING
         // console.log(navigation)
         // console.log(farmProducts.products)
+        // console.log(UserToken(token))
+        // await AsyncStorage.setItem('token', token);
+        AsyncStorage.setItem('token1', 'oopp');
+        AsyncStorage.setItem('token', token);
+
       const latestFarm=()=>{
         let date=[]
         farmProducts.products.map(product=>{
