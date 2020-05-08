@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useState, useEffect, Fragment} from 'react';
 import {
   Image,
   Platform,
@@ -8,11 +8,45 @@ import {
   Text,
   TouchableOpacity,
   View,
+  AsyncStorage
 } from 'react-native';
+// import AsyncStorage from '@react-native-community/async-storage';
 
 import { MonoText } from '../components/StyledText';
 
-export default function WalletScreen() {
+export default function WalletScreen(props) {
+
+  const [wallets, setWallets] = useState('');
+  let sum=0;
+
+  const fetchWallet =async (value) => {  
+    await fetch('https://farmcenta.com/api/v1/wallet?token='+value,{
+            method: 'POST'
+          })  
+   .then(resp=>resp.json())
+   .then(json =>{
+    //  console.log(json.wallet.length)
+    //  console.log(JSON.stringify(json.wallet.id))
+    setWallets(json);
+   } )
+   .catch(err=> {
+     console.log(err);
+   });
+ };
+
+  const retrieveToken = async () => {
+    try {
+      const value = await AsyncStorage.getItem("token");
+      if (value !== null) {
+        // You can access your data
+        fetchWallet(value)
+        // console.log(value);
+  
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const loginCall= async (values)=> {
     return await fetch('https://farmcenta.com/api/v1/login',{
@@ -51,6 +85,9 @@ export default function WalletScreen() {
           });
   };
 
+  useEffect(() => {
+    retrieveToken();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -72,85 +109,113 @@ export default function WalletScreen() {
                 </View>
                 
                 <View style={styles.rowContainer} >
-                <Text style={styles.boldText}>#1000000000035</Text>
+                {wallets ==='' || wallets.wallet.length === 0?<Text>Nil</Text>:<Text style={styles.balanceText}>N{wallets.wallet.map((item,id)=>{
+                  sum+=item.amount;
+                  if (wallets.wallet.length===id+1){return sum}
+                })}</Text>}
                 </View>
             </View>
             <View style={styles.content2Container}>
-            <View style={styles.rowContainer} >
-                <Text style={styles.text2}>Wallet Transactions</Text>
-                </View>
+            <View style={styles.walletHeader} >
+              <Text style={styles.walletHeaderText}>Wallet Transactions</Text>
+              </View>
+              {wallets ==='' || wallets.wallet.length === 0? <Fragment>
                 <View style={styles.rowContainer} >
-                <Text style={styles.text2}>S/N</Text>
-                <Text style={styles.text2}>Dates</Text>
-                <Text style={styles.text2}>Amount</Text>
-                <Text style={styles.text2}>Status</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>1</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>2</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>3</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>4</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>5</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>5</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>7</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>8</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>9</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>10</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>11</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>12</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
+              <Text style={styles.text2}>Wallet Transactions</Text>
+              </View>
+              <View style={styles.rowContainer} >
+              <Text style={styles.text2}>S/N</Text>
+              <Text style={styles.text2}>Dates</Text>
+              <Text style={styles.text2}>Amount</Text>
+              <Text style={styles.text2}>Status</Text>
+              </View>
+              <View style={styles.rowContainer} >
+              <Text style={styles.text2}>1</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View>
+              <View style={styles.rowContainer} >
+              <Text style={styles.text2}>2</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View><View style={styles.rowContainer} >
+              <Text style={styles.text2}>3</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View>
+              <View style={styles.rowContainer} >
+              <Text style={styles.text2}>4</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View>
+              <View style={styles.rowContainer} >
+              <Text style={styles.text2}>5</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View><View style={styles.rowContainer} >
+              <Text style={styles.text2}>5</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View><View style={styles.rowContainer} >
+              <Text style={styles.text2}>7</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View><View style={styles.rowContainer} >
+              <Text style={styles.text2}>8</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View><View style={styles.rowContainer} >
+              <Text style={styles.text2}>9</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View><View style={styles.rowContainer} >
+              <Text style={styles.text2}>10</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View>
+              <View style={styles.rowContainer} >
+              <Text style={styles.text2}>11</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View>
+              <View style={styles.rowContainer} >
+              <Text style={styles.text2}>12</Text>
+              <Text style={styles.text2}>27, Jan 2019</Text>
+              <Text style={styles.text2}>#3,000,000</Text>
+              <Text style={styles.text2}>Returning</Text>
+              </View>
+              </Fragment>
+              :
+              <Fragment>
+              <View style={styles.rowContainer} >
+              <Text style={styles.text2}>Amount</Text>
+              <Text style={styles.text2}>Dates</Text>
+              <Text style={styles.text2}>Method</Text>
+              <Text style={styles.text2}>Status</Text>
+              </View>
+              {wallets.wallet.map((item)=>
+      //  console.log(item.id, item.amount,'imd:'+item.method,'imm:'+item.memo, 'iu:'+item.user,item.created_at)
+       <View key={item.id} style={styles.rowContainer} >
+       <Text style={styles.text2}>N{item.amount}</Text>
+       <Text style={styles.text2}>{item.created_at}</Text>
+       <Text style={styles.text2}>{item.method}</Text>
+       <Text style={styles.text2}>{item.amount < 0?'(Dr)':'(Cr)'}</Text>
+       </View>
+     )}
+              </Fragment>
+              }
+            
             </View>
             
             </ScrollView>
@@ -240,7 +305,8 @@ const styles = StyleSheet.create({
     height:120,
       justifyContent:'space-between',
     alignItems:'center',
-      backgroundColor: '#1BBC2E',
+      // backgroundColor: '#1BBC2E',
+      backgroundColor:"#0E861C",
       width:'90%',
       borderRadius:10,
       paddingTop:20,
@@ -251,6 +317,16 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     paddingHorizontal:15,
   },
+  walletHeader:{
+    // flex:2,
+    justifyContent:'center',
+    alignItems:'center',
+    borderBottomWidth:0.6,
+    borderBottomColor:'#06360B',
+    minHeight:30,
+    // paddingHorizontal:15,
+    // backgroundColor:'blue'
+  },
   text: {
         color: 'white',
       },
@@ -258,9 +334,14 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight:'bold'
     },
+    balanceText: {
+      color: 'white',
+      fontWeight:'bold',
+      fontSize:30 
+      },
     content2Container:{
         flex:1,
-        paddingTop:20,
+        paddingTop:2,
         marginVertical:15,
         justifyContent:'space-between',
     //   alignItems:'center',
@@ -276,6 +357,11 @@ const styles = StyleSheet.create({
     //   },
     text2: {
         color: '#0E861C'
+      },
+      walletHeaderText: {
+        // color: '#06360B'
+        color: '#0E861C',
+        fontWeight:'bold'
       },
 row3Container:{
     flexDirection:"row",
