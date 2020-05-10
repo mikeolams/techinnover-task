@@ -51,8 +51,10 @@ export default function Dashboard(props) {
         // console.log(farmProducts.products)
         // console.log(UserToken(token))
         // await AsyncStorage.setItem('token', token);
-        AsyncStorage.setItem('token1', 'oopp');
+        AsyncStorage.setItem('avatar',userAvatar);
+        AsyncStorage.setItem('user', userName);
         AsyncStorage.setItem('token', token);
+        // AsyncStorage.multiSet([['tokena', token],['user', userName], ['avatar',userAvatar]]);
 
       const latestFarm=()=>{
         let date=[]
