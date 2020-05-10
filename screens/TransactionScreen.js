@@ -1,5 +1,5 @@
 import * as WebBrowser from 'expo-web-browser';
-import React from 'react';
+import React, { useState, useEffect, Fragment} from 'react';
 import {
   Image,
   Platform,
@@ -7,12 +7,63 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  AsyncStorage,
   View,
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 
 export default function TransactionScreen() {
+
+  const [trans, setTrans] = useState('');
+  const [userInfo, setUserInfo] = useState('');
+  const [loading, setLoading] = useState(true);
+  let sum=0;
+
+  const fetchTrans =async (value) => {  
+    await fetch('https://farmcenta.com/api/v1/transactions?token='+value,{
+            method: 'POST'
+          })  
+   .then(resp=>resp.json())
+   .then(json =>{
+    //  console.log(json.wallet.length)
+    //  console.log(JSON.stringify(json))
+    setTrans(json);
+    setLoading(false);
+    // console.log(trans.transactions[0])
+   } )
+   .catch(err=> {
+     console.log(err);
+   });
+ };
+
+  const retrieveUserInfo = async () => {
+    try {
+      const value = await AsyncStorage.getItem("token");
+      if (value !== null) {
+        // You can access your data
+        fetchTrans(value)
+        // console.log(value);
+  
+      };
+      const name = await AsyncStorage.getItem("user"),
+  avatar= await AsyncStorage.getItem("avatar");
+  if (avatar !== null) {
+    // You can access your data
+    setUserInfo([name, avatar])
+    // console.log(userInfo)
+
+  }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+
+  useEffect(() => {
+    retrieveUserInfo();
+  }, []);
+
   return (
     <View style={styles.container}>
         <View style={styles.innerContainer}>
@@ -24,6 +75,10 @@ export default function TransactionScreen() {
             style={styles.logoImage}
           />
             </View>
+            <View style={styles.id}>
+           <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
+           <Text>{userInfo[0]}</Text>
+           </View>
             <ScrollView 
             style={styles.container}
             contentContainerStyle={styles.contentContainer}>
@@ -32,20 +87,14 @@ export default function TransactionScreen() {
                 <Text style={styles.text2}>Transactions</Text>
                 </View>
                 <View style={styles.rowContainer} >
-                <Text style={styles.text2}>S/N</Text>
+                {/* <Text style={styles.text2}>S/N</Text> */}
                 <Text style={styles.text2}>Farm Units</Text>
                 <Text style={styles.text2}>Payout Dates</Text>
                 <Text style={styles.text2}>Amount</Text>
                 <Text style={styles.text2}>Status</Text>
                 </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>1</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
+                 {loading ? <Fragment>
+                 <View style={styles.rowContainer} >
                 <Text style={styles.text2}>2</Text>
                 <Text style={styles.text2}>27, Jan 2019</Text>
                 <Text style={styles.text2}>#3,000,000</Text>
@@ -116,6 +165,14 @@ export default function TransactionScreen() {
                 <Text style={styles.text2}>#3,000,000</Text>
                 <Text style={styles.text2}>Returning</Text>
                 </View>
+                 </Fragment>:
+                trans.transactions.map(item=><View key={item.id} style={styles.rowContainer} >
+                {/* <Text style={styles.text2}>1</Text> */}
+          <Text style={styles.text2}>{item.quantity}</Text>
+                <Text style={styles.text2}>{item.payback_date}</Text>
+                <Text style={styles.text2}>N{item.amount}</Text>
+                <Text style={styles.text2}>{item.status}</Text>
+                </View>)}
                 {/* <View style={{...styles.rowContainer,justifyContent:'flex-end'}} >
                 <Text style={styles.text2}>More</Text>
                 </View> */}
@@ -298,6 +355,22 @@ row3Container:{
 //     lineHeight: 24,
 //     textAlign: 'center',
 //   },
+id:{
+  // flexDirection:"row",
+  // backgroundColor:'blue',
+  paddingHorizontal:10,
+  marginBottom:2,
+  // alignItems:'center',
+  // justifyContent:'flex-end'
+  width:'30%'
+},
+picImage:{
+  width: 30,
+  height: 30,
+  resizeMode: 'contain',
+  marginLeft:10,
+  borderRadius:20
+},
   tabBarInfoContainer: {
     position: 'absolute',
     bottom: 0,
