@@ -17,6 +17,7 @@ import { MonoText } from '../components/StyledText';
 export default function WalletScreen(props) {
 
   const [wallets, setWallets] = useState('');
+  const [userInfo, setUserInfo] = useState('');
   let sum=0;
 
   const fetchWallet =async (value) => {  
@@ -34,7 +35,7 @@ export default function WalletScreen(props) {
    });
  };
 
-  const retrieveToken = async () => {
+  const retrieveUserInfo = async () => {
     try {
       const value = await AsyncStorage.getItem("token");
       if (value !== null) {
@@ -42,51 +43,91 @@ export default function WalletScreen(props) {
         fetchWallet(value)
         // console.log(value);
   
-      }
+      };
+      const name = await AsyncStorage.getItem("user"),
+  avatar= await AsyncStorage.getItem("avatar");
+  if (avatar !== null) {
+    // You can access your data
+    setUserInfo([name, avatar])
+    console.log(userInfo)
+
+  }
     } catch (error) {
       console.log(error);
     }
   };
 
-  const loginCall= async (values)=> {
-    return await fetch('https://farmcenta.com/api/v1/login',{
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(values)
-    })
-    .then(res => res.json());
-  },
   
-  transactionsCall= (values)=> {
-        loginCall(values)
-          .then(login => {
-            fetch('https://farmcenta.com/api/v1/wallet?token='+login.token,{
-              method: 'POST'
-            })
-            .then(res => res.json())
-            .then(transactions => {
+
+  // const retrieveToken1 = async () => {
+  //   try {
+  //      await  AsyncStorage.getAllKeys((err, keys) => {
+  //       let paramSet=[]
+  //       AsyncStorage.multiGet(keys, (err, stores) => {
+  //         stores.map((result, i, store) => {
+  //           // get at each store's key/value so you can work with it
+  //           let key = store[i][0];
+  //           let value = store[i][1];
+  //           // paramSet.push({key,value})
+  //           paramSet.push({key,value})
+  //           // console.log(stores, err)
+  //           // console.log(key, value)
+  //           // return key, value
+  //           // return stores
+  //         });
+  //         // console.log(paramSet);
+  //         setUserInfo(paramSet);
+  //         if(userInfo[3]!=null){console.log(userInfo[3]);
+  //         console.log(userInfo[3].value);
+  //         fetchWallet(userInfo[3].value)
+  //       }
+  //       })
+  //     })
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+
+  // const loginCall= async (values)=> {
+  //   return await fetch('https://farmcenta.com/api/v1/login',{
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(values)
+  //   })
+  //   .then(res => res.json());
+  // };
   
-              props.navigation.navigate('Home', {
-                "name": login.details.name,
-                "email": login.details.email,
-                "avatar": login.details.avatar,
-                "token": login.token,
-                "transactions":transactions
-              });
-          })
-          .catch(err=> {
-            console.warn('issues fetching trans parameters '+err )
-          })
-          })
-          .catch(err=> {
-            console.warn('issues fetching login parameters '+err )
-          });
-  };
+  // transactionsCall= (values)=> {
+  //       loginCall(values)
+  //         .then(login => {
+  //           fetch('https://farmcenta.com/api/v1/wallet?token='+login.token,{
+  //             method: 'POST'
+  //           })
+  //           .then(res => res.json())
+  //           .then(transactions => {
+  
+  //             props.navigation.navigate('Home', {
+  //               "name": login.details.name,
+  //               "email": login.details.email,
+  //               "avatar": login.details.avatar,
+  //               "token": login.token,
+  //               "transactions":transactions
+  //             });
+  //         })
+  //         .catch(err=> {
+  //           console.warn('issues fetching trans parameters '+err )
+  //         })
+  //         })
+  //         .catch(err=> {
+  //           console.warn('issues fetching login parameters '+err )
+  //         });
+  // };
 
   useEffect(() => {
-    retrieveToken();
+    retrieveUserInfo();
   }, []);
 
   return (
@@ -100,9 +141,14 @@ export default function WalletScreen(props) {
             style={styles.logoImage}
           />
             </View>
+            <View style={styles.id}>
+           <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
+           <Text>{userInfo[0]}</Text>
+           </View>
             <ScrollView 
             style={styles.container}
             contentContainerStyle={styles.contentContainer}>
+              {/* <View><Text style={styles.text21}>{userInfo.name}</Text></View> */}
             <View style={styles.content1Container}>
                 <View style={styles.rowContainer} >
                 <Text style={styles.text}>Wallet Ballance</Text>
@@ -300,6 +346,16 @@ const styles = StyleSheet.create({
     alignItems:'center',
     // backgroundColor: '#222',
   },
+  // test:{
+  //   // flex:2,
+  //   // justifyContent:'center',
+  //   // alignItems:'center',
+  //   // borderBottomWidth:0.6,
+  //   // borderBottomColor:'#06360B',
+  //   minHeight:30,
+  //   // // paddingHorizontal:15,
+  //   backgroundColor:'blue'
+  // },
   content1Container:{
     //   flex:1,
     height:120,
@@ -357,6 +413,25 @@ const styles = StyleSheet.create({
     //   },
     text2: {
         color: '#0E861C'
+      },
+      text21: {
+        // color: 'black'
+      },
+      id:{
+        // flexDirection:"row",
+        // backgroundColor:'blue',
+        paddingHorizontal:10,
+        // marginBottom:2,
+        // alignItems:'center',
+        // justifyContent:'flex-end'
+        width:'30%'
+      },
+      picImage:{
+        width: 20,
+        height: 20,
+        resizeMode: 'contain',
+        marginLeft:20,
+        borderRadius:20
       },
       walletHeaderText: {
         // color: '#06360B'
