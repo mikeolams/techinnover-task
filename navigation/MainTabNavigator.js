@@ -160,7 +160,7 @@ const tabNavigator = createBottomTabNavigator({
   TransactionStack,
   WalletStack,
   // LinksStack,
-  // SettingsStack,
+  SettingsStack,
   // App: StoreScreen,
 });
 

@@ -76,19 +76,19 @@ export default function IndexScreen(props) {
         <View style={styles.circleContainer}>
         <Image
             source={
-              require('../assets/images/Empowering-Farmers.png')
+              require('../assets/images/unique_one.png')
             }
             style={styles.messageImage}
           />
           </View>
         <View style={styles.textContainer}>
-          <Text>Empowering Farmers</Text>
+          <Text style={styles.text}>We work with small-scale farmers by providing what they need to scale their farming activities from improved inputs, training, weather information and access to premium market.</Text>
         </View> 
         <View style={styles.slideContainer}>
           <TouchableOpacity style={styles.activeSlide}><Text style={styles.slideText}>1</Text></TouchableOpacity>
           <TouchableOpacity onPress={()=>props.navigation.navigate('LandingTwo')}><Text>2</Text></TouchableOpacity>
           <TouchableOpacity onPress={()=>props.navigation.navigate('LandingThree')}><Text>3</Text></TouchableOpacity>
-          <TouchableOpacity onPress={()=>props.navigation.navigate('LandingFour')}><Text>4</Text></TouchableOpacity>
+          {/* <TouchableOpacity onPress={()=>props.navigation.navigate('LandingFour')}><Text>4</Text></TouchableOpacity> */}
         </View>
       </View>
 
@@ -204,8 +204,8 @@ const styles = StyleSheet.create({
   },
 
   topContainer: {
-    margin: 60,
-    marginVertical:130,
+    marginVertical:110,
+    marginHorizontal:40,
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
     flex:1,
@@ -217,6 +217,7 @@ const styles = StyleSheet.create({
   logoContainer:{
     flex:1,
     justifyContent:'center',
+    marginBottom:40,
     // backgroundColor: '#fca',
   },
   logoImage: {
@@ -243,14 +244,20 @@ const styles = StyleSheet.create({
     // height: 130
   },
   textContainer:{
+    marginTop:70,
     flex:1,
     justifyContent:'center',
     paddingHorizontal:30,
     // backgroundColor: '#aaa',
   },
+  text: {
+    color: '#0E861C',
+    justifyContent:'center',
+    textAlign:"center"
+  },
   slideContainer:{
     // flex:1,
-    paddingTop:70,
+    paddingTop:60,
     paddingBottom:10,
     // backgroundColor: '#2ca',
     width:'40%',

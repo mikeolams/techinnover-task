@@ -16,10 +16,14 @@ import { MonoText } from '../components/StyledText';
 export default function OnboardingThreeScreen(props) {
 
   function handleNextPress() {
-    props.navigation.navigate('LandingFour')
-  }
-  function handleSkipPress() {
     props.navigation.navigate('Auth')
+  }
+  // function handleSkipPress() {
+  //   props.navigation.navigate('Auth')
+  // }
+  function handlePreviousPress() {
+    console.log('remove skip')
+    props.navigation.navigate('LandingTwo')
   }
 
   return (
@@ -44,22 +48,22 @@ export default function OnboardingThreeScreen(props) {
           />
           </View>
         <View style={styles.textContainer}>
-          <Text>Ensuring Food Security</Text>
+          <Text style={styles.text}>We are using technology in making data-based operational decisions from soil classification to weather information and crop health analysis in order to improve productivity.</Text>
         </View>
         <View style={styles.slideContainer}>
         <TouchableOpacity onPress={()=>props.navigation.navigate('LandingOne')}><Text>1</Text></TouchableOpacity>
           <TouchableOpacity onPress={()=>props.navigation.navigate('LandingTwo')}><Text>2</Text></TouchableOpacity>
           <TouchableOpacity style={styles.activeSlide}><Text style={styles.slideText}>3</Text></TouchableOpacity>
-          <TouchableOpacity onPress={()=>props.navigation.navigate('LandingFour')}><Text>4</Text></TouchableOpacity>
+          {/* <TouchableOpacity onPress={()=>props.navigation.navigate('LandingFour')}><Text>4</Text></TouchableOpacity> */}
         </View>
       </View>
 
       <View style={styles.tabBarInfoContainer}>
        
 
-<TouchableOpacity onPress={handleSkipPress} style={styles.skipButton}>
+<TouchableOpacity onPress={handlePreviousPress} style={styles.skipButton}>
             <Text style={styles.skipButtonText}>
-              Skip
+            Previous
             </Text>
           </TouchableOpacity>
           <TouchableOpacity onPress={handleNextPress} style={styles.nextButton}>
@@ -163,9 +167,10 @@ const styles = StyleSheet.create({
   },
 
   topContainer: {
-    margin: 60,
-    marginVertical:130,
-    backgroundColor: '#FFFFFF',
+    // margin: 60,
+    marginVertical:110,
+    marginHorizontal:40,
+    backgroundColor: '#FFF',
     borderRadius: 10,
     flex:1,
     justifyContent:'center',
@@ -196,10 +201,16 @@ const styles = StyleSheet.create({
     // backgroundColor: '#aca',
   },
   textContainer:{
+    marginTop:70,
     flex:1,
     justifyContent:'center',
     paddingHorizontal:30,
     // backgroundColor: '#aaa',
+  },
+  text: {
+    color: '#0E861C',
+    justifyContent:'center',
+    textAlign:"center"
   },
   slideContainer:{
     // flex:1,

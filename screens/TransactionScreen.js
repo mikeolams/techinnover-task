@@ -67,6 +67,7 @@ export default function TransactionScreen() {
   return (
     <View style={styles.container}>
         <View style={styles.innerContainer}>
+        {/* <View style={styles.titleContainer}> */}
             <View style={styles.imageContainer} >
             <Image
             source={
@@ -75,24 +76,29 @@ export default function TransactionScreen() {
             style={styles.logoImage}
           />
             </View>
-            <View style={styles.id}>
+           {/* </View> */}
+           <View style={styles.id}>
            <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
            <Text>{userInfo[0]}</Text>
            </View>
             <ScrollView 
             style={styles.container}
             contentContainerStyle={styles.contentContainer}>
+              <View style={styles.rowHeadContainer} >
+                <Text style={{...styles.textHead, ...styles.textSize}}>Transactions</Text>
+                </View>
             <View style={styles.content2Container}>
-            <View style={styles.rowContainer} >
-                <Text style={styles.text2}>Transactions</Text>
-                </View>
-                <View style={styles.rowContainer} >
+              {/* <View style={styles.header}> */}
+            
+                <View style={styles.rowTitleContainer} >
                 {/* <Text style={styles.text2}>S/N</Text> */}
-                <Text style={styles.text2}>Farm Units</Text>
-                <Text style={styles.text2}>Payout Dates</Text>
-                <Text style={styles.text2}>Amount</Text>
-                <Text style={styles.text2}>Status</Text>
+                <Text style={styles.textHead}>Farm Units</Text>
+                <Text style={styles.textHead}>Payout Dates</Text>
+                <Text style={styles.textHead}>Amount</Text>
+                <Text style={styles.textHead}>Status</Text>
                 </View>
+                <View style={styles.transContent}>
+              {/* </View> */}
                  {loading ? <Fragment>
                  <View style={styles.rowContainer} >
                 <Text style={styles.text2}>2</Text>
@@ -166,16 +172,25 @@ export default function TransactionScreen() {
                 <Text style={styles.text2}>Returning</Text>
                 </View>
                  </Fragment>:
-                trans.transactions.map(item=><View key={item.id} style={styles.rowContainer} >
+                trans.transactions.map(item=><View key={item.id} style={styles.rowMapContainer} >
                 {/* <Text style={styles.text2}>1</Text> */}
-          <Text style={styles.text2}>{item.quantity}</Text>
+                {/* <View style={styles.textcontent}> */}
+                <Text style={styles.text2}>{item.quantity}</Text>
+                {/* </View> */}
+                {/* <View style={styles.textcontent}> */}
                 <Text style={styles.text2}>{item.payback_date}</Text>
+                {/* </View> */}
+                {/* <View style={styles.textcontent}> */}
                 <Text style={styles.text2}>N{item.amount}</Text>
+                {/* </View> */}
+                {/* <View style={styles.textcontent}> */}
                 <Text style={styles.text2}>{item.status}</Text>
+                {/* </View> */}
                 </View>)}
                 {/* <View style={{...styles.rowContainer,justifyContent:'flex-end'}} >
                 <Text style={styles.text2}>More</Text>
                 </View> */}
+                </View>
             </View>
           
             </ScrollView>
@@ -254,16 +269,64 @@ const styles = StyleSheet.create({
         // width:'90%'
         // paddingBottom:30
     },
+    // titleContainer:{
+    //   flexDirection:"row"
+    // },
   imageContainer:{
     // flex:1,
     paddingTop:1,
     alignItems:'center',
-    // backgroundColor: '#222',
+    // backgroundColor: '#222','#fe2'
+    // backgroundColor: '#fe2'
   },
+  transContent:{
+    flex:1
+  },
+  // rowHead:{
+  //   borderBottomColor:"black",
+  //   borderBottomWidth:2
+  // },
   rowContainer:{
+    flex:0.5,
     flexDirection:"row",
     justifyContent:'space-between',
     paddingHorizontal:15,
+  },
+  rowTitleContainer:{
+    flex:0.1,
+    flexDirection:"row",
+    justifyContent:'space-between',
+    paddingHorizontal:15,
+    // backgroundColor: '#e3e',
+  },
+  rowHeadContainer:{
+    // flex:0.1,
+    flexDirection:"row",
+    justifyContent:'space-between',
+    width:'100%',
+    paddingHorizontal:15,
+    // backgroundColor: '#1ee',
+    borderBottomColor:"#eee",
+    borderBottomWidth:2
+  },
+  rowMapContainer:{
+    flex:1,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    // justifyContent:"center",
+    // justifyContent:"space-evenly",
+    // alignContent:"center",
+    // alignItems:"center",
+    paddingHorizontal:15,
+    maxHeight:40,
+    paddingLeft:50
+    // backgroundColor: '#ee2',
+  },
+  textcontent:{
+    flex:1,
+    // justifyContent:"space-between",
+    alignSelf:"center"
+    // alignItems:"center",
   },
   text: {
         color: 'white',
@@ -274,11 +337,11 @@ const styles = StyleSheet.create({
     },
     content2Container:{
         flex:1,
-        paddingTop:20,
-        marginVertical:15,
+        // paddingTop:2,
+        marginVertical:2,
         justifyContent:'space-between',
     //   alignItems:'center',
-        // backgroundColor: '#eee',
+        backgroundColor: '#eee',
         width:'90%',
         borderRadius:10,
         // height:"20%"
@@ -291,11 +354,18 @@ const styles = StyleSheet.create({
     text2: {
         color: '#0E861C'
       },
+      textHead: {
+        fontWeight:"bold",
+        color: '#0E861C',
+      },
+      textSize: {
+        fontSize:20
+      },
   content3Container:{
     flex:1,
     // flexDirection:'row',
     // paddingTop:20,
-    marginVertical:15,
+    marginVertical:2,
     justifyContent:'space-between',
 //   alignItems:'center',
     // backgroundColor: '#bec',
@@ -308,9 +378,11 @@ row3Container:{
     justifyContent:'space-between',
   },
   logoImage: {
+    // flex:1,
         width: 120,
         height: 120,
         resizeMode: 'contain',
+        left:0
       },
 //   developmentModeText: {
 //     marginBottom: 20,
@@ -359,10 +431,14 @@ id:{
   // flexDirection:"row",
   // backgroundColor:'blue',
   paddingHorizontal:10,
-  marginBottom:2,
+  // marginTop:25,
+  // backgroundColor: '#eee',
   // alignItems:'center',
-  // justifyContent:'flex-end'
-  width:'30%'
+  justifyContent:"center",
+  marginLeft:18,
+  width:'30%',
+  zIndex:2,
+  top:-50
 },
 picImage:{
   width: 30,

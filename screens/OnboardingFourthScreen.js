@@ -45,7 +45,7 @@ export default function OnboardingFourthScreen(props) {
           />
           </View>
         <View style={styles.textContainer}>
-          <Text>Leveraging Technology</Text>
+          <Text style={styles.text}>Leveraging Technology</Text>
         </View>
         <View style={styles.slideContainer}>
         <TouchableOpacity onPress={()=>props.navigation.navigate('LandingOne')}><Text>1</Text></TouchableOpacity>

@@ -37,19 +37,20 @@ export default function OnboardingTwoScreen(props) {
         <View style={styles.circleContainer}>
         <Image
             source={
-              require('../assets/images/Addressing-Needs.jpg')
+              require('../assets/images/unique_two.png')
+              // require('../assets/images/Addressing-Needs.jpg')unique_two.png
             }
             style={styles.messageImage}
           />
           </View>
         <View style={styles.textContainer}>
-          <Text>Addressing Farmers Needs</Text>
+          <Text style={styles.text}>Farm subscribers’ participation in food production is critical to achieving food security and improved nutrition in Sub-Sahara Africa.</Text>
         </View>
         <View style={styles.slideContainer}>
         <TouchableOpacity onPress={()=>props.navigation.navigate('LandingOne')}><Text>1</Text></TouchableOpacity>
           <TouchableOpacity style={styles.activeSlide}><Text style={styles.slideText}>2</Text></TouchableOpacity>
           <TouchableOpacity onPress={()=>props.navigation.navigate('LandingThree')}><Text>3</Text></TouchableOpacity>
-          <TouchableOpacity onPress={()=>props.navigation.navigate('LandingFour')}><Text>4</Text></TouchableOpacity>
+          {/* <TouchableOpacity onPress={()=>props.navigation.navigate('LandingFour')}><Text>4</Text></TouchableOpacity> */}
         </View>
       </View>
 
@@ -162,8 +163,8 @@ const styles = StyleSheet.create({
   },
 
   topContainer: {
-    margin: 60,
-    marginVertical:130,
+    marginVertical:110,
+    marginHorizontal:40,
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
     flex:1,
@@ -175,6 +176,7 @@ const styles = StyleSheet.create({
   logoContainer:{
     flex:1,
     justifyContent:'center',
+    marginBottom:40,
     // backgroundColor: '#fca',
   },
   logoImage: {
@@ -195,10 +197,16 @@ const styles = StyleSheet.create({
     // backgroundColor: '#aca',
   },
   textContainer:{
+    marginTop:60,
     flex:1,
     justifyContent:'center',
     paddingHorizontal:30,
     // backgroundColor: '#aaa',
+  },
+  text: {
+    color: '#0E861C',
+    justifyContent:'center',
+    textAlign:"center"
   },
   slideContainer:{
     // flex:1,
