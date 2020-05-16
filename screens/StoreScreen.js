@@ -8,14 +8,43 @@ import {
     Text,
     TouchableOpacity,
     View,
+    AsyncStorage
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
 
 export default function StoreScreen() {
 
-    const [productsArray, setProductsArray] = useState([]);
-    const [productsReceived, setProductsReceived] = useState(false);
+    const [productsArray, setProductsArray] = useState([]),
+     [productsReceived, setProductsReceived] = useState(false),
+     [userInfo, setUserInfo] = useState('');
+    //  [loading, setLoading] = useState(true);
+    let sum=0;
+  
+    
+    const retrieveUserInfo = async () => {
+      try {
+        const name = await AsyncStorage.getItem("user"),
+    avatar= await AsyncStorage.getItem("avatar");
+    if (avatar !== null) {
+      // You can access your data
+      setUserInfo([name, avatar])
+      console.log(userInfo)
+  
+    }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+     //  Sign up logic
+    const signUpHandler =async () => {
+        console.log('testing sign')
+       },
+     
+       loginHandler =async () => {    
+        console.log('testing log')
+          };
 
     const fetchProducts =async () => {    
         await fetch('https://farmcenta.com/api/v1/products')
@@ -49,6 +78,7 @@ export default function StoreScreen() {
      useEffect(() => {
         fetchProducts();
            // retrieveData();
+           retrieveUserInfo();
         }, []);
 
 
@@ -63,14 +93,31 @@ export default function StoreScreen() {
                         style={styles.logoImage}
                     />
                 </View>
+                <View style={styles.id}>
+           <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
+           <Text>{userInfo[0]}</Text>
+           </View>
+                <View style={styles.buttonContainer}>
+      <TouchableOpacity onPress={signUpHandler} style={styles.sellingButton}>
+            <Text style={styles.sellingButtonText}>
+              Still selling
+            </Text>
+          </TouchableOpacity>
+<TouchableOpacity onPress={loginHandler} style={styles.closeButton}>
+            <Text style={styles.closeButtonText}>
+              Closed Farm
+            </Text>
+          </TouchableOpacity>
+      
+      </View>
                 <ScrollView
                     // style={styles.container}
                     contentContainerStyle={styles.contentContainer}>
 
                     <View style={styles.content2Container}>
-                        <View style={{...styles.rowContainer, justifyContent:'center'}} >
+                        {/* <View style={{...styles.rowContainer, justifyContent:'center'}} >
                             <Text style={styles.text2}>Farm Store</Text>
-                        </View>
+                        </View> */}
                         <View style={styles.productsContainer} >
                         {productsReceived? productsArray.products.map((item)=>
                             <TouchableOpacity key={item.id}style={styles.itemContainer}>
@@ -282,10 +329,24 @@ const styles = StyleSheet.create({
         // backgroundColor:'yellow'
         width:'30%',
         margin:4,
-        borderWidth:.7,
-        borderColor:'black',
+        // borderWidth:.7,
+        // borderColor:'black',
         borderRadius:20
     },
+    buttonContainer:{
+        // flex:1,
+        justifyContent:'center',
+        // alignItems: 'center',
+        paddingVertical: 20,
+        flexDirection: "row",
+        // backgroundColor: '#234',
+        // width:'100%'
+      },
+      helpLinkText: {
+        fontSize: 14,
+        color: '#2e78b7',
+        textAlign: 'center',
+      },
     itemTitle:{
         textAlign:'center',
         fontWeight:'bold'
@@ -312,6 +373,33 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         // paddingHorizontal: 15,
     },
+    closeButton: {
+        // paddingVertical: 15,
+        justifyContent:'center',
+        backgroundColor: '#0C9121',
+        width:"40%",
+        height:20,
+        borderBottomRightRadius:10,
+        borderTopRightRadius:10,
+      },
+      sellingButton: {
+        // paddingVertical: 15,
+        borderBottomLeftRadius:10,
+        borderTopLeftRadius:10,
+        justifyContent:'center',
+        backgroundColor: '#fff',
+        width:'40%',
+        height:20,
+        borderColor:'#2e78b7',
+        borderWidth:1,
+        // borderRadius:10
+      },
+      closeButtonText: {
+        fontSize: 14,
+        color: '#fff',
+        lineHeight: 24,
+        textAlign: 'center',
+      },
     text: {
         color: 'white',
     },
@@ -346,8 +434,29 @@ const styles = StyleSheet.create({
         width: 100,
         height: 100,
         resizeMode: 'contain',
-        margin:10
+        margin:10,
+        borderRadius:50
     },
+    picImage:{
+        width: 30,
+        height: 30,
+        resizeMode: 'contain',
+        marginLeft:10,
+        borderRadius:20
+      },
+      id:{
+        // flexDirection:"row",
+        // backgroundColor:'blue',
+        paddingHorizontal:10,
+        // marginTop:25,
+        // backgroundColor: '#eee',
+        // alignItems:'center',
+        justifyContent:"center",
+        marginLeft:18,
+        width:'30%',
+        zIndex:2,
+        top:-3
+      },
     tabBarInfoContainer: {
         position: 'absolute',
         bottom: 0,
@@ -383,8 +492,10 @@ const styles = StyleSheet.create({
     helpLink: {
         paddingVertical: 15,
     },
-    helpLinkText: {
+    sellingButtonText: {
         fontSize: 14,
         color: '#2e78b7',
+        lineHeight: 24,
+        textAlign: 'center',
     },
 });

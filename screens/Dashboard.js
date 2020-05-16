@@ -180,13 +180,13 @@ export default function Dashboard(props) {
             </View>
             <View style={styles.content2Container}>
             <View style={styles.rowContainer} >
-                <Text style={styles.text2}>Lastest Transaction</Text>
+                <Text style={{...styles.text2,...styles.boldText2}}>Lastest Transaction</Text>
                 </View>
                 <View style={styles.rowContainer} >
-                <Text style={styles.text2}>Farm Units</Text>
-                <Text style={styles.text2}>Payout Dates</Text>
-                <Text style={styles.text2}>Amount</Text>
-                <Text style={styles.text2}>Status</Text>
+                <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
+                <Text style={{...styles.text2,...styles.boldText2}}>Payout Dates</Text>
+                <Text style={{...styles.text2,...styles.boldText2}}>Amount</Text>
+                <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
                 </View>
                 <View style={styles.rowContainer} >
                 <Text style={styles.text2}>{loading?0:transaction.transactions[0].quantity}</Text>
@@ -208,12 +208,13 @@ export default function Dashboard(props) {
                 //     "email": 'resp.details.email'
                 //   })
                 // }
-                ><Text style={styles.text2}>More</Text></TouchableOpacity>
+                ><Text style={styles.text2}>More ></Text></TouchableOpacity>
+                {/* ><Text style={styles.text2}>More <Text style={styles.boldText}>></Text></Text></TouchableOpacity> */}
                 </View>
             </View>
             <View style={styles.content3Container}>
-            <View style={styles.rowContainer} >
-                <Text style={styles.text2}>Lastest Farm</Text>
+            <View style={styles.lastFarmHead} >
+                <Text style={{...styles.text2,...styles.boldText2}}>Lastest Farm</Text>
                 </View>
                 <View style={styles.row3Container} >
                 {/* {farms.map(farm =>console.log(farm.location))} */}
@@ -224,7 +225,7 @@ export default function Dashboard(props) {
               {uri:"https://farmcenta.com"+farm.photo}
               // require('../assets/images/cattle-farm3x.png')
             }
-            style={styles.logoImage}
+            style={styles.itemImage}
           />)}
           {/* <Image
             source={
@@ -353,6 +354,11 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     paddingHorizontal:15
   },
+  lastFarmHead:{
+    flexDirection:"row",
+    justifyContent:"center",
+    paddingHorizontal:15
+  },
   colHeadings:{
     flex:1,
     // justifyContent: "center",
@@ -369,9 +375,12 @@ const styles = StyleSheet.create({
         color: "white",
         textAlign:"center"
       },
+      boldText2:{
+        fontWeight:'bold',
+      },
   colText: {
     color: 'white',
-    fontWeight:'bold',
+    // fontWeight:'bold',
     textAlign:"center"
   },
     boldText: {
@@ -418,6 +427,13 @@ row3Container:{
         height: 80,
         resizeMode: 'contain',
       },
+      itemImage: {
+        width: 100,
+        height: 100,
+        resizeMode: 'contain',
+        // margin:10,
+        borderRadius:50
+    },
       id:{
         // flexDirection:"row",
         // backgroundColor:'blue',
