@@ -12,7 +12,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  AsyncStorage
+  AsyncStorage,
+  TouchableHighlight
 } from 'react-native';
 import { Button } from 'react-native-elements';
 
@@ -287,22 +288,7 @@ const submitSignUp =async (values) => {
             style={styles.logoImage}
           />
 
-<View style={styles.authButtonContainer}>
-      <TouchableOpacity onPress={signUpHandler} style={styles.nextButton}>
-      {/* <TouchableOpacity onPress={toggleHandler} style={styles.nextButton}> */}
-            <Text style={styles.helpLinkText}>
-              Sign Up
-            </Text>
-          </TouchableOpacity>
-{/* <TouchableOpacity style={styles.skipButton}> */}
-{/* <TouchableOpacity onPress={()=>props.navigation.navigate('Main')} style={styles.skipButton}> */}
-<TouchableOpacity onPress={loginHandler} style={styles.skipButton}>
-            <Text style={styles.skipButtonText}>
-              Login
-            </Text>
-          </TouchableOpacity>
-      
-      </View>
+
       </View>
 
 
@@ -376,7 +362,7 @@ const submitSignUp =async (values) => {
                 <FormButton
                   buttonType="outline"
                   onPress={formikProps.handleSubmit}
-                  title="Enter"
+                  title="Log in"
                   // buttonColor="#039BE5"'#0C9121'
                   backgroundColor="#0C9121"
                   buttonColor = "#fff"
@@ -388,15 +374,49 @@ const submitSignUp =async (values) => {
             </Fragment>
           )}
         </Formik>
-        <Button
+         {/* <Button
           // title="Don't have an account? Sign Up"Forget password?
-          title="Forget password?"
+          title="Forgotten your log in details? Get help."
           onPress={goToSignup}
           titleStyle={{
             color: '#F57C00'
           }}
           type="clear"
-        />
+        /> */}
+        <View style={styles.optionContainer}>
+          <Text style={styles.text}>Forgotten your log in details?</Text>
+          <TouchableHighlight style={{paddingLeft:8}} activeOpacity={0.6} underlayColor="#DDDDDD" onPress={() => alert('Pressed!')}>
+          <Text style={styles.textHead}>Get help.</Text>
+          </TouchableHighlight>
+          </View>
+          <View style={styles.dividerContainer}>
+            <View style={styles.line}></View>
+            <Text style={styles.text}>OR</Text>
+            <View style={styles.line}></View>
+          </View>
+        <View style={styles.optionContainer}>
+          <Text style={styles.text}>Don't have an acoount?</Text>
+        <TouchableHighlight style={{paddingLeft:8}} activeOpacity={0.6} underlayColor="#DDDDDD" onPress={signUpHandler}>
+          <Text style={styles.textHead}>Register Now.</Text>
+          </TouchableHighlight>
+        </View>
+        {/* </Text> */}
+        {/* <View style={styles.authButtonContainer}>
+      <TouchableOpacity onPress={signUpHandler} style={styles.nextButton}>
+      <TouchableOpacity onPress={toggleHandler} style={styles.nextButton}>
+            <Text style={styles.helpLinkText}>
+              Sign Up
+            </Text>
+          </TouchableOpacity>
+<TouchableOpacity style={styles.skipButton}>
+<TouchableOpacity onPress={()=>props.navigation.navigate('Main')} style={styles.skipButton}>
+<TouchableOpacity onPress={loginHandler} style={styles.skipButton}>
+            <Text style={styles.skipButtonText}>
+              Login
+            </Text>
+          </TouchableOpacity>
+      
+      </View> */}
         {/* <View style={styles.textContainer}>
           <Text>Empowering rural farmers in Africa through simple technology and mechanisation</Text>
         </View> */}
@@ -477,7 +497,7 @@ const submitSignUp =async (values) => {
                 <FormButton
                   buttonType="outline"
                   onPress={formikProps.handleSubmit}
-                  title="Submit"
+                  title="Register"
                   backgroundColor="#0C9121"
                   buttonColor = "#fff"
                   disabled={!formikProps.isValid || formikProps.isSubmitting}
@@ -487,14 +507,18 @@ const submitSignUp =async (values) => {
             </Fragment>
           )}
         </Formik>
-        <Button
-          title="Forget password?"
-          onPress={goToSignup}
-          titleStyle={{
-            color: '#F57C00'
-          }}
-          type="clear"
-        />
+       
+          <View style={styles.dividerContainer}>
+            <View style={styles.line}></View>
+            <Text style={styles.text}>OR</Text>
+            <View style={styles.line}></View>
+          </View>
+        <View style={styles.optionContainer}>
+          <Text style={styles.text}>Already have an acoount?</Text>
+        <TouchableHighlight style={{paddingLeft:8}} activeOpacity={0.6} underlayColor="#DDDDDD" onPress={loginHandler}>
+          <Text style={styles.textHead}>Log in</Text>
+          </TouchableHighlight>
+        </View>
         </ScrollView>
         </SafeAreaView>
       )}
@@ -618,7 +642,8 @@ const styles = StyleSheet.create({
 
   innerContainer: {
     // margin: 60,
-    marginVertical:30,
+    // marginVertical:30,
+    marginBottom:30,
     backgroundColor: '#FFFFFF',
     // borderRadius: 10,
     flex:1,
@@ -630,11 +655,36 @@ const styles = StyleSheet.create({
   },
   mainAuthContainer:{
     marginVertical:30,
-    flex:1,
+    // flex:1,
+    height:150,
     justifyContent:'center',
     alignItems: 'center',
-    top:0,
+    // top:0,
     // position:'relative'
+  },
+  optionContainer:{
+    flexDirection:"row",
+    justifyContent:'center',
+  },
+  textHead: {
+    fontWeight:"bold",
+    color: '#0E861C',
+    height:30,
+  },
+  text: {
+    color: '#0E861C',
+  },
+  dividerContainer:{
+    flexDirection:"row",
+    justifyContent:'center',
+    alignItems:"center",
+    marginVertical:20
+  },
+  line:{
+    borderBottomWidth:1,
+    borderBottomColor:'#0E861C',
+    width:'40%',
+    marginHorizontal:5
   },
   authButtonContainer:{
     // flex:1,
@@ -648,10 +698,10 @@ const styles = StyleSheet.create({
   formContainer: {
     flex: 1,
     // backgroundColor: '#fff'
-    width:'80%'
+    width:'86%'
   },
   signUpContainer: {
-    marginTop:30,
+    marginTop:3,
     // flex: 1,
     // backgroundColor: '#fff'
   },
