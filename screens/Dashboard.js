@@ -22,6 +22,7 @@ export default function Dashboard(props) {
   const [transaction, setTransaction] = useState('');
   const [farms, setFarms] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [hold, setHold] = useState([]);
 
   // const [transaction, setTransaction] = useState({
   //   "id":'',
@@ -46,6 +47,7 @@ export default function Dashboard(props) {
         const token = navigation.getParam('token', 'some default value');
         const farmProducts = navigation.getParam('farmProducts', 'default');
         const transactions = navigation.getParam('transactions', 'some default value');
+        // let hold=[];
 //TESTING
         // console.log(navigation)
         // console.log(farmProducts.products)
@@ -82,11 +84,31 @@ export default function Dashboard(props) {
         // console.log(userAvatar,userEmail)
         const getUserTransaction = () => {
           setTransaction(transactions);
+          // setHolsd([])
                  if(transactions.transactions.length!=0){
                   // console.log('yes')
-                  setLoading(false)
+                  setLoading(false);
+                   
+                  // console.log(hold)
+                  // hold=[],
+                  transactions.transactions.map((transaction,i)=>{
+                    // if(hold.includes(transaction)){
+                      console.log(':+'+i,)
+                    //   if(i>=transactions.transactions.length-2 && hold.length<2){
+                    //   hold.push(transaction)
+                    //   // console.log(hold.length,i,transactions.transactions.length)
+                    // }
+                    // console.log(transaction.created_at);
+                    });
+                    // hold.sort();
                  };
          };
+
+        //  transaction.transactions.map(transaction=>{
+        //   hold.push(transaction.created_at)
+      
+        //   console.log(hold.sort());
+        //   })
 
       //   const getUserTransaction =async () => {    
       //     await fetch('https://farmcenta.com/api/v1/transactions?token='+token,{
@@ -116,6 +138,7 @@ export default function Dashboard(props) {
        useEffect(() => {
         getUserTransaction();
         latestFarm();
+        // setHold([])
       }, []);
 
   return (
@@ -179,20 +202,82 @@ export default function Dashboard(props) {
                 </View>
             </View>
             <View style={styles.content2Container}>
-            <View style={styles.rowContainer} >
+            <View style={{paddingHorizontal:10}} >
                 <Text style={{...styles.text2,...styles.boldText2}}>Lastest Transaction</Text>
                 </View>
-                <View style={styles.rowContainer} >
+                {/* <View style={styles.rowContainer} >
                 <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
                 <Text style={{...styles.text2,...styles.boldText2}}>Payout Dates</Text>
                 <Text style={{...styles.text2,...styles.boldText2}}>Amount</Text>
                 <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
                 </View>
-                <View style={styles.rowContainer} >
+                <View style={styles.rowContainerContent} >
                 <Text style={styles.text2}>{loading?0:transaction.transactions[0].quantity}</Text>
                 <Text style={styles.text2}>{loading?0:transaction.transactions[0].payback_date}</Text>
                 <Text style={styles.text2}>{loading?0:'#'+transaction.transactions[0].amount}</Text>
                 <Text style={styles.text2}>{loading?0:transaction.transactions[0].status}</Text>
+                </View> */}
+
+
+{/* <View style={styles.rowContainer} >
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
+              <Text style={{...styles.text2,...styles.textMagin}}>{loading?0:transaction.transactions[0].quantity}</Text>
+                <Text style={styles.text2}>{loading?0:transaction.transactions[1].quantity}</Text>
+  </View>
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Payout Dates</Text>
+                <Text style={{...styles.text2,...styles.textMagin}}>{loading?0:transaction.transactions[0].payback_date}</Text>
+                <Text style={styles.text2}>{loading?0:transaction.transactions[1].payback_date}</Text>
+  </View>
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Amount</Text>
+                <Text style={{...styles.text2,...styles.textMagin}}>{loading?0:'#'+transaction.transactions[0].amount}</Text>
+                <Text style={styles.text2}>{loading?0:'#'+transaction.transactions[1].amount}</Text>
+  </View>
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
+                <Text style={{...styles.text2,...styles.textMagin}}>{loading?0:transaction.transactions[0].status}</Text>
+                <Text style={styles.text2}>{loading?0:transaction.transactions[1].status}</Text>
+  </View>
+                </View> */}
+
+
+
+                <View style={styles.rowContainer} >
+                <View style={styles.contentHead}>
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
+  </View>
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Payout Dates</Text>
+  </View>
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Amount</Text>
+  </View>
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
+  </View>
+  </View>
+  {/* {  loading? <Text>No transaction yet</Text>:hold.map((item)=>{
+    console.log(item)
+    })} */}
+    {  loading? <Text>No transaction yet</Text>:hold.map((item)=><View key={item.id} style={styles.contentHead}>
+  <View style={styles.content}>
+              <Text style={{...styles.text2,...styles.textMagin}}>{item.quantity}</Text>
+  </View>
+  
+  <View style={styles.content}>
+                <Text style={{...styles.text2,...styles.textMagin}}>{item.payback_date}</Text>
+  </View>
+  <View style={styles.content}>
+                <Text style={{...styles.text2,...styles.textMagin}}>{'#'+item.amount}</Text>
+  </View>
+  <View style={styles.content}>
+                <Text style={{...styles.text2,...styles.textMagin}}>{item.status}</Text>
+  </View>
+  </View>)}
+  
                 </View>
                 {/* <View style={styles.rowContainer} >
                 <Text style={styles.text2}>20 Carbon</Text>
@@ -200,7 +285,7 @@ export default function Dashboard(props) {
                 <Text style={styles.text2}>#3,000,000</Text>
                 <Text style={styles.text2}>Returning</Text>
                 </View> */}
-                <View style={{...styles.rowContainer,justifyContent:'flex-end'}} >
+                <View style={styles.moreContainer} >
                 <TouchableOpacity 
                 // onPress={()=>
                 //   props.navigation.navigate('Store', {
@@ -343,16 +428,32 @@ const styles = StyleSheet.create({
   rowContent:{
     flexDirection:"row",
     justifyContent:'space-between',
-    paddingHorizontal:15,
+    paddingHorizontal:10,
     // backgroundColor: '#1BBC2E',
     backgroundColor: '#eee',
     flex:1,
-    paddingTop:5
+    paddingTop:2
   },
-  rowContainer:{
+  moreContainer:{
     flexDirection:"row",
     justifyContent:'space-between',
-    paddingHorizontal:15
+    paddingHorizontal:15,
+    justifyContent:'flex-end'
+  },
+  contentHead:{
+    flexDirection:"row",
+    justifyContent:'space-between',
+    // paddingHorizontal:2,
+  },
+  content:{
+    // flexDirection:"row",
+    // justifyContent:'center',
+    flex:1,
+     alignItems:"center",
+    // paddingHorizontal:5,
+    // paddingLeft:30,
+    // marginLeft:30
+    // marginHorizontal:20
   },
   lastFarmHead:{
     flexDirection:"row",
@@ -369,14 +470,17 @@ const styles = StyleSheet.create({
   text: {
         color: "#0E861C",
         // backgroundColor:"#0E861C",
-        textAlign:"center"
+        textAlign:"center",
       },
       payBackText: {
         color: "white",
         textAlign:"center"
       },
       boldText2:{
-        fontWeight:'bold',
+        fontWeight:'bold'
+      },
+      textMagin:{
+        marginVertical:10
       },
   colText: {
     color: 'white',
@@ -422,11 +526,17 @@ row3Container:{
     flexDirection:"row",
     justifyContent:'space-between',
   },
-  logoImage: {
-        width: 120,
-        height: 80,
+  // logoImage: {
+  //       width: 120,
+  //       height: 80,
+  //       resizeMode: 'contain',
+  //     },
+      logoImage: {
+        width: 180,
+        height: 50,
         resizeMode: 'contain',
-      },
+        marginTop:40
+    },
       itemImage: {
         width: 100,
         height: 100,

@@ -377,13 +377,19 @@ row3Container:{
     flexDirection:"row",
     justifyContent:'space-between',
   },
+  // logoImage: {
+  //   // flex:1,
+  //       width: 120,
+  //       height: 120,
+  //       resizeMode: 'contain',
+  //       left:0
+  //     },
   logoImage: {
-    // flex:1,
-        width: 120,
-        height: 120,
-        resizeMode: 'contain',
-        left:0
-      },
+    width: 180,
+    height: 50,
+    resizeMode: 'contain',
+    marginTop:40
+},
 //   developmentModeText: {
 //     marginBottom: 20,
 //     color: 'rgba(0,0,0,0.4)',

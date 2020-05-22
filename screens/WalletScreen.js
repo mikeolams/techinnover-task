@@ -442,11 +442,17 @@ row3Container:{
     flexDirection:"row",
     justifyContent:'space-between',
   },
+  // logoImage: {
+  //       width: 120,
+  //       height: 120,
+  //       resizeMode: 'contain',
+  //     },
   logoImage: {
-        width: 120,
-        height: 120,
-        resizeMode: 'contain',
-      },
+    width: 180,
+    height: 50,
+    resizeMode: 'contain',
+    marginTop:40
+},
   tabBarInfoContainer: {
     position: 'absolute',
     bottom: 0,
