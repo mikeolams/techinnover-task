@@ -431,7 +431,7 @@ const submitSignUp =async (values) => {
         </SafeAreaView>):
         (<SafeAreaView style={{...styles.formContainer,...styles.signUpContainer}}>
           <View
-           style={styles.container}
+           style={styles.inContainer}
           //  style={{...styles.container,...styles.scrollContainer}}
           //  contentContainerStyle={styles.contentContainer}
            >
@@ -644,7 +644,7 @@ const styles = StyleSheet.create({
   innerContainer: {
     // margin: 60,
     // marginVertical:30,
-    marginBottom:30,
+    // marginBottom:50,
     backgroundColor: '#FFFFFF',
     // borderRadius: 10,
     flex:1,
@@ -652,7 +652,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // top:-10
     // opacity:280
-    paddingBottom: 100
+    paddingBottom: 140
   },
   mainAuthContainer:{
     // marginVertical:30,
@@ -666,6 +666,7 @@ const styles = StyleSheet.create({
   optionContainer:{
     flexDirection:"row",
     justifyContent:'center',
+    // marginBottom:80
   },
   textHead: {
     fontWeight:"bold",
@@ -697,15 +698,22 @@ const styles = StyleSheet.create({
     width:'70%'
   },
   formContainer: {
-    flex: 1,
+    // flex:1,
     // backgroundColor: '#fff'
+    height:'80%',
     width:'86%'
   },
-  signUpContainer: {
-    marginTop:3,
-    // flex: 1,
-    // backgroundColor: '#fff'
-  },
+  // signUpContainer: {
+  //   // marginTop:3,
+  //   // flex: 1,
+  //   // backgroundColor: '#fff'
+  // },
+  // inContainer: {
+  //   marginBottom:50,
+  //   // backgroundColor: '#FFFFFF',
+  //   flex:1,
+  //   paddingBottom: 140
+  // },
   buttonContainer: {
     margin: 25
   },
