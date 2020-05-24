@@ -132,7 +132,7 @@ export default function WalletScreen(props) {
 
   return (
     <View style={styles.container}>
-        <View style={styles.innerContainer}>
+        <View style={styles.topContainer}>
             <View style={styles.imageContainer} >
             <Image
             source={
@@ -145,11 +145,8 @@ export default function WalletScreen(props) {
            <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
            <Text>{userInfo[0]}</Text>
            </View>
-            <ScrollView 
-            style={styles.container}
-            contentContainerStyle={styles.contentContainer}>
-              {/* <View><Text style={styles.text21}>{userInfo.name}</Text></View> */}
-            <View style={styles.content1Container}>
+           </View>
+           <View style={styles.walletDashboard}>
                 <View style={styles.rowContainer} >
                 <Text style={styles.text}>Wallet Ballance</Text>
                 </View>
@@ -161,11 +158,22 @@ export default function WalletScreen(props) {
                 })}</Text>}
                 </View>
             </View>
+            <View style={styles.contentContainer}>
+            {/* contentContainerStyle={styles.contentContainer}> */}
+              {/* <View><Text style={styles.text21}>{userInfo.name}</Text></View> */}
             <View style={styles.content2Container}>
             <View style={styles.walletHeader} >
               <Text style={styles.walletHeaderText}>Wallet Transactions</Text>
               </View>
-              {wallets ==='' || wallets.wallet.length === 0? <Fragment>
+              <View style={styles.walletContainer} >
+              <View style={styles.titleContainer} >
+              <Text style={styles.text2}>Amount</Text>
+              <Text style={styles.text2}>Dates</Text>
+              <Text style={styles.text2}>Method</Text>
+              <Text style={styles.text2}>Status</Text>
+              </View>
+                <View style={styles.walletContent}>
+                {wallets ==='' || wallets.wallet.length === 0? <Fragment>
                 <View style={styles.rowContainer} >
               <Text style={styles.text2}>Wallet Transactions</Text>
               </View>
@@ -243,30 +251,41 @@ export default function WalletScreen(props) {
               </View>
               </Fragment>
               :
-              <Fragment>
-              <View style={styles.rowContainer} >
+              <ScrollView 
+            style={styles.container}
+            // contentContainerStyle={styles.contentContainer}
+            >
+              {/* <View style={styles.rowContainer} >
               <Text style={styles.text2}>Amount</Text>
               <Text style={styles.text2}>Dates</Text>
               <Text style={styles.text2}>Method</Text>
               <Text style={styles.text2}>Status</Text>
-              </View>
+              </View> */}
               {wallets.wallet.map((item)=>
       //  console.log(item.id, item.amount,'imd:'+item.method,'imm:'+item.memo, 'iu:'+item.user,item.created_at)
-       <View key={item.id} style={styles.rowContainer} >
-       <Text style={styles.text2}>N{item.amount}</Text>
-       <Text style={styles.text2}>{item.created_at}</Text>
-       <Text style={styles.text2}>{item.method}</Text>
-       <Text style={styles.text2}>{item.amount < 0?'(Dr)':'(Cr)'}</Text>
+       <View key={item.id} style={styles.walletItems} >
+         <View style={styles.col}><Text style={styles.text2}>N{item.amount}</Text></View>
+         <View style={styles.col}><Text style={styles.text2}>{Date.UTC(item.created_at)}</Text></View>
+         <View style={styles.col}><Text style={styles.text2}>{item.method}</Text></View>
+         <View style={styles.col}><Text style={styles.text2}>{item.amount < 0?'(Dr)':'(Cr)'}</Text></View>
+       
+       {/* <Text style={styles.text2}>{item.created_at}</Text> */}
+       {/* <Text style={styles.text2}>{item.created_at}</Text> */}
+       {/* {console.log(Date(item.created_at))} */}
+       {/* {console.log(new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()))} */}
+       {/* new Date(new Date().getFullYear(),new Date().getMonth() , new Date().getDate()) */}
        </View>
      )}
-              </Fragment>
+               </ScrollView>
               }
+                </View>
+
+              </View>
+              
             
             </View>
             
-            </ScrollView>
-            
-        </View>
+            </View>
     
 
       {/* <View style={styles.tabBarInfoContainer}>
@@ -329,17 +348,98 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  innerContainer: {
-      flex:1,
+  topContainer: {
+      flex:0.3,
+      marginBottom:7
         // alignItems:'center',
       },
-      contentContainer:{
+  walletDashboard:{
+          flex:0.2,
+        // height:120,
+          justifyContent:'center',
+        alignItems:'center',
+        alignSelf:'center',
+          // backgroundColor: '#1BBC2E',
+          backgroundColor:"#0E861C",
+          width:'90%',
+          borderRadius:10,
+          // paddingTop:20,
+          paddingVertical:20
+      },
+  contentContainer:{
         flex:1,
       alignItems:'center',
         // backgroundColor: '#fe2',
         // width:'90%'
         // paddingBottom:30
     },
+    content2Container:{
+      flex:1,
+      // paddingTop:2,
+      marginTop:10,
+      justifyContent:'space-between',
+  //   alignItems:'center',
+      // backgroundColor: '#eee',
+      width:'90%',
+      borderRadius:10,
+      // height:"20%"
+  },
+  walletHeader:{
+    flex:0.1,
+    justifyContent:'center',
+    alignItems:'center',
+    borderBottomWidth:1,
+    borderBottomColor:"#0E861C33",
+    // borderBottomColor:'#06360B' "#0E861C33",
+    // minHeight:30,
+    // paddingHorizontal:15,
+    // backgroundColor:'blue'
+  },
+  walletContainer:{
+    // justifyContent:'space-between',
+    flex:1,
+    // backgroundColor:'green'
+  },
+  titleContainer:{
+    flex:0.08,
+    flexDirection:"row",
+    justifyContent:'space-between',
+    paddingHorizontal:15,
+    // backgroundColor:'yellow'
+  },
+  
+  walletContent:{
+    flex:1,
+    // justifyContent:'space-between',
+    // alignItems:'center',
+    
+    // minHeight:30,
+    // paddingHorizontal:15,
+    // paddingTop:1,
+    // backgroundColor:'blue'
+  },
+      rowContainer:{
+        flexDirection:"row",
+        justifyContent:'space-between',
+        paddingHorizontal:15,
+      },
+      walletItems:{
+        flex:1,
+        flexDirection:"row",
+        justifyContent:'space-evenly',
+        // paddingHorizontal:15,
+        // textAlignVertical:"center",
+        alignItems:"center",
+        // minHeight:5,
+        // backgroundColor:'#eef',"#0E861C33"
+        backgroundColor:"#0E861C33",
+        margin:4
+      },
+      col:{
+        flex:1,
+        // backgroundColor:'#32f',
+        paddingHorizontal:5,
+      },
   imageContainer:{
     // flex:1,
     paddingTop:1,
@@ -356,33 +456,9 @@ const styles = StyleSheet.create({
   //   // // paddingHorizontal:15,
   //   backgroundColor:'blue'
   // },
-  content1Container:{
-    //   flex:1,
-    height:120,
-      justifyContent:'space-between',
-    alignItems:'center',
-      // backgroundColor: '#1BBC2E',
-      backgroundColor:"#0E861C",
-      width:'90%',
-      borderRadius:10,
-      paddingTop:20,
-      paddingVertical:30
-  },
-  rowContainer:{
-    flexDirection:"row",
-    justifyContent:'space-between',
-    paddingHorizontal:15,
-  },
-  walletHeader:{
-    // flex:2,
-    justifyContent:'center',
-    alignItems:'center',
-    borderBottomWidth:0.6,
-    borderBottomColor:'#06360B',
-    minHeight:30,
-    // paddingHorizontal:15,
-    // backgroundColor:'blue'
-  },
+  
+  
+  
   text: {
         color: 'white',
       },
@@ -395,24 +471,15 @@ const styles = StyleSheet.create({
       fontWeight:'bold',
       fontSize:30 
       },
-    content2Container:{
-        flex:1,
-        paddingTop:2,
-        marginVertical:15,
-        justifyContent:'space-between',
-    //   alignItems:'center',
-        backgroundColor: '#eee',
-        width:'90%',
-        borderRadius:10,
-        // height:"20%"
-    },
+    
     // row2Container:{
     //     flexDirection:"row",
     //     justifyContent:'space-between',
     //     paddingHorizontal:15,
     //   },
     text2: {
-        color: '#0E861C'
+        color: '#0E861C',
+        textAlign:"center"
       },
       text21: {
         // color: 'black'
@@ -420,7 +487,7 @@ const styles = StyleSheet.create({
       id:{
         // flexDirection:"row",
         // backgroundColor:'blue',
-        paddingHorizontal:10,
+        paddingHorizontal:20,
         // marginBottom:2,
         // alignItems:'center',
         // justifyContent:'flex-end'

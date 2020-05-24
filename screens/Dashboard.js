@@ -94,10 +94,10 @@ export default function Dashboard(props) {
                   transactions.transactions.map((transaction,i)=>{
                     // if(hold.includes(transaction)){
                       console.log(':+'+i,)
-                    //   if(i>=transactions.transactions.length-2 && hold.length<2){
-                    //   hold.push(transaction)
-                    //   // console.log(hold.length,i,transactions.transactions.length)
-                    // }
+                      if(i>=transactions.transactions.length-2 && hold.length<2){
+                      hold.push(transaction)
+                      // console.log(hold.length,i,transactions.transactions.length)
+                    }
                     // console.log(transaction.created_at);
                     });
                     // hold.sort();
