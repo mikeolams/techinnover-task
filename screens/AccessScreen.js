@@ -430,10 +430,11 @@ const submitSignUp =async (values) => {
         </View> */}
         </SafeAreaView>):
         (<SafeAreaView style={{...styles.formContainer,...styles.signUpContainer}}>
-          <ScrollView
+          <View
            style={styles.container}
           //  style={{...styles.container,...styles.scrollContainer}}
-           contentContainerStyle={styles.contentContainer}>
+          //  contentContainerStyle={styles.contentContainer}
+           >
           <Formik
           initialValues={{ name: '', email: '', password: '',password_confirmation: '' }}
           onSubmit={values => {handleSubmit(values)}}
@@ -519,7 +520,7 @@ const submitSignUp =async (values) => {
           <Text style={styles.textHead}>Log in</Text>
           </TouchableHighlight>
         </View>
-        </ScrollView>
+        </View> 
         </SafeAreaView>
       )}
 
@@ -654,7 +655,7 @@ const styles = StyleSheet.create({
     paddingBottom: 100
   },
   mainAuthContainer:{
-    marginVertical:30,
+    // marginVertical:30,
     // flex:1,
     height:150,
     justifyContent:'center',
