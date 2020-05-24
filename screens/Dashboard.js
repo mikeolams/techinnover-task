@@ -304,14 +304,16 @@ export default function Dashboard(props) {
                 <View style={styles.row3Container} >
                 {/* {farms.map(farm =>console.log(farm.location))} */}
                 {/* {Object.values(farms).map(value =>console.log(value))} */}
-                {farms.map(farm =><Image
-                key={farm.id}
+                {farms.map(farm =><TouchableOpacity  key={farm.id}>
+                  <Image
+               
             source={
               {uri:"https://farmcenta.com"+farm.photo}
               // require('../assets/images/cattle-farm3x.png')
             }
             style={styles.itemImage}
-          />)}
+          />
+          </TouchableOpacity>)}
           {/* <Image
             source={
               require('../assets/images/ginger3x.png')
@@ -342,6 +344,23 @@ export default function Dashboard(props) {
             navigation/MainTabNavigator.js
           </MonoText>
         </View>
+      </View> */}
+      {/* <View style={styles.menuBackground}>
+      <View style={styles.menuContainer}>
+        <View style={styles.menuHead}>
+        <View style={styles.id}>
+           <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
+           <Text>{userInfo[0]}</Text>
+           </View>
+        </View>
+        <View style={styles.menuDiv}></View>
+        <View style={styles.menu}>
+        <View style={styles.menuItem}>
+           <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
+           <Text>{userInfo[0]}</Text>
+           </View>
+        </View>
+      </View>
       </View> */}
     </View>
   );
@@ -401,6 +420,36 @@ const styles = StyleSheet.create({
         // backgroundColor: '#fe2',
         // width:'90%'
         // paddingBottom:30
+    },
+    menuContainer:{
+      zIndex:2,
+      backgroundColor: '#eee',
+      height:"90%",
+      width:"80%",
+      bottom:-72
+    },
+    menuBackground:{
+      // flex:1,
+      // paddingTop:'30%',
+      height:"100%",
+      width:"100%",
+      zIndex:1,
+      position:"absolute",
+      backgroundColor: 'rgba(52, 52, 52, 0.5)',
+      // backgroundColor: 'transparent'
+      // bottom:250,
+      // backgroundColor: '#eee',
+    },
+    menuHead:{
+      flex:0.5,
+      backgroundColor: '#eed',
+    },
+    menuDiv:{
+      borderBottomWidth:1,
+    },
+    menu:{
+      flex:3,
+      backgroundColor: '#2e3',
     },
   imageContainer:{
     // flex:1,
@@ -589,9 +638,9 @@ row3Container:{
 //   homeScreenFilename: {
 //     marginVertical: 7,
 //   },
-//   codeHighlightText: {
-//     color: 'rgba(96,100,109, 0.8)',
-//   },
+  // codeHighlightText: {
+  //   color: 'rgba(96,100,109, 0.8)',
+  // },
 //   codeHighlightContainer: {
 //     backgroundColor: 'rgba(0,0,0,0.05)',
 //     borderRadius: 3,
