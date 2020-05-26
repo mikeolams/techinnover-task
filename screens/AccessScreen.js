@@ -62,6 +62,7 @@ if(actionType==='login'){
 }else{
   // console.log(actionType);
   console.log(JSON.stringify(values));
+  console.log(values);
   submitSignUp(values);
 }
 // if(actionType==='signup'){
@@ -217,16 +218,17 @@ const submitSignUp =async (values) => {
     headers: {
       'Content-Type': 'application/json'
     },
-    body: values // body data type must match "Content-Type" header
-    // body: JSON.stringify(values) // body data type must match "Content-Type" header
+    // body: values // body data type must match "Content-Type" header
+    body: JSON.stringify(values) // body data type must match "Content-Type" header
   })
   .then(resp=>resp.json())
-  .then(resp=>console.log(JSON.parse(resp)))
-//   .then(resp=>{
+  // .then(resp=>console.log(JSON.parse(resp)))
+  .then(
 // console.log(resp)
-//   })
+transactionsCall(values)
+  )
  .catch(err=> {
-   console.warn('Wrong parameters '+err )
+   console.warn('Wrong parameters or unreachable '+err )
  })
 };
 
