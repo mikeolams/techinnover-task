@@ -345,20 +345,50 @@ export default function Dashboard(props) {
           </MonoText>
         </View>
       </View> */}
+
       {/* <View style={styles.menuBackground}>
       <View style={styles.menuContainer}>
         <View style={styles.menuHead}>
-        <View style={styles.id}>
-           <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
-           <Text>{userInfo[0]}</Text>
+        <View style={styles.menuId}>
+        <Image source={{uri:userAvatar}} style={styles.picImage}/>
+           <Text>{userName}</Text>
            </View>
+           <TouchableOpacity  onPress={()=>navigation.navigate('Auth')} style={styles.signOut}>
+           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Text>Log Off</Text>
+           </TouchableOpacity>
         </View>
         <View style={styles.menuDiv}></View>
         <View style={styles.menu}>
-        <View style={styles.menuItem}>
-           <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
-           <Text>{userInfo[0]}</Text>
-           </View>
+        <TouchableOpacity style={styles.menuItem}>
+           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Text>Dashboard</Text>
+           </TouchableOpacity>
+           <TouchableOpacity style={styles.menuItem}>
+           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Text>Settings</Text>
+           </TouchableOpacity>
+           <TouchableOpacity style={styles.menuItem}>
+           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Text>Notification</Text>
+           </TouchableOpacity>
+           <TouchableOpacity style={styles.menuItem}>
+           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Text>Call</Text>
+           </TouchableOpacity>
+           <TouchableOpacity style={styles.menuItem}>
+           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Text>Email</Text>
+           </TouchableOpacity>
+           <TouchableOpacity style={styles.menuItem}>
+           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Text>Whatsapp</Text>
+           </TouchableOpacity>
+           <TouchableOpacity style={styles.menuItem}>
+           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Text>Visit Website</Text>
+           </TouchableOpacity>
+
         </View>
       </View>
       </View> */}
@@ -441,15 +471,44 @@ const styles = StyleSheet.create({
       // backgroundColor: '#eee',
     },
     menuHead:{
-      flex:0.5,
+      flex:0.4,
       backgroundColor: '#eed',
+      flexDirection:"row"
+    },
+    signOut:{
+      // marginHorizontal:0
+      alignItems:'center',
+        justifyContent:'center',
+        width:'50%'
     },
     menuDiv:{
-      borderBottomWidth:1,
+      width:"80%",
+      borderBottomWidth:2,
+      borderBottomColor:"#0E861C33",
     },
     menu:{
       flex:3,
-      backgroundColor: '#2e3',
+      // backgroundColor: '#2e3',
+      backgroundColor: '#eed'
+    },
+    menuId:{
+      flexDirection:"row",
+        // padding:10,
+        marginVertical:25,
+        marginLeft:35,
+        // alignSelf:"center",
+        alignItems:'center',
+        justifyContent:'space-between',
+        width:'42%'
+    },
+    menuItem:{
+      flexDirection:"row",
+        // backgroundColor:'blue',
+        padding:10,
+        // marginBottom:2,
+        alignItems:'center',
+        justifyContent:'space-between',
+        width:'50%'
     },
   imageContainer:{
     // flex:1,
