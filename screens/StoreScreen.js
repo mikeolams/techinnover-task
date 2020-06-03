@@ -19,8 +19,9 @@ export default function StoreScreen() {
      [farm, setFarm] = useState([[],[]]),
      [selling, setSelling] = useState(false),
      [productsReceived, setProductsReceived] = useState(false),
-     [userInfo, setUserInfo] = useState('');
-    //  [loading, setLoading] = useState(true);
+     [userInfo, setUserInfo] = useState(''),
+     [farmClicked, setFarmClicked] = useState(true),
+     [proceed, setProceed] = useState(false);
     let sum=0;
   
     
@@ -44,6 +45,11 @@ export default function StoreScreen() {
         setSelling(true)
         console.log('selling ' +selling)
         // console.log(farm[1])
+        setProceed(true)
+       },
+       payIniHandler =async () => {
+        console.log('initialise' +selling)
+        setProceed(true)
        },
      
        closeHandler =async () => {
@@ -62,24 +68,25 @@ export default function StoreScreen() {
     //     // //    setNewArray(newArray.push(item))
     //     //  }
     //    })
+    // console.log(json.products[1])
+    if (farm[0].length===0||farm[1].length===0){
+        // if (productsReceived && (farm[0].length===0||farm[1].length===0)){
+    json.products.map((item)=>{
+        item.status=== 'Sold Out'? farm[0].push(item):farm[1].push(item)
+    })
+};
+
     setProductsArray(json)
     setProductsReceived(true)
     // console.log(productsArray.products[12].status)
     // console.log(productsArray.products[0].category)
-    // console.log(productsArray.products[10])
+  
     // console.log(productsArray)
     // console.log(productsReceived)
     // console.log(productsArray) photo,category,amount,status, name,location,id,desc,
-    if (productsReceived && (farm[0].length===0||farm[1].length===0)){
-        // setFarm([[],[]])
-        productsArray.products.map((item)=>{
-            // item.status=== 'Sold Out'?console.log(farm[0]):console.log(farm)
-            item.status=== 'Sold Out'? farm[0].push(item):farm[1].push(item)
-            console.log('b4: '+productsReceived)
-        });
-        // console.log('b4: '+productsReceived)
-        // console.log(farm[1])
-    } 
+    // if (productsReceived && (farm[0].length===0||farm[1].length===0)){
+
+    //     if (productsReceived ){
         //  save(JSON.stringify(newArray));
  
        } )
@@ -96,11 +103,28 @@ export default function StoreScreen() {
            // retrieveData();
            retrieveUserInfo();
         }, []);
+    
+        const pickItemHandler = (itemId) =>{
+            // console.log(itemId);
+               let clickedItem= productsArray.products.find((item) =>{
+                if (item.id===itemId){
+                    // console.log(item.id, itemId)
+                    setFarmClicked(false)
+                  return item
 
+                }
+                //  item ===e.currentTarget
+                //  return item ===e.currentTarget;
+                });
+          console.log(clickedItem.name,+' '+ clickedItem.location);
+        // console.log(itemId)
+                // return props.navigation.navigate('Hack', itemData);
+          };
 
     return (
         <View style={styles.container}>
             <View style={styles.innerContainer}>
+            <View>
                 <View style={styles.imageContainer} >
                     <Image
                         source={
@@ -113,6 +137,8 @@ export default function StoreScreen() {
            <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
            <Text>{userInfo[0]}</Text>
            </View>
+           </View>
+           {farmClicked?<View>
                 <View style={styles.buttonContainer}>
       <TouchableOpacity onPress={sellHandler} style={{...styles.leftButton,...styles.buttonSet, backgroundColor:selling?'#0C9121':'#fff'}}>
             <Text style={{...styles.buttonText, color:selling?'#fff':'#2e78b7'}}>
@@ -127,22 +153,15 @@ export default function StoreScreen() {
       
       </View>
                 <ScrollView
-                    // style={styles.container}
                     contentContainerStyle={styles.contentContainer}>
 
                     <View style={styles.content2Container}>
-                        {/* <View style={{...styles.rowContainer, justifyContent:'center'}} >
-                            <Text style={styles.text2}>Farm Store</Text>
-                        </View> */}
-                        {/* productsArray.products.map((item)=> */}
-            {/* // item.status=== 'Sold Out'?console.log(farm[0]):console.log(farm) */}
-            {/* item.status=== 'Sold Out'? */}
+        
                         <View style={styles.productsContainer} >
                             
                         {productsReceived? selling?
                         farm[1].map((item)=>
-                        // productsArray.products.map((item)=>
-                        <TouchableOpacity key={item.id}style={styles.itemContainer}>
+                        <TouchableOpacity onPress={pickItemHandler.bind(item,item.id)} key={item.id}style={styles.itemContainer}>
                             <Image
                             source={
                                 {uri:'https://farmcenta.com'+item.photo}
@@ -154,7 +173,7 @@ export default function StoreScreen() {
                             <View><Text>{item.location}</Text></View>
                         </View>
                         </TouchableOpacity>) :farm[0].map((item)=>
-                            <TouchableOpacity key={item.id+'1'}style={styles.itemContainer}>
+                            <TouchableOpacity onPress={pickItemHandler.bind(item,item.id)} key={item.id+'1'}style={styles.itemContainer}>
                                 <Image
                                 source={
                                     {uri:'https://farmcenta.com'+item.photo}
@@ -168,6 +187,9 @@ export default function StoreScreen() {
                             </TouchableOpacity>):null}
                             </View>
                         
+
+
+                        {/* ........................................ */}
                         {/* <View style={styles.rowContainer} > */}
                             
                             {/* <Text>{productsArray.products[0].category}</Text> */}
@@ -268,10 +290,84 @@ export default function StoreScreen() {
                                 style={styles.logoImage}
                             />
                         </View> */}
-                        
+                        {/* ........................................ */}
+
+
                     </View>
                 </ScrollView>
+                </View>:
+                 proceed? <View style={styles.productsPop}>
+                 <View style={styles.productTop}>
+                     <View style={styles.productHead}>
+                         <Text style={styles.text2}>Make Payment</Text>
+                         <Image
+                             source={
+                                 require('../assets/images/ginger3x.png')
+                             }
+                             style={styles.logoImage}
+                         />
+                         </View>
+                     <View style={styles.productDetails}>
+                         <Text>ui</Text>
+                         <Text>ui</Text>
+                         <Text>ui</Text>
+                         </View>
+                 </View>
+                 <View style={styles.productBelow}>
+                 <View style={styles.productTitle}><Text style={styles.text2}>Selected Investment</Text></View>
+                     <View style={styles.productData}><Text>Amount to Pay</Text><Text>8</Text></View>
+                     <View style={styles.productData}><Text>Quantity Selected</Text><Text>77</Text></View>
+                     <View style={styles.productData}><Text>Expected Pay Back</Text><Text>5</Text></View>
+                     <TouchableOpacity style={styles.productClear}><Text style={{...styles.text,textAlign:"center"}}>Clear Cart</Text></TouchableOpacity>
+                 </View>
+                 <View style={styles.payButtons}>
+                 <TouchableOpacity onPress={sellHandler} style={{...styles.productButton,width:150}}>
+         <Text style={styles.text}>
+           Pay with Bank
+         </Text>
+       </TouchableOpacity>
+       <TouchableOpacity onPress={sellHandler} style={{...styles.productButton,width:150}}>
+         <Text style={styles.text}>
+           Pay with Card
+         </Text>
+       </TouchableOpacity>
+       </View>
+             </View>:<View style={styles.productsPop}>
+             <View style={styles.productTop}>
+                 <View style={styles.productHead}>
+                     <Text style={styles.text2}>Investment Information</Text>
+                     <Image
+                         source={
+                             require('../assets/images/ginger3x.png')
+                         }
+                         style={styles.logoImage}
+                     />
+                     </View>
+                 <View style={styles.productDetails}>
+                     <Text>ui</Text>
+                     <Text>ui</Text>
+                     <Text>ui</Text>
+                     </View>
+             </View>
+             <View style={styles.productBelow}>
+             <View style={styles.productTitle}><Text style={styles.text2}>Calculator</Text></View>
+                 <View style={styles.productData}><Text>Quantity</Text><Text>8</Text></View>
+                 <View style={styles.productData}><Text>Amount to Pay</Text><Text>77</Text></View>
+                 <View style={styles.productData}><Text>Expected Pay Back</Text><Text>5</Text></View>
+                 <View style={styles.productData}><Text>Accept MOU</Text><Text>ok</Text></View>
+             </View>
+             <TouchableOpacity onPress={payIniHandler} style={styles.productButton}>
+     <Text style={styles.text}>
+       Proceed to Payament
+     </Text>
+   </TouchableOpacity>
+         </View>
+                }
 
+                {/* ........................................................ */}
+
+{/* ................................................... */}
+                
             </View>
 
 
@@ -523,4 +619,79 @@ const styles = StyleSheet.create({
     helpLink: {
         paddingVertical: 15,
     },
+    productPop:{
+        // flex:1,
+        // justifyContent:"center",
+        // backgroundColor:'yellow'
+    },
+    productTop:{
+        flexDirection:"row",
+        // flex:1,
+        justifyContent:"center",
+        borderTopColor:"#0E861C33",
+        borderTopWidth:2,
+        height:180,
+        paddingHorizontal:30,
+    },
+    productHead:{
+        flex:1,
+        // borderColor:"pink",
+        // borderWidth:1,
+        justifyContent:"center",
+        // backgroundColor:'blue'
+    },
+    productDetails:{
+        flex:1,
+        justifyContent:"center",
+        // alignContent:"center",
+        alignItems:'center',
+        // backgroundColor:'red',
+        // borderColor:"purple",
+        // borderWidth:3,
+        // textAlign:"center"
+    },
+    productBelow:{
+        // flex:1,
+        justifyContent:"center"
+    },
+    productTitle:{
+        paddingHorizontal:30,
+        borderBottomColor:"#0E861C33",
+        borderBottomWidth:1,
+    },
+    productData:{
+        justifyContent:'space-between',
+        flexDirection:"row",
+        paddingHorizontal:30,
+        // borderTopColor:'green',
+        // borderTopWidth:1,
+        borderBottomColor:"#0E861C33",
+        borderBottomWidth:1,
+        // flex:1,
+        // alignContent:"center",
+        alignItems:"center",
+        minHeight:45
+    },
+    productButton:{
+        justifyContent:"center",
+        alignItems:"center",
+        backgroundColor:'#0E861C',
+        minHeight:35,
+        margin:30,
+        // flex:1
+    },
+    payButtons:{
+        flexDirection:"row",
+        // alignItems:"center",
+        justifyContent:"center",
+    },
+    productClear:{
+        backgroundColor:'red',
+        alignSelf:"flex-end",
+        marginRight:30,
+        marginVertical:10,
+        minHeight:25,
+        width:80,
+        justifyContent:"center"
+    }
 });
