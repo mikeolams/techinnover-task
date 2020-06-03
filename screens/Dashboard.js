@@ -360,7 +360,7 @@ export default function Dashboard(props) {
         </View>
         <View style={styles.menuDiv}></View>
         <View style={styles.menu}>
-        <TouchableOpacity style={styles.menuItem}>
+        <TouchableOpacity onPress={()=>navigation.navigate('Links')} style={styles.menuItem}>
            <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
            <Text>Dashboard</Text>
            </TouchableOpacity>

@@ -16,6 +16,8 @@ import { MonoText } from '../components/StyledText';
 export default function StoreScreen() {
 
     const [productsArray, setProductsArray] = useState([]),
+     [farm, setFarm] = useState([[],[]]),
+     [selling, setSelling] = useState(false),
      [productsReceived, setProductsReceived] = useState(false),
      [userInfo, setUserInfo] = useState('');
     //  [loading, setLoading] = useState(true);
@@ -38,12 +40,16 @@ export default function StoreScreen() {
     };
 
      //  Sign up logic
-    const signUpHandler =async () => {
-        console.log('testing sign')
+    const sellHandler =async () => {
+        setSelling(true)
+        console.log('selling ' +selling)
+        // console.log(farm[1])
        },
      
-       loginHandler =async () => {    
-        console.log('testing log')
+       closeHandler =async () => {
+        setSelling(false)    
+        console.log('closed '+selling)
+        // console.log(farm[0])
           };
 
     const fetchProducts =async () => {    
@@ -58,12 +64,22 @@ export default function StoreScreen() {
     //    })
     setProductsArray(json)
     setProductsReceived(true)
+    // console.log(productsArray.products[12].status)
     // console.log(productsArray.products[0].category)
     // console.log(productsArray.products[10])
     // console.log(productsArray)
     // console.log(productsReceived)
     // console.log(productsArray) photo,category,amount,status, name,location,id,desc,
-
+    if (productsReceived && (farm[0].length===0||farm[1].length===0)){
+        // setFarm([[],[]])
+        productsArray.products.map((item)=>{
+            // item.status=== 'Sold Out'?console.log(farm[0]):console.log(farm)
+            item.status=== 'Sold Out'? farm[0].push(item):farm[1].push(item)
+            console.log('b4: '+productsReceived)
+        });
+        // console.log('b4: '+productsReceived)
+        // console.log(farm[1])
+    } 
         //  save(JSON.stringify(newArray));
  
        } )
@@ -98,13 +114,13 @@ export default function StoreScreen() {
            <Text>{userInfo[0]}</Text>
            </View>
                 <View style={styles.buttonContainer}>
-      <TouchableOpacity onPress={signUpHandler} style={styles.sellingButton}>
-            <Text style={styles.sellingButtonText}>
+      <TouchableOpacity onPress={sellHandler} style={{...styles.leftButton,...styles.buttonSet, backgroundColor:selling?'#0C9121':'#fff'}}>
+            <Text style={{...styles.buttonText, color:selling?'#fff':'#2e78b7'}}>
               Still selling
             </Text>
           </TouchableOpacity>
-<TouchableOpacity onPress={loginHandler} style={styles.closeButton}>
-            <Text style={styles.closeButtonText}>
+<TouchableOpacity onPress={closeHandler} style={{...styles.rightButton,...styles.buttonSet, backgroundColor:selling?'#fff':'#0C9121'}}>
+            <Text style={{...styles.buttonText, color:selling?'#2e78b7':'#fff'}}>
               Closed Farm
             </Text>
           </TouchableOpacity>
@@ -118,20 +134,35 @@ export default function StoreScreen() {
                         {/* <View style={{...styles.rowContainer, justifyContent:'center'}} >
                             <Text style={styles.text2}>Farm Store</Text>
                         </View> */}
+                        {/* productsArray.products.map((item)=> */}
+            {/* // item.status=== 'Sold Out'?console.log(farm[0]):console.log(farm) */}
+            {/* item.status=== 'Sold Out'? */}
                         <View style={styles.productsContainer} >
-                        {productsReceived? productsArray.products.map((item)=>
-                            <TouchableOpacity key={item.id}style={styles.itemContainer}>
+                            
+                        {productsReceived? selling?
+                        farm[1].map((item)=>
+                        // productsArray.products.map((item)=>
+                        <TouchableOpacity key={item.id}style={styles.itemContainer}>
+                            <Image
+                            source={
+                                {uri:'https://farmcenta.com'+item.photo}
+                            }
+                            style={styles.itemImage}
+                        />
+                         <Text style={styles.itemTitle}>{item.name}</Text>
+                        <View style={styles.itemTextBelow}>
+                            <View><Text>{item.location}</Text></View>
+                        </View>
+                        </TouchableOpacity>) :farm[0].map((item)=>
+                            <TouchableOpacity key={item.id+'1'}style={styles.itemContainer}>
                                 <Image
                                 source={
                                     {uri:'https://farmcenta.com'+item.photo}
                                 }
                                 style={styles.itemImage}
                             />
-                            {/* {productsArray.products.map((item)=>{console.log(item.photo)})} */}
                              <Text style={styles.itemTitle}>{item.name}</Text>
-                            {/* <Text>{productsArray.products[0].category}</Text> */}
                             <View style={styles.itemTextBelow}>
-                                {/* <View><Text>N{item.amount}</Text></View> */}
                                 <View><Text>{item.location}</Text></View>
                             </View>
                             </TouchableOpacity>):null}
@@ -373,33 +404,33 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
         // paddingHorizontal: 15,
     },
-    closeButton: {
-        // paddingVertical: 15,
-        justifyContent:'center',
-        backgroundColor: '#0C9121',
-        width:"40%",
-        height:20,
+      leftButton:{
+        borderBottomLeftRadius:10,
+        borderTopLeftRadius:10,
+      },
+      rightButton:{
         borderBottomRightRadius:10,
         borderTopRightRadius:10,
       },
-      sellingButton: {
-        // paddingVertical: 15,
-        borderBottomLeftRadius:10,
-        borderTopLeftRadius:10,
+      buttonSet: {
         justifyContent:'center',
-        backgroundColor: '#fff',
-        width:'40%',
+        // backgroundColor: '#0C9121',
+        width:"40%",
         height:20,
         borderColor:'#2e78b7',
         borderWidth:1,
-        // borderRadius:10
       },
-      closeButtonText: {
+      buttonText: {
         fontSize: 14,
-        color: '#fff',
         lineHeight: 24,
         textAlign: 'center',
       },
+    //   offText: {
+    //     fontSize: 14,
+    //     color: '#2e78b7',
+    //     lineHeight: 24,
+    //     textAlign: 'center',
+    // },
     text: {
         color: 'white',
     },
@@ -491,11 +522,5 @@ const styles = StyleSheet.create({
     },
     helpLink: {
         paddingVertical: 15,
-    },
-    sellingButtonText: {
-        fontSize: 14,
-        color: '#2e78b7',
-        lineHeight: 24,
-        textAlign: 'center',
     },
 });
