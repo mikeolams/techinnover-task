@@ -7,6 +7,7 @@ import {
     StyleSheet,
     Text,
     TouchableOpacity,
+    TouchableHighlight,
     View,
     AsyncStorage
 } from 'react-native';
@@ -21,6 +22,7 @@ export default function StoreScreen() {
      [productsReceived, setProductsReceived] = useState(false),
      [userInfo, setUserInfo] = useState(''),
      [farmClicked, setFarmClicked] = useState(true),
+     [clicked, setClicked] = useState(''),
      [proceed, setProceed] = useState(false);
     let sum=0;
   
@@ -51,7 +53,19 @@ export default function StoreScreen() {
         console.log('initialise' +selling)
         setProceed(true)
        },
-     
+       payHandler =async () => {
+        console.log('initialising ' +selling)
+       },
+       toggleHandler =async () => {
+        // setFarmClicked(true)
+        // setProceed(false)
+        if(!farmClicked){
+            setFarmClicked(true);
+            setProceed(false);
+        }else{
+            setProceed(true)
+        }
+       },
        closeHandler =async () => {
         setSelling(false)    
         console.log('closed '+selling)
@@ -110,14 +124,19 @@ export default function StoreScreen() {
                 if (item.id===itemId){
                     // console.log(item.id, itemId)
                     setFarmClicked(false)
-                  return item
+                //   return item
+                  return setClicked(item);
+                  
 
                 }
-                //  item ===e.currentTarget
-                //  return item ===e.currentTarget;
+            
                 });
-          console.log(clickedItem.name,+' '+ clickedItem.location);
-        // console.log(itemId)
+        //   console.log(clickedItem.name,+' '+ clickedItem.location);
+        // console.log(clickedItem)
+        // console.log(clickedItem.status)
+        // setClicked(clickedItem);
+        // console.log(clicked.return)photo, return,quantity, location,name, amount, category
+        // console.log(clicked)
                 // return props.navigation.navigate('Hack', itemData);
           };
 
@@ -137,6 +156,7 @@ export default function StoreScreen() {
            <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
            <Text>{userInfo[0]}</Text>
            </View>
+           {farmClicked? null:<TouchableOpacity onPress={toggleHandler} style={styles.backButton}><Text>Go Back</Text></TouchableOpacity>}
            </View>
            {farmClicked?<View>
                 <View style={styles.buttonContainer}>
@@ -301,32 +321,50 @@ export default function StoreScreen() {
                      <View style={styles.productHead}>
                          <Text style={styles.text2}>Make Payment</Text>
                          <Image
-                             source={
-                                 require('../assets/images/ginger3x.png')
-                             }
-                             style={styles.logoImage}
+                              source={
+                                {uri:'https://farmcenta.com'+clicked.photo}
+                            }
+                            style={styles.listImage}
                          />
                          </View>
-                     <View style={styles.productDetails}>
-                         <Text>ui</Text>
-                         <Text>ui</Text>
-                         <Text>ui</Text>
-                         </View>
+                         <View style={styles.productDetails}>
+                 <View >
+                    <Text style={styles.listName}>{clicked.name}</Text>
+                     <Text style={styles.listAmount}>N{clicked.amount}</Text>
+                     </View>
+                     <View>
+                     <View style={styles.list}>
+                     <Text style={styles.listText}>Amount:</Text><Text>N{clicked.amount}</Text>
+                     </View>
+                     <View style={styles.list}>
+                     <Text style={styles.listText}>Available Quantity:</Text><Text>{clicked.quantity}</Text>
+                     </View>
+                     <View style={styles.list}>
+                     <Text style={styles.listText}>Return:</Text><Text>{clicked.return}</Text>
+                     </View>
+                     <View style={styles.list}>
+                     <Text style={styles.listText}>Period:</Text><Text>{clicked.period}</Text>
+                     </View>
+                     <View style={styles.list}>
+                     <Text style={styles.listText}>Location:</Text><Text>{clicked.location}</Text>
+                     </View>
+                     </View>
+                     </View>
                  </View>
                  <View style={styles.productBelow}>
                  <View style={styles.productTitle}><Text style={styles.text2}>Selected Investment</Text></View>
-                     <View style={styles.productData}><Text>Amount to Pay</Text><Text>8</Text></View>
-                     <View style={styles.productData}><Text>Quantity Selected</Text><Text>77</Text></View>
-                     <View style={styles.productData}><Text>Expected Pay Back</Text><Text>5</Text></View>
+                     <View style={styles.productData}><Text>Amount to Pay:</Text><Text>{clicked.amount}</Text></View>
+                     <View style={styles.productData}><Text>Quantity Selected:</Text><Text>77</Text></View>
+                     <View style={styles.productData}><Text>Expected Pay Back:</Text><Text>5</Text></View>
                      <TouchableOpacity style={styles.productClear}><Text style={{...styles.text,textAlign:"center"}}>Clear Cart</Text></TouchableOpacity>
                  </View>
                  <View style={styles.payButtons}>
-                 <TouchableOpacity onPress={sellHandler} style={{...styles.productButton,width:150}}>
+                 <TouchableOpacity onPress={payHandler} style={{...styles.productButton,width:150}}>
          <Text style={styles.text}>
            Pay with Bank
          </Text>
        </TouchableOpacity>
-       <TouchableOpacity onPress={sellHandler} style={{...styles.productButton,width:150}}>
+       <TouchableOpacity onPress={payHandler} style={{...styles.productButton,width:150}}>
          <Text style={styles.text}>
            Pay with Card
          </Text>
@@ -338,23 +376,48 @@ export default function StoreScreen() {
                      <Text style={styles.text2}>Investment Information</Text>
                      <Image
                          source={
-                             require('../assets/images/ginger3x.png')
-                         }
-                         style={styles.logoImage}
+                            {uri:'https://farmcenta.com'+clicked.photo}
+                        }
+                         style={styles.listImage}
+                          // console.log(clicked.return)photo, return,quantity, location,name, amount, category
                      />
                      </View>
                  <View style={styles.productDetails}>
-                     <Text>ui</Text>
-                     <Text>ui</Text>
-                     <Text>ui</Text>
+                 <View >
+                    <Text style={styles.listName}>{clicked.name}</Text>
+                     <Text style={styles.listAmount}>N{clicked.amount}</Text>
+                     </View>
+                     <View>
+                     <View style={styles.list}>
+                     <Text style={styles.listText}>Amount:</Text><Text>N{clicked.amount}</Text>
+                     </View>
+                     <View style={styles.list}>
+                     <Text style={styles.listText}>Available Quantity:</Text><Text>{clicked.quantity}</Text>
+                     </View>
+                     <View style={styles.list}>
+                     <Text style={styles.listText}>Return:</Text><Text>{clicked.return}</Text>
+                     </View>
+                     <View style={styles.list}>
+                     <Text style={styles.listText}>Period:</Text><Text>{clicked.period}</Text>
+                     </View>
+                     <View style={styles.list}>
+                     <Text style={styles.listText}>Location:</Text><Text>{clicked.location}</Text>
+                     </View>
+                     </View>
                      </View>
              </View>
              <View style={styles.productBelow}>
              <View style={styles.productTitle}><Text style={styles.text2}>Calculator</Text></View>
                  <View style={styles.productData}><Text>Quantity</Text><Text>8</Text></View>
-                 <View style={styles.productData}><Text>Amount to Pay</Text><Text>77</Text></View>
+                 <View style={styles.productData}><Text>Amount to Pay</Text><Text>N{clicked.amount}</Text></View>
                  <View style={styles.productData}><Text>Expected Pay Back</Text><Text>5</Text></View>
-                 <View style={styles.productData}><Text>Accept MOU</Text><Text>ok</Text></View>
+                 <View style={styles.productData}>
+                     <View>
+                         <Text>Accept MOU</Text>
+                     <TouchableHighlight><Text style={styles.mouText}>Click to view sample MOU</Text></TouchableHighlight>
+                     </View>
+                     <Text>ok</Text>
+                     </View>
              </View>
              <TouchableOpacity onPress={payIniHandler} style={styles.productButton}>
      <Text style={styles.text}>
@@ -534,6 +597,10 @@ const styles = StyleSheet.create({
         color: 'white',
         fontWeight: 'bold'
     },
+    mouText: {
+        color: 'red',
+        fontSize:10
+    },
     content2Container: {
         flex: 1,
         paddingTop:10,
@@ -584,6 +651,11 @@ const styles = StyleSheet.create({
         zIndex:2,
         top:-3
       },
+      backButton:{
+          alignItems:"flex-end",
+          marginLeft:'80%',
+          marginRight:10
+      },
     tabBarInfoContainer: {
         position: 'absolute',
         bottom: 0,
@@ -631,6 +703,8 @@ const styles = StyleSheet.create({
         borderTopColor:"#0E861C33",
         borderTopWidth:2,
         height:180,
+        // marginTop:10,
+        paddingTop:20,
         paddingHorizontal:30,
     },
     productHead:{
@@ -645,6 +719,8 @@ const styles = StyleSheet.create({
         justifyContent:"center",
         // alignContent:"center",
         alignItems:'center',
+        // paddingTop:20,
+        paddingVertical:30
         // backgroundColor:'red',
         // borderColor:"purple",
         // borderWidth:3,
@@ -652,6 +728,7 @@ const styles = StyleSheet.create({
     },
     productBelow:{
         // flex:1,
+        paddingTop:20,
         justifyContent:"center"
     },
     productTitle:{
@@ -693,5 +770,27 @@ const styles = StyleSheet.create({
         minHeight:25,
         width:80,
         justifyContent:"center"
+    },
+    list:{
+        flexDirection:"row",
+        flex:1
+    },
+    listImage:{
+        width: 150,
+        height: 150,
+        resizeMode: 'contain',
+        // marginTop:40
+        marginVertical:10
+    },
+    listText: {
+        color: '#0E861C',
+    },
+    listAmount:{
+        fontSize:40,
+        fontWeight:"bold"
+    },
+    listName:{
+        fontSize:25,
+        color: '#0E861C',
     }
 });
