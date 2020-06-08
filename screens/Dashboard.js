@@ -304,7 +304,7 @@ export default function Dashboard(props) {
                 <View style={styles.row3Container} >
                 {/* {farms.map(farm =>console.log(farm.location))} */}
                 {/* {Object.values(farms).map(value =>console.log(value))} */}
-                {farms.map(farm =><TouchableOpacity  key={farm.id}>
+                {farms.map(farm =><TouchableOpacity  onPress={()=>props.navigation.navigate('Store')} key={farm.id}>
                   <Image
                
             source={
