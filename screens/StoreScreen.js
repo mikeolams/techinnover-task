@@ -23,7 +23,8 @@ export default function StoreScreen() {
      [userInfo, setUserInfo] = useState(''),
      [farmClicked, setFarmClicked] = useState(true),
      [clicked, setClicked] = useState(''),
-     [proceed, setProceed] = useState(false);
+     [proceed, setProceed] = useState(false),
+     [value, setValue] = useState(1);
     let sum=0;
   
     
@@ -58,7 +59,7 @@ export default function StoreScreen() {
        },
        toggleHandler =async () => {
         // setFarmClicked(true)
-        // setProceed(false)
+        setValue(1)
         if(!farmClicked){
             setFarmClicked(true);
             setProceed(false);
@@ -138,6 +139,20 @@ export default function StoreScreen() {
         // console.log(clicked.return)photo, return,quantity, location,name, amount, category
         // console.log(clicked)
                 // return props.navigation.navigate('Hack', itemData);
+          },
+          addHandler= ()=>{
+              if(value<clicked.quantity){
+                  let num=value;
+                  num+=1;
+                  setValue(num)
+              }
+          },
+          lessHandler= ()=>{
+            if(value>1){
+                let num=value;
+                num-=1;
+                setValue(num)
+            }
           };
 
     return (
@@ -354,9 +369,9 @@ export default function StoreScreen() {
                  <View style={styles.productBelow}>
                  <View style={styles.productTitle}><Text style={styles.text2}>Selected Investment</Text></View>
                      <View style={styles.productData}><Text>Amount to Pay:</Text><Text>{clicked.amount}</Text></View>
-                     <View style={styles.productData}><Text>Quantity Selected:</Text><Text>77</Text></View>
+                        <View style={styles.productData}><Text>Quantity Selected:</Text><Text>{value}</Text></View>
                      <View style={styles.productData}><Text>Expected Pay Back:</Text><Text>5</Text></View>
-                     <TouchableOpacity style={styles.productClear}><Text style={{...styles.text,textAlign:"center"}}>Clear Cart</Text></TouchableOpacity>
+                     <TouchableOpacity onPress={toggleHandler} style={styles.productClear}><Text style={{...styles.text,textAlign:"center"}}>Clear Cart</Text></TouchableOpacity>
                  </View>
                  <View style={styles.payButtons}>
                  <TouchableOpacity onPress={payHandler} style={{...styles.productButton,width:150}}>
@@ -408,15 +423,45 @@ export default function StoreScreen() {
              </View>
              <View style={styles.productBelow}>
              <View style={styles.productTitle}><Text style={styles.text2}>Calculator</Text></View>
-                 <View style={styles.productData}><Text>Quantity</Text><Text>8</Text></View>
-                 <View style={styles.productData}><Text>Amount to Pay</Text><Text>N{clicked.amount}</Text></View>
-                 <View style={styles.productData}><Text>Expected Pay Back</Text><Text>5</Text></View>
+                 <View style={styles.productData}>
+                     <Text>Quantity:</Text>
+                     <View style={styles.select}>
+                    <Text>{value}</Text>
+                         <View>
+                             <TouchableOpacity onPress={addHandler}>
+                             <Image
+                        source={
+                            require('../assets/images/up.png')
+                        }
+                        style={styles.valImage}
+                    />
+                             </TouchableOpacity>
+                             <TouchableOpacity onPress={lessHandler}>
+                             <Image
+                    source={
+                        require('../assets/images/down.jpg')
+                    }
+                    style={styles.valImage}
+                />
+                             </TouchableOpacity>
+                        </View>
+                    </View>
+                </View>
+                 <View style={styles.productData}><Text>Amount to Pay:</Text><Text>N{clicked.amount}</Text></View>
+                 <View style={styles.productData}><Text>Expected Pay Back:</Text><Text>5</Text></View>
                  <View style={styles.productData}>
                      <View>
                          <Text>Accept MOU</Text>
                      <TouchableHighlight><Text style={styles.mouText}>Click to view sample MOU</Text></TouchableHighlight>
                      </View>
-                     <Text>ok</Text>
+                     <TouchableOpacity style={styles.mouTick}>
+                     <Image
+                        source={
+                            require('../assets/images/mark.png')
+                        }
+                        style={styles.valImage}
+                    />
+                     </TouchableOpacity>
                      </View>
              </View>
              <TouchableOpacity onPress={payIniHandler} style={styles.productButton}>
@@ -601,6 +646,14 @@ const styles = StyleSheet.create({
         color: 'red',
         fontSize:10
     },
+    mouTick:{
+        backgroundColor:'#0E861C',
+        width:30,
+        height:30,
+        justifyContent:"center",
+        alignItems:"center",
+        borderRadius:4
+    },
     content2Container: {
         flex: 1,
         paddingTop:10,
@@ -703,9 +756,10 @@ const styles = StyleSheet.create({
         borderTopColor:"#0E861C33",
         borderTopWidth:2,
         height:180,
+        // justifyContent:"",
         // marginTop:10,
         paddingTop:20,
-        paddingHorizontal:30,
+        paddingHorizontal:20,
     },
     productHead:{
         flex:1,
@@ -713,10 +767,12 @@ const styles = StyleSheet.create({
         // borderWidth:1,
         justifyContent:"center",
         // backgroundColor:'blue'
+        // paddingHorizontal:2
     },
     productDetails:{
         flex:1,
         justifyContent:"center",
+        // paddingHorizontal:2,
         // alignContent:"center",
         alignItems:'center',
         // paddingTop:20,
@@ -748,6 +804,17 @@ const styles = StyleSheet.create({
         // alignContent:"center",
         alignItems:"center",
         minHeight:45
+    },
+    select:{
+        justifyContent:'space-between',
+        flexDirection:"row",
+        paddingHorizontal:5,
+        // borderColor:'green',
+        borderWidth:1,
+        borderRadius:5,
+        alignItems:"center",
+        minHeight:30,
+        width:70
     },
     productButton:{
         justifyContent:"center",
@@ -786,7 +853,7 @@ const styles = StyleSheet.create({
         color: '#0E861C',
     },
     listAmount:{
-        fontSize:40,
+        fontSize:38,
         fontWeight:"bold"
     },
     listName:{
