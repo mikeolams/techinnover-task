@@ -374,12 +374,24 @@ export default function StoreScreen() {
                      <TouchableOpacity onPress={toggleHandler} style={styles.productClear}><Text style={{...styles.text,textAlign:"center"}}>Clear Cart</Text></TouchableOpacity>
                  </View>
                  <View style={styles.payButtons}>
-                 <TouchableOpacity onPress={payHandler} style={{...styles.productButton,width:150}}>
+                 <TouchableOpacity onPress={payHandler} style={{...styles.productButton,width:150,marginRight:15}}>
+                 <Image
+                        source={
+                            require('../assets/images/museum.png')
+                        }
+                        style={styles.valImage}
+                    /> 
          <Text style={styles.text}>
            Pay with Bank
          </Text>
        </TouchableOpacity>
-       <TouchableOpacity onPress={payHandler} style={{...styles.productButton,width:150}}>
+       <TouchableOpacity onPress={payHandler} style={{...styles.productButton,width:150,marginLeft:15}}>
+       <Image
+                 source={
+                            require('../assets/images/credit-card.png')
+                        }
+                        style={styles.valImage}
+                    /> 
          <Text style={styles.text}>
            Pay with Card
          </Text>
@@ -817,17 +829,21 @@ const styles = StyleSheet.create({
         width:70
     },
     productButton:{
-        justifyContent:"center",
+        justifyContent:"space-evenly",
         alignItems:"center",
         backgroundColor:'#0E861C',
         minHeight:35,
         margin:30,
+        flexDirection:"row",
         // flex:1
     },
     payButtons:{
         flexDirection:"row",
         // alignItems:"center",
         justifyContent:"center",
+        // backgroundColor:'#0E861C',
+        // marginHorizontal:50
+        // marginHorizontal:40
     },
     productClear:{
         backgroundColor:'red',
