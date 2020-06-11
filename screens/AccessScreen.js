@@ -13,6 +13,7 @@ import {
   TouchableOpacity,
   View,
   AsyncStorage,
+  WebView,
   TouchableHighlight
 } from 'react-native';
 import { Button } from 'react-native-elements';
@@ -280,8 +281,14 @@ transactionsCall(values)
 
   return (
     <View style={styles.container}>
+
+{/* <WebView originWhitelist={['*']} 
+    style={styles.webPostion}
+    // source={{html: newsItems}}/>
+    source={{uri:'https://farmcenta.com/mobile/login'}}/> */}
+
       
-      <View style={styles.innerContainer}>
+      {/* <View style={styles.innerContainer}>
       <View style={styles.mainAuthContainer}>
       <Image
             source={
@@ -289,49 +296,21 @@ transactionsCall(values)
             }
             style={styles.logoImage}
           />
-
-
       </View>
 
 
-{/* <View style={{...styles.authButtonContainer, width:'50%', height:50}}>
-  
-        <FormButton
-                  buttonType="outline"
-                  title="SignUp"
-                  // backgroundColor="#0C9121"
-                  buttonColor = "#0C9121"
-                  borderRadius= {0}
-                  // width={400}
-                  // flex={1}
-                />
-        <FormButton
-                  buttonType="outline"
-                  title="Login"
-                  backgroundColor="#0C9121"
-                  buttonColor = "#fff"
-                  borderRadius= {0}
-                  // width={20}
-                />
-      
-      </View> */}
 
-        {/* <View style={styles.circleContainer}>
-        <Text>Form</Text>
-          </View> */}
 
 {toggle? ( <SafeAreaView style={styles.formContainer}>
           <Formik
           initialValues={{ email: '', password: '' }}
-          // onSubmit={values => {}}
-          // onSubmit={values => { alert(JSON.stringify(values))}}
+          
           onSubmit={values => {handleSubmit(values)}}
           validationSchema={validationSchema}
         >
-          {/* {({ handleChange, values, handleSubmit }) => ( */}
           {formikProps => (
             <Fragment>
-              {/* {console.log(formikProps)} */}
+             
               <FormInput
                 name="email"
                 value={formikProps.values.email}
@@ -343,9 +322,9 @@ transactionsCall(values)
                 touched
                 onBlur={formikProps.handleBlur('email')}
               />
-              {/* <Text style={{ color: 'red' }}>{formikProps.errors.email}</Text> */}
+             
               <ErrorMessage errorValue={formikProps.errors.email} />
-              {/* <ErrorMessage errorValue={formikProps.touched.email && formikProps.errors.email} /> */}
+             
               <FormInput
                 name="password"
                 value={formikProps.values.password}
@@ -357,18 +336,16 @@ transactionsCall(values)
                 touched
                 onBlur={formikProps.handleBlur('password')}
               />
-              {/* <Text style={{ color: 'red' }}>{formikProps.errors.password}</Text> */}
+              
               <ErrorMessage errorValue={formikProps.errors.password} />
-              {/* <ErrorMessage errorValue={formikProps.touched.password && formikProps.errors.password} /> */}
+              
               <View style={styles.buttonContainer}>
                 <FormButton
                   buttonType="outline"
                   onPress={formikProps.handleSubmit}
                   title="Log in"
-                  // buttonColor="#039BE5"'#0C9121'
                   backgroundColor="#0C9121"
                   buttonColor = "#fff"
-                  // borderRadius= {20}
                   disabled={!formikProps.isValid || formikProps.isSubmitting}
                   loading = { formikProps.isSubmitting }
                 />
@@ -376,15 +353,7 @@ transactionsCall(values)
             </Fragment>
           )}
         </Formik>
-         {/* <Button
-          // title="Don't have an account? Sign Up"Forget password?
-          title="Forgotten your log in details? Get help."
-          onPress={goToSignup}
-          titleStyle={{
-            color: '#F57C00'
-          }}
-          type="clear"
-        /> */}
+         
         <View style={styles.optionContainer}>
           <Text style={styles.text}>Forgotten your log in details?</Text>
           <TouchableHighlight style={{paddingLeft:8}} activeOpacity={0.6} underlayColor="#DDDDDD" onPress={() => alert('Pressed!')}>
@@ -402,57 +371,24 @@ transactionsCall(values)
           <Text style={styles.textHead}>Register Now.</Text>
           </TouchableHighlight>
         </View>
-        {/* </Text> */}
-        {/* <View style={styles.authButtonContainer}>
-      <TouchableOpacity onPress={signUpHandler} style={styles.nextButton}>
-      <TouchableOpacity onPress={toggleHandler} style={styles.nextButton}>
-            <Text style={styles.helpLinkText}>
-              Sign Up
-            </Text>
-          </TouchableOpacity>
-<TouchableOpacity style={styles.skipButton}>
-<TouchableOpacity onPress={()=>props.navigation.navigate('Main')} style={styles.skipButton}>
-<TouchableOpacity onPress={loginHandler} style={styles.skipButton}>
-            <Text style={styles.skipButtonText}>
-              Login
-            </Text>
-          </TouchableOpacity>
-      
-      </View> */}
-        {/* <View style={styles.textContainer}>
-          <Text>Empowering rural farmers in Africa through simple technology and mechanisation</Text>
-        </View> */}
-        {/* <View style={styles.slideContainer}>
-        <TouchableOpacity onPress={handleHelpPress} style={styles.skipButton}>
-            <Text style={styles.skipButtonText}>
-              Enter
-            </Text>
-          </TouchableOpacity>
-        <Text>Forget password?</Text>
-        </View> */}
+       
         </SafeAreaView>):
         (<SafeAreaView style={{...styles.formContainer,...styles.signUpContainer}}>
           <View
            style={styles.inContainer}
-          //  style={{...styles.container,...styles.scrollContainer}}
-          //  contentContainerStyle={styles.contentContainer}
            >
           <Formik
           initialValues={{ name: '', email: '', password: '',password_confirmation: '' }}
           onSubmit={values => {handleSubmit(values)}}
           validationSchema={validationSchema}
         >
-          {/* {({ handleChange, values, handleSubmit }) => ( */}
           {formikProps => (
             <Fragment>
-              {/* {console.log(formikProps)} */}
               <FormInput
                 name="name"
                 value={formikProps.values.name}
                 onChangeText={formikProps.handleChange('name')}
                 placeholder="Enter Full Name"
-                // autoCapitalize="none"
-                // iconName="ios-mail"
                 iconColor="#2C384A"
                 touched
                 onBlur={formikProps.handleBlur('name')}
@@ -526,22 +462,6 @@ transactionsCall(values)
         </SafeAreaView>
       )}
 
-      </View>
-
-    
-
-      {/* <View style={styles.tabBarInfoContainer}>
-      <TouchableOpacity onPress={handleHelpPress} style={styles.nextButton}>
-            <Text style={styles.helpLinkText}>
-              Sign Up
-            </Text>
-          </TouchableOpacity>
-<TouchableOpacity onPress={handleHelpPress} style={styles.skipButton}>
-            <Text style={styles.skipButtonText}>
-              Login
-            </Text>
-          </TouchableOpacity>
-      
       </View> */}
      
     </View>
@@ -809,4 +729,10 @@ const styles = StyleSheet.create({
     color: '#2e78b7',
     textAlign: 'center',
   },
+
+  // webPostion:{
+  //   top:-90,
+  //   zIndex:-1
+  // },
+
 });
