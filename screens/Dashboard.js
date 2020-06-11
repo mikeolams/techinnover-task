@@ -163,27 +163,30 @@ export default function Dashboard(props) {
             <View style={styles.content1Container}>
                 <View style={styles.rowHeadContainer} >
                   <View style={styles.colHeadings}>
-                    <Text style={styles.colText}>Total Investment:</Text>
+                    <Text style={styles.colText}>Total</Text>
+                    <Text style={styles.colText}>Investment:</Text>
+                  </View>
+                  <View style={styles.colHeadings2}>
+                    <Text style={styles.colText2}>Total</Text>
+                    <Text style={styles.colText2}>Returns:</Text>
                   </View>
                   <View style={styles.colHeadings}>
-                    <Text style={styles.colText}>Total Return:</Text>
-                  </View>
-                  <View style={styles.colHeadings}>
-                   <Text style={styles.colText}>Total Farm Units:</Text>
+                   <Text style={styles.colText3}>Total</Text>
+                   <Text style={styles.colText3}>Farm Units:</Text>
                   </View>
                 </View>
                 <View style={styles.rowContent} >
                 {/* {loading?null: <Fragment> */}
-                  <View style={styles.colHeadings}>
-                  <Text style={styles.text}>#{loading?0:transaction.transactions[0].amount}</Text>
+                  <View style={{...styles.colHeadings, paddingTop:6}}>
+                  <Text style={{...styles.text1,...styles.boldText2}}>N{loading?0:transaction.transactions[0].amount}</Text>
                   {/* <Text style={styles.text}>{transaction.transactions[0].product}</Text> */}
                   </View>
-                  <View style={styles.colHeadings}>
-                  <Text style={styles.text}>#{loading?0:transaction.transactions[0].payback}</Text>
+                  <View style={{...styles.colHeadings, paddingTop:6}}>
+                  <Text style={{...styles.text,...styles.boldText2}}>N{loading?0:transaction.transactions[0].payback}</Text>
                   {/* <Text style={styles.text}>{transaction.transactions[0].return}</Text> */}
                   </View>
-                  <View style={styles.colHeadings}>
-                  <Text style={styles.text}>{loading?0:transaction.transactions[0].quantity}</Text>
+                  <View style={{...styles.colHeadings, paddingTop:6}}>
+                  <Text style={{...styles.text3,...styles.boldText2}}>{loading?0:transaction.transactions[0].quantity}</Text>
                   </View>
                 {/* </Fragment>
                 } */}
@@ -194,16 +197,19 @@ export default function Dashboard(props) {
                 <Text style={styles.text}>See More</Text>
                 </View> */}
                 <View style={styles.rowHeadContainer} >
-                <View>
-                <Text style={styles.boldText}>Pay Back Date:</Text>
-                {loading?null:<Text style={styles.payBackText}>{transaction.transactions[0].payback_date}</Text>}
+                <View style={styles.rowHead}>
+                <Text style={styles.rowText}>Next Payout Date:</Text>
+                {loading?null:<Text style={styles.boldText}>{transaction.transactions[0].payback_date}</Text>}
                 </View>
-                {loading?null:<Text style={styles.boldText}>Amount: #{transaction.transactions[0].amount}</Text>}
+                <View style={styles.rowHead}>
+                  <Text style={styles.rowText}>Amount:</Text>
+                  {loading?null:<Text style={styles.boldText}>N{transaction.transactions[0].amount}</Text>}
+                  </View>
                 </View>
             </View>
             <View style={styles.content2Container}>
-            <View style={{paddingHorizontal:10}} >
-                <Text style={{...styles.text2,...styles.boldText2}}>Lastest Transaction</Text>
+            <View style={styles.latestTrans} >
+                <Text style={{...styles.text2,...styles.boldText2}}>Lastest Transactions</Text>
                 </View>
                 {/* <View style={styles.rowContainer} >
                 <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
@@ -244,7 +250,7 @@ export default function Dashboard(props) {
 
 
 
-                <View style={styles.rowContainer} >
+                {/* <View> */}
                 <View style={styles.contentHead}>
   <View style={styles.content}>
   <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
@@ -271,35 +277,30 @@ export default function Dashboard(props) {
                 <Text style={{...styles.text2,...styles.textMagin}}>{item.payback_date}</Text>
   </View>
   <View style={styles.content}>
-                <Text style={{...styles.text2,...styles.textMagin}}>{'#'+item.amount}</Text>
+                <Text style={{...styles.text2,...styles.textMagin}}>{'N'+item.amount}</Text>
   </View>
   <View style={styles.content}>
                 <Text style={{...styles.text2,...styles.textMagin}}>{item.status}</Text>
   </View>
   </View>)}
   
-                </View>
+                {/* </View> */}
                 {/* <View style={styles.rowContainer} >
                 <Text style={styles.text2}>20 Carbon</Text>
                 <Text style={styles.text2}>27, Jan 2019</Text>
                 <Text style={styles.text2}>#3,000,000</Text>
                 <Text style={styles.text2}>Returning</Text>
                 </View> */}
-                <View style={styles.moreContainer} >
-                <TouchableOpacity 
-                // onPress={()=>
-                //   props.navigation.navigate('Store', {
-                //     "name": 'resp.details.name',
-                //     "email": 'resp.details.email'
-                //   })
-                // }
-                ><Text style={styles.text2}>More ></Text></TouchableOpacity>
-                {/* ><Text style={styles.text2}>More <Text style={styles.boldText}>></Text></Text></TouchableOpacity> */}
-                </View>
+               
             </View>
+            <View style={styles.moreContainer} >
+                <TouchableOpacity>
+                  <Text style={styles.text2}> See More ></Text>
+                </TouchableOpacity>
+                </View>
             <View style={styles.content3Container}>
             <View style={styles.lastFarmHead} >
-                <Text style={{...styles.text2,...styles.boldText2}}>Lastest Farm</Text>
+                <Text style={{...styles.text2,...styles.boldText2}}>Lastest Farms</Text>
                 </View>
                 <View style={styles.row3Container} >
                 {/* {farms.map(farm =>console.log(farm.location))} */}
@@ -533,6 +534,11 @@ const styles = StyleSheet.create({
     marginHorizontal:2
     // flex:1
   },
+  rowHead:{
+    flexDirection:"row",
+    height:35,
+    alignItems:"center"
+  },
   rowContent:{
     flexDirection:"row",
     justifyContent:'space-between',
@@ -544,13 +550,15 @@ const styles = StyleSheet.create({
   },
   moreContainer:{
     flexDirection:"row",
+    width:"100%",
     justifyContent:'space-between',
     paddingHorizontal:15,
-    justifyContent:'flex-end'
+    justifyContent:'flex-end',
+    // backgroundColor: '#1BBC2E',
   },
   contentHead:{
     flexDirection:"row",
-    justifyContent:'space-between',
+    // justifyContent:'space-between',
     // paddingHorizontal:2,
   },
   content:{
@@ -575,25 +583,45 @@ const styles = StyleSheet.create({
     // alignContent:'center',
     // alignSelf: 'center'
   },
+  colHeadings2:{
+    flex:1.4,
+    borderLeftWidth: 1,
+    borderRightWidth:1,
+    borderColor: "#aaa",
+  },
   text: {
         color: "#0E861C",
         // backgroundColor:"#0E861C",
         textAlign:"center",
       },
-      payBackText: {
-        color: "white",
-        textAlign:"center"
+      text1: {
+        color: "#0E861C",
+        textAlign:"left",
+      },
+      text3: {
+        color: "#0E861C",
+        textAlign:"right",
+      },
+      rowText: {
+        color: "#aaa",
+        // textAlign:"center"
       },
       boldText2:{
         fontWeight:'bold'
       },
       textMagin:{
-        marginVertical:10
+        marginVertical:1
       },
   colText: {
     color: 'white',
-    // fontWeight:'bold',
+  },
+  colText2: {
+    color: 'white',
     textAlign:"center"
+  },
+  colText3: {
+    color: 'white',
+    textAlign:"right"
   },
     boldText: {
     color: 'white',
@@ -601,14 +629,20 @@ const styles = StyleSheet.create({
     },
     content2Container:{
         flex:1,
-        paddingTop:20,
-        marginVertical:15,
+        paddingVertical:10,
+        marginTop:15,
+        // marginVertical:15,
         justifyContent:'space-between',
     //   alignItems:'center',
         backgroundColor: '#eee',
         width:'95%',
         borderRadius:10,
         // height:"20%"
+    },
+    latestTrans:{
+      marginBottom:5,
+      marginLeft:10,
+      // backgroundColor: 'blue',
     },
     // row2Container:{
     //     flexDirection:"row",
@@ -622,7 +656,9 @@ const styles = StyleSheet.create({
     flex:1,
     // flexDirection:'row',
     // paddingTop:20,
-    marginVertical:15,
+    marginTop:5,
+    marginBottom:20,
+    // marginVertical:10,
     justifyContent:'space-between',
 //   alignItems:'center',
     // backgroundColor: '#bec',
