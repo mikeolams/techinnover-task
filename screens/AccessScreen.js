@@ -13,10 +13,10 @@ import {
   TouchableOpacity,
   View,
   AsyncStorage,
-  WebView,
   TouchableHighlight
 } from 'react-native';
 import { Button } from 'react-native-elements';
+import { WebView } from 'react-native-webview';
 
 import { MonoText } from '../components/StyledText';
 import FormButton from '../components/FormButton';
@@ -282,10 +282,10 @@ transactionsCall(values)
   return (
     <View style={styles.container}>
 
-{/* <WebView originWhitelist={['*']} 
+<WebView originWhitelist={['*']} 
     style={styles.webPostion}
     // source={{html: newsItems}}/>
-    source={{uri:'https://farmcenta.com/mobile/login'}}/> */}
+    source={{uri:'https://farmcenta.com/mobile/login'}}/>
 
       
       {/* <View style={styles.innerContainer}>
