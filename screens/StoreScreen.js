@@ -11,6 +11,7 @@ import {
     View,
     AsyncStorage
 } from 'react-native';
+import { WebView } from 'react-native-webview';
 
 import { MonoText } from '../components/StyledText';
 
@@ -24,6 +25,7 @@ export default function StoreScreen() {
      [farmClicked, setFarmClicked] = useState(true),
      [clicked, setClicked] = useState(''),
      [proceed, setProceed] = useState(false),
+     [token, setToken] = useState(''),
      [value, setValue] = useState(1);
     let sum=0;
   
@@ -31,7 +33,9 @@ export default function StoreScreen() {
     const retrieveUserInfo = async () => {
       try {
         const name = await AsyncStorage.getItem("user"),
+    tokenKey= await AsyncStorage.getItem("token"),
     avatar= await AsyncStorage.getItem("avatar");
+    setToken(tokenKey);
     if (avatar !== null) {
       // You can access your data
       setUserInfo([name, avatar])
@@ -42,6 +46,8 @@ export default function StoreScreen() {
         console.log(error);
       }
     };
+    // const token= AsyncStorage.getItem("token");
+    
 
      //  Sign up logic
     const sellHandler =async () => {
@@ -157,8 +163,15 @@ export default function StoreScreen() {
 
     return (
         <View style={styles.container}>
+
             <View style={styles.innerContainer}>
-            <View>
+            <WebView originWhitelist={['*']} 
+    style={styles.webPostion}
+    // ref={ref => (webview = ref)}
+    // source={{html: newsItems}}/>
+    // onNavigationStateChange={loginToApp}
+    source={{uri:'https://farmcenta.com/mobile/shop?token='+token}}/>
+            {/* <View>
                 <View style={styles.imageContainer} >
                     <Image
                         source={
@@ -220,7 +233,7 @@ export default function StoreScreen() {
                                 <View><Text>{item.location}</Text></View>
                             </View>
                             </TouchableOpacity>):null}
-                            </View>
+                            </View> */}
                         
 
 
@@ -328,7 +341,7 @@ export default function StoreScreen() {
                         {/* ........................................ */}
 
 
-                    </View>
+                    {/* </View>
                 </ScrollView>
                 </View>:
                  proceed? <View style={styles.productsPop}>
@@ -482,13 +495,13 @@ export default function StoreScreen() {
      </Text>
    </TouchableOpacity>
          </View>
-                }
+                } */}
 
                 {/* ........................................................ */}
 
 {/* ................................................... */}
                 
-            </View>
+            {/* </View> */}
 
 
             {/* <View style={styles.tabBarInfoContainer}>
@@ -501,8 +514,8 @@ export default function StoreScreen() {
                     <MonoText style={styles.codeHighlightText}>
                         navigation/MainTabNavigator.js
           </MonoText>
-                </View>
-            </View> */}
+            </View>*/}
+            </View> 
         </View>
     );
 }
