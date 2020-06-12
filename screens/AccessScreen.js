@@ -86,19 +86,25 @@ const loginCall= async (values)=> {
     },
     body: JSON.stringify(values)
   })
-  .then(res => res.json());
+  .then(res => res.json())
+  // .then(res => console.log(res));
+  .then(res => transactionsCall(res));
 },
 
-transactionsCall= (values)=> {
-      loginCall(values)
-        .then(login => {
+transactionsCall= (login)=> {
+      // loginCall(values)
+      //   .then(login => {
           fetch('https://farmcenta.com/api/v1/transactions?token='+login.token,{
-            method: 'POST'
+            method: 'POST',
+            header: {
+              'Content-Type': 'application/json'
+            }
           })
           .then(res => res.json())
           .then(transactions => {
             // console.log('token - '+login.token);
           // console.log(login, transactions);
+          console.log(login);
           // if(transactions.transactions.length!=0){
           //   console.log('yes');
           //   console.log(transactions.transactions.length);
@@ -125,14 +131,15 @@ transactionsCall= (values)=> {
         .catch(err=> {
           console.warn('issues fetching trans parameters '+err )
         })
-        })
-        .catch(err=> {
-          console.warn('issues fetching login parameters '+err )
-        });
+        // })
+        // .catch(err=> {
+        //   console.warn('issues fetching login parameters '+err )
+        // });
 };
 
 const submitLogin =async (values) => {
-  transactionsCall(values);
+  // transactionsCall(values);
+  loginCall(values);
  }
 //   const submitLogin =async (values) => {    
 //     await fetch('https://farmcenta.com/api/v1/login',{
@@ -225,8 +232,9 @@ const submitSignUp =async (values) => {
   .then(resp=>resp.json())
   // .then(resp=>console.log(JSON.parse(resp)))
   .then(
-// console.log(resp)
-transactionsCall(values)
+(resp)=>transactionsCall(resp)
+// (resp)=>console.log(resp)
+
   )
  .catch(err=> {
    console.warn('Wrong parameters or unreachable '+err )
@@ -274,7 +282,18 @@ transactionsCall(values)
     setActionType('signup')
     setToggle(false)
   };
+// const loginToApp = (newState)=>{
+//   const { url } = newState;
+//   const { title } = newState;
+//   console.log(title)
+//   if (!url) return;
 
+//   if (url.includes('?message=success')) {
+//     this.webview.stopLoading();
+//     maybe close this view?
+//     console.log('yes')
+//   }
+// }
   // useEffect(() => {
   //   console.log('test')
   // }, [loginState]);
@@ -282,13 +301,15 @@ transactionsCall(values)
   return (
     <View style={styles.container}>
 
-<WebView originWhitelist={['*']} 
+{/* <WebView originWhitelist={['*']} 
     style={styles.webPostion}
+    ref={ref => (webview = ref)}
     // source={{html: newsItems}}/>
-    source={{uri:'https://farmcenta.com/mobile/login'}}/>
+    onNavigationStateChange={loginToApp}
+    source={{uri:'https://farmcenta.com/mobile/login'}}/> */}
 
       
-      {/* <View style={styles.innerContainer}>
+      <View style={styles.innerContainer}>
       <View style={styles.mainAuthContainer}>
       <Image
             source={
@@ -462,7 +483,7 @@ transactionsCall(values)
         </SafeAreaView>
       )}
 
-      </View> */}
+      </View>
      
     </View>
   );
