@@ -121,7 +121,7 @@ transactionsCall= (login)=> {
               "avatar": login.details.avatar,
               "token": login.token,
               "transactions":transactions,
-              // "farmProducts": farmProducts
+              "farmProducts": farmProducts
             });
           })
           .catch(err=> {

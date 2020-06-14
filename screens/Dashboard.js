@@ -157,8 +157,7 @@ export default function Dashboard(props) {
 
        useEffect(() => {
         getUserTransaction();
-        // retrieveMenuState();
-        // latestFarm();
+        latestFarm();
         // setHold([])
         loadFunction();
         toggleMenu();
