@@ -1,5 +1,5 @@
 import React from 'react';
-import { Platform } from 'react-native';
+import { Platform, AsyncStorage } from 'react-native';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 // import { NavigationContainer } from '@react-navigation/native';
@@ -35,7 +35,7 @@ const HomeStack = createStackNavigator(
 );
 
 HomeStack.navigationOptions = {
-  tabBarLabel: 'Dashboard',
+  tabBarLabel: 'Menu',
   // tabBarLabel: 'Home',
   tabBarIcon: ({ focused }) => (
     // <TabBarIcon
@@ -48,6 +48,16 @@ HomeStack.navigationOptions = {
     // />
     <TabBarImage focused={focused} icon={require('../assets/images/menu.png')} />
   ),
+  // transitionSpec: {
+  //   open: config,
+  //   close: config,
+  // },
+  tabBarOnPress:({ navigation })=>{
+    navigation.navigate('HomeStack');
+    navigation.state.routes[0].params.Menu();
+    // console.log( navigation.state.routes[0].params.toggleMenu)
+    // console.log( navigation.state.routes[0].params.Menu)
+  }
 };
 
 HomeStack.path = '';
@@ -83,6 +93,7 @@ StoreStack.navigationOptions = {
     // <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
     <TabBarImage focused={focused} icon={require('../assets/images/field.png')} />
   ),
+  
 };
 
 StoreStack.path = '';

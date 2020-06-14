@@ -23,6 +23,7 @@ export default function Dashboard(props) {
   const [farms, setFarms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hold, setHold] = useState([]);
+  const [menuOn, setMenuOn] = useState(false);
 
   // const [transaction, setTransaction] = useState({
   //   "id":'',
@@ -49,14 +50,30 @@ export default function Dashboard(props) {
         const transactions = navigation.getParam('transactions', 'some default value');
         // let hold=[];
 //TESTING
-        // console.log(navigation)
+        // console.log(navigation.actions)
+        // console.log(navigation.actions.setParams({9:'you'}))
+        // console.log(navigation.addListener)
         // console.log(farmProducts.products)
         // console.log(UserToken(token))
         // await AsyncStorage.setItem('token', token);
         AsyncStorage.setItem('avatar',userAvatar);
         AsyncStorage.setItem('user', userName);
         AsyncStorage.setItem('token', token);
+        const loadFunction =()=>navigation.setParams({'Menu': toggleMenu});
         // AsyncStorage.multiSet([['tokena', token],['user', userName], ['avatar',userAvatar]]);
+        const menuFly =()=>{
+          setMenuOn(true);
+          // navigation.setParams({'toggleMenu':menuOn});
+          // console.log( navigation);
+        },
+        toggleMenu = ()=>{
+          menuOn? setMenuOn(true):setMenuOn(false);
+          // navigation.setParams({'toggleMenu':menuOn})
+          console.log( menuOn);
+          // console.log( navigation.getParam('toggleMenu'));
+        };
+        
+        
 
       const latestFarm=()=>{
         let date=[]
@@ -134,11 +151,17 @@ export default function Dashboard(props) {
       //      console.warn('Error is: '+err )
       //    })
       //  };
+      // useEffect(() => {
+      //   toggleMenu();
+      // }, [menuOn]);
 
        useEffect(() => {
         getUserTransaction();
-        latestFarm();
+        // retrieveMenuState();
+        // latestFarm();
         // setHold([])
+        loadFunction();
+        toggleMenu();
       }, []);
 
   return (
@@ -154,8 +177,8 @@ export default function Dashboard(props) {
          
           </View>
           <View style={styles.id}>
-           <Image source={{uri:userAvatar}} style={styles.picImage}/>
-           <Text>{userName}</Text>
+           {/* <Image source={{uri:userAvatar}} style={styles.picImage}/>
+           <Text>{userName}</Text> */}
            </View>
             <ScrollView 
             style={styles.container}
@@ -346,8 +369,8 @@ export default function Dashboard(props) {
           </MonoText>
         </View>
       </View> */}
-
-      {/* <View style={styles.menuBackground}>
+{menuOn?null:
+  <View style={styles.menuBackground}>
       <View style={styles.menuContainer}>
         <View style={styles.menuHead}>
         <View style={styles.menuId}>
@@ -361,38 +384,40 @@ export default function Dashboard(props) {
         </View>
         <View style={styles.menuDiv}></View>
         <View style={styles.menu}>
-        <TouchableOpacity onPress={()=>navigation.navigate('Links')} style={styles.menuItem}>
-           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+        <TouchableOpacity onPress={menuFly} style={styles.menuItem}>
+           <Image source={require('../assets/images/layerDashboard.png')} style={styles.picImage}/>
            <Text>Dashboard</Text>
            </TouchableOpacity>
-           <TouchableOpacity style={styles.menuItem}>
-           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <TouchableOpacity onPress={()=>navigation.navigate('Links')} style={styles.menuItem}>
+           <Image source={require('../assets/images/layerSetting.png')} style={styles.picImage}/>
            <Text>Settings</Text>
            </TouchableOpacity>
            <TouchableOpacity style={styles.menuItem}>
-           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Image source={require('../assets/images/layerNotification.png')} style={styles.picImage}/>
            <Text>Notification</Text>
            </TouchableOpacity>
            <TouchableOpacity style={styles.menuItem}>
-           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Image source={require('../assets/images/layerCall.png')} style={styles.picImage}/>
            <Text>Call</Text>
            </TouchableOpacity>
            <TouchableOpacity style={styles.menuItem}>
-           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Image source={require('../assets/images/layerEmail.png')} style={styles.picImage}/>
            <Text>Email</Text>
            </TouchableOpacity>
            <TouchableOpacity style={styles.menuItem}>
-           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Image source={require('../assets/images/layerWhatsapp.png')} style={styles.picImage}/>
            <Text>Whatsapp</Text>
            </TouchableOpacity>
            <TouchableOpacity style={styles.menuItem}>
-           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Image source={require('../assets/images/layerWorldwide.png')} style={styles.picImage}/>
            <Text>Visit Website</Text>
            </TouchableOpacity>
 
         </View>
       </View>
-      </View> */}
+      </View>
+}
+      
     </View>
   );
 }
