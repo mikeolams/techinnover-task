@@ -387,7 +387,7 @@ export default function Dashboard(props) {
            <Image source={require('../assets/images/layerDashboard.png')} style={styles.picImage}/>
            <Text>Dashboard</Text>
            </TouchableOpacity>
-           <TouchableOpacity onPress={()=>navigation.navigate('Links')} style={styles.menuItem}>
+           <TouchableOpacity onPress={()=>navigation.navigate('Settings')} style={styles.menuItem}>
            <Image source={require('../assets/images/layerSetting.png')} style={styles.picImage}/>
            <Text>Settings</Text>
            </TouchableOpacity>
@@ -395,19 +395,19 @@ export default function Dashboard(props) {
            <Image source={require('../assets/images/layerNotification.png')} style={styles.picImage}/>
            <Text>Notification</Text>
            </TouchableOpacity>
-           <TouchableOpacity style={styles.menuItem}>
+           <TouchableOpacity onPress={()=>navigation.navigate('Dashboard')} style={styles.menuItem}>
            <Image source={require('../assets/images/layerCall.png')} style={styles.picImage}/>
            <Text>Call</Text>
            </TouchableOpacity>
-           <TouchableOpacity style={styles.menuItem}>
+           <TouchableOpacity onPress={()=>navigation.navigate('HomeStack')} style={styles.menuItem}>
            <Image source={require('../assets/images/layerEmail.png')} style={styles.picImage}/>
            <Text>Email</Text>
            </TouchableOpacity>
-           <TouchableOpacity style={styles.menuItem}>
+           <TouchableOpacity onPress={()=>navigation.navigate('HomeStack')} style={styles.menuItem}>
            <Image source={require('../assets/images/layerWhatsapp.png')} style={styles.picImage}/>
            <Text>Whatsapp</Text>
            </TouchableOpacity>
-           <TouchableOpacity style={styles.menuItem}>
+           <TouchableOpacity onPress={()=>navigation.navigate('HomeStack')} style={styles.menuItem}>
            <Image source={require('../assets/images/layerWorldwide.png')} style={styles.picImage}/>
            <Text>Visit Website</Text>
            </TouchableOpacity>
