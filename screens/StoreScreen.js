@@ -165,13 +165,8 @@ export default function StoreScreen() {
         <View style={styles.container}>
 
             <View style={styles.innerContainer}>
-            <WebView originWhitelist={['*']} 
-    style={styles.webPostion}
-    // ref={ref => (webview = ref)}
-    // source={{html: newsItems}}/>
-    // onNavigationStateChange={loginToApp}
-    source={{uri:'https://farmcenta.com/mobile/shop?token='+token}}/>
-            {/* <View>
+            
+            <View>
                 <View style={styles.imageContainer} >
                     <Image
                         source={
@@ -181,12 +176,18 @@ export default function StoreScreen() {
                     />
                 </View>
                 <View style={styles.id}>
-           <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
-           <Text>{userInfo[0]}</Text>
+           {/* <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
+           <Text>{userInfo[0]}</Text> */}
            </View>
-           {farmClicked? null:<TouchableOpacity onPress={toggleHandler} style={styles.backButton}><Text>Go Back</Text></TouchableOpacity>}
+           {/* {farmClicked? null:<TouchableOpacity onPress={toggleHandler} style={styles.backButton}><Text>Go Back</Text></TouchableOpacity>} */}
            </View>
-           {farmClicked?<View>
+           <WebView originWhitelist={['*']} 
+    style={styles.webPostion}
+    // ref={ref => (webview = ref)}
+    // source={{html: newsItems}}/>
+    // onNavigationStateChange={loginToApp}
+    source={{uri:'https://farmcenta.com/mobile/shop?token='+token}}/>
+           {/* {farmClicked?<View>
                 <View style={styles.buttonContainer}>
       <TouchableOpacity onPress={sellHandler} style={{...styles.leftButton,...styles.buttonSet, backgroundColor:selling?'#0C9121':'#fff'}}>
             <Text style={{...styles.buttonText, color:selling?'#fff':'#2e78b7'}}>

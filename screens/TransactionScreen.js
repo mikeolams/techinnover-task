@@ -78,8 +78,8 @@ export default function TransactionScreen() {
             </View>
            {/* </View> */}
            <View style={styles.id}>
-           <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
-           <Text>{userInfo[0]}</Text>
+           {/* <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
+           <Text>{userInfo[0]}</Text> */}
            </View>
             <ScrollView 
             style={styles.container}

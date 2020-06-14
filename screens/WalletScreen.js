@@ -142,8 +142,8 @@ export default function WalletScreen(props) {
           />
             </View>
             <View style={styles.id}>
-           <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
-           <Text>{userInfo[0]}</Text>
+           {/* <Image source={{uri:userInfo[1]}} style={styles.picImage}/>
+           <Text>{userInfo[0]}</Text> */}
            </View>
            </View>
            <View style={styles.walletDashboard}>
@@ -173,83 +173,84 @@ export default function WalletScreen(props) {
               <Text style={styles.text2}>Status</Text>
               </View>
                 <View style={styles.walletContent}>
-                {wallets ==='' || wallets.wallet.length === 0? <Fragment>
-                <View style={styles.rowContainer} >
-              <Text style={styles.text2}>Wallet Transactions</Text>
-              </View>
-              <View style={styles.rowContainer} >
-              <Text style={styles.text2}>S/N</Text>
-              <Text style={styles.text2}>Dates</Text>
-              <Text style={styles.text2}>Amount</Text>
-              <Text style={styles.text2}>Status</Text>
-              </View>
-              <View style={styles.rowContainer} >
-              <Text style={styles.text2}>1</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View>
-              <View style={styles.rowContainer} >
-              <Text style={styles.text2}>2</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View><View style={styles.rowContainer} >
-              <Text style={styles.text2}>3</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View>
-              <View style={styles.rowContainer} >
-              <Text style={styles.text2}>4</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View>
-              <View style={styles.rowContainer} >
-              <Text style={styles.text2}>5</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View><View style={styles.rowContainer} >
-              <Text style={styles.text2}>5</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View><View style={styles.rowContainer} >
-              <Text style={styles.text2}>7</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View><View style={styles.rowContainer} >
-              <Text style={styles.text2}>8</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View><View style={styles.rowContainer} >
-              <Text style={styles.text2}>9</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View><View style={styles.rowContainer} >
-              <Text style={styles.text2}>10</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View>
-              <View style={styles.rowContainer} >
-              <Text style={styles.text2}>11</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View>
-              <View style={styles.rowContainer} >
-              <Text style={styles.text2}>12</Text>
-              <Text style={styles.text2}>27, Jan 2019</Text>
-              <Text style={styles.text2}>#3,000,000</Text>
-              <Text style={styles.text2}>Returning</Text>
-              </View>
-              </Fragment>
+                {wallets ==='' || wallets.wallet.length === 0? null
+              //   <Fragment>
+              //   <View style={styles.rowContainer} >
+              // <Text style={styles.text2}>Wallet Transactions</Text>
+              // </View>
+              // <View style={styles.rowContainer} >
+              // <Text style={styles.text2}>S/N</Text>
+              // <Text style={styles.text2}>Dates</Text>
+              // <Text style={styles.text2}>Amount</Text>
+              // <Text style={styles.text2}>Status</Text>
+              // </View>
+              // <View style={styles.rowContainer} >
+              // <Text style={styles.text2}>1</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View>
+              // <View style={styles.rowContainer} >
+              // <Text style={styles.text2}>2</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View><View style={styles.rowContainer} >
+              // <Text style={styles.text2}>3</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View>
+              // <View style={styles.rowContainer} >
+              // <Text style={styles.text2}>4</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View>
+              // <View style={styles.rowContainer} >
+              // <Text style={styles.text2}>5</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View><View style={styles.rowContainer} >
+              // <Text style={styles.text2}>5</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View><View style={styles.rowContainer} >
+              // <Text style={styles.text2}>7</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View><View style={styles.rowContainer} >
+              // <Text style={styles.text2}>8</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View><View style={styles.rowContainer} >
+              // <Text style={styles.text2}>9</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View><View style={styles.rowContainer} >
+              // <Text style={styles.text2}>10</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View>
+              // <View style={styles.rowContainer} >
+              // <Text style={styles.text2}>11</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View>
+              // <View style={styles.rowContainer} >
+              // <Text style={styles.text2}>12</Text>
+              // <Text style={styles.text2}>27, Jan 2019</Text>
+              // <Text style={styles.text2}>#3,000,000</Text>
+              // <Text style={styles.text2}>Returning</Text>
+              // </View>
+              // </Fragment>
               :
               <ScrollView 
             style={styles.container}
