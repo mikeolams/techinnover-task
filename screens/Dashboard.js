@@ -8,7 +8,8 @@ import {
   Text,
   TouchableOpacity,
   View,
-  AsyncStorage
+  AsyncStorage,
+  Linking
 } from 'react-native';
 
 import { MonoText } from '../components/StyledText';
@@ -23,7 +24,7 @@ export default function Dashboard(props) {
   const [farms, setFarms] = useState([]);
   const [loading, setLoading] = useState(true);
   const [hold, setHold] = useState([]);
-  const [menuOn, setMenuOn] = useState(false);
+  const [menuOn, setMenuOn] = useState(true);
 
   // const [transaction, setTransaction] = useState({
   //   "id":'',
@@ -61,13 +62,16 @@ export default function Dashboard(props) {
         AsyncStorage.setItem('token', token);
         const loadFunction =()=>navigation.setParams({'Menu': toggleMenu});
         // AsyncStorage.multiSet([['tokena', token],['user', userName], ['avatar',userAvatar]]);
-        const menuFly =()=>{
+        const menuFly =(e)=>{
+          e.preventDefault();
           setMenuOn(true);
           // navigation.setParams({'toggleMenu':menuOn});
           // console.log( navigation);
         },
-        toggleMenu = ()=>{
-          menuOn? setMenuOn(true):setMenuOn(false);
+         toggleMenu = ()=>{
+          {menuList?(// menuOn? setMenuOn(false):setMenuOn(true);
+          setMenuOn(false)   ):null
+        }
           // navigation.setParams({'toggleMenu':menuOn})
           console.log( menuOn);
           // console.log( navigation.getParam('toggleMenu'));
@@ -160,8 +164,77 @@ export default function Dashboard(props) {
         latestFarm();
         // setHold([])
         loadFunction();
-        toggleMenu();
+        // toggleMenu();
       }, []);
+
+      const menuList =[
+        {
+          'text':'Dashboard',
+          'image':require('../assets/images/layerDashboard.png')
+        },
+        {
+          'text':'Settings',
+          'image':require('../assets/images/layerSetting.png')
+        },
+        {
+          'text':' Notification',
+          'image':require('../assets/images/layerNotification.png')
+        },
+        {
+          'text':'Call',
+          'image':require('../assets/images/layerCall.png')
+        },
+        {
+          'text':'Email',
+          'image':require('../assets/images/layerEmail.png')
+        },
+        {
+          'text':'Whatsapp',
+          'image':require('../assets/images/layerWhatsapp.png')
+        },
+        {
+          'text':'Visit Website',
+          'image':require('../assets/images/layerWorldwide.png')
+        }
+        
+      ],
+      handleMenuClick=(id)=>{
+        let URL = "https://www.farmcenta.com";
+        console.log('you clicked'+ id)
+        switch(id){
+          case 0:
+            setMenuOn(true);
+            break;
+          case 1:
+            setMenuOn(true);
+            navigation.navigate('Settings')
+            break;
+          case 2:
+            setMenuOn(true);
+            alert('you clicked coming soon '+ id+' try other menu')
+            break;
+            case 3:
+               URL = "tel:+2347018231992";
+              openLink(URL);
+              break;
+            case 4:
+              URL = "mailto:info@farmcenta.com?subject=Inquiry on Farm";
+              openLink(URL)
+              break;
+              case 5:
+                URL = "whatsapp://send?text=Hello Farmcenta&phone=+2347018231992";
+                openLink(URL)
+                break;
+                case 6:
+                  openLink(URL)
+                  break;
+        }
+      },
+      openLink= (link)=>{
+      Linking.openURL(link);
+      setMenuOn(true);
+      };
+
 
   return (
     <View style={styles.container}>
@@ -368,8 +441,9 @@ export default function Dashboard(props) {
           </MonoText>
         </View>
       </View> */}
+     
 {menuOn?null:
-  <View style={styles.menuBackground}>
+  <TouchableOpacity style={styles.menuBackground} onPress={menuFly}>
       <View style={styles.menuContainer}>
         <View style={styles.menuHead}>
         <View style={styles.menuId}>
@@ -383,38 +457,17 @@ export default function Dashboard(props) {
         </View>
         <View style={styles.menuDiv}></View>
         <View style={styles.menu}>
-        <TouchableOpacity onPress={menuFly} style={styles.menuItem}>
-           <Image source={require('../assets/images/layerDashboard.png')} style={styles.picImage}/>
-           <Text>Dashboard</Text>
+           { menuList.map((list,i)=>
+        // {console.log(list)}
+        <TouchableOpacity key={i} onPress={handleMenuClick.bind(id,i)} style={styles.menuItem}>
+           <Image source={list.image} style={styles.picImage}/>
+           <Text>{list.text}</Text>
            </TouchableOpacity>
-           <TouchableOpacity onPress={()=>navigation.navigate('Settings')} style={styles.menuItem}>
-           <Image source={require('../assets/images/layerSetting.png')} style={styles.picImage}/>
-           <Text>Settings</Text>
-           </TouchableOpacity>
-           <TouchableOpacity style={styles.menuItem}>
-           <Image source={require('../assets/images/layerNotification.png')} style={styles.picImage}/>
-           <Text>Notification</Text>
-           </TouchableOpacity>
-           <TouchableOpacity onPress={()=>navigation.navigate('Dashboard')} style={styles.menuItem}>
-           <Image source={require('../assets/images/layerCall.png')} style={styles.picImage}/>
-           <Text>Call</Text>
-           </TouchableOpacity>
-           <TouchableOpacity onPress={()=>navigation.navigate('HomeStack')} style={styles.menuItem}>
-           <Image source={require('../assets/images/layerEmail.png')} style={styles.picImage}/>
-           <Text>Email</Text>
-           </TouchableOpacity>
-           <TouchableOpacity onPress={()=>navigation.navigate('HomeStack')} style={styles.menuItem}>
-           <Image source={require('../assets/images/layerWhatsapp.png')} style={styles.picImage}/>
-           <Text>Whatsapp</Text>
-           </TouchableOpacity>
-           <TouchableOpacity onPress={()=>navigation.navigate('HomeStack')} style={styles.menuItem}>
-           <Image source={require('../assets/images/layerWorldwide.png')} style={styles.picImage}/>
-           <Text>Visit Website</Text>
-           </TouchableOpacity>
+        )}
 
         </View>
       </View>
-      </View>
+      </TouchableOpacity>
 }
       
     </View>
@@ -480,7 +533,7 @@ const styles = StyleSheet.create({
       zIndex:2,
       backgroundColor: '#eee',
       height:"90%",
-      width:"80%",
+      width:"70%",
       bottom:-72
     },
     menuBackground:{
@@ -512,7 +565,7 @@ const styles = StyleSheet.create({
       borderBottomColor:"#0E861C33",
     },
     menu:{
-      flex:3,
+      flex:2,
       // backgroundColor: '#2e3',
       backgroundColor: '#eed'
     },
