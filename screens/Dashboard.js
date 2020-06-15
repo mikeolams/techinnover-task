@@ -69,9 +69,10 @@ export default function Dashboard(props) {
           // console.log( navigation);
         },
          toggleMenu = ()=>{
-          {menuList?(// menuOn? setMenuOn(false):setMenuOn(true);
-          setMenuOn(false)   ):null
-        }
+          // {menuList?(// menuOn? setMenuOn(false):setMenuOn(true);
+          setMenuOn(false)   
+        //   ):null
+        // }
           // navigation.setParams({'toggleMenu':menuOn})
           console.log( menuOn);
           // console.log( navigation.getParam('toggleMenu'));
@@ -457,13 +458,13 @@ export default function Dashboard(props) {
         </View>
         <View style={styles.menuDiv}></View>
         <View style={styles.menu}>
-           { menuList.map((list,i)=>
+           { menuList?menuList.map((list,i)=>
         // {console.log(list)}
         <TouchableOpacity key={i} onPress={handleMenuClick.bind(id,i)} style={styles.menuItem}>
            <Image source={list.image} style={styles.picImage}/>
            <Text>{list.text}</Text>
            </TouchableOpacity>
-        )}
+        ):null}
 
         </View>
       </View>
