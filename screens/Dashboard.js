@@ -460,7 +460,7 @@ export default function Dashboard(props) {
         <View style={styles.menu}>
            { menuList?menuList.map((list,i)=>
         // {console.log(list)}
-        <TouchableOpacity key={i} onPress={handleMenuClick.bind(id,i)} style={styles.menuItem}>
+        <TouchableOpacity key={i} onPress={handleMenuClick.bind(list,i)} style={styles.menuItem}>
            <Image source={list.image} style={styles.picImage}/>
            <Text>{list.text}</Text>
            </TouchableOpacity>
