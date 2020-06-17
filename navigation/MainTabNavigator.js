@@ -93,6 +93,12 @@ StoreStack.navigationOptions = {
     // <TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-link' : 'md-link'} />
     <TabBarImage focused={focused} icon={require('../assets/images/field.png')} />
   ),
+  // tabBarOnPress:({ navigation })=>{
+  //   navigation.navigate('StoreStack');
+  //   if(navigation.state.routes[0].params!=null){
+  //     navigation.state.routes[0].params.FarmStore()
+  //   };
+  // }
   
 };
 

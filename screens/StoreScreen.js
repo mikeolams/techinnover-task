@@ -15,7 +15,7 @@ import { WebView } from 'react-native-webview';
 
 import { MonoText } from '../components/StyledText';
 
-export default function StoreScreen() {
+export default function StoreScreen(props) {
 
     const [productsArray, setProductsArray] = useState([]),
      [farm, setFarm] = useState([[],[]]),
@@ -25,10 +25,27 @@ export default function StoreScreen() {
      [farmClicked, setFarmClicked] = useState(true),
      [clicked, setClicked] = useState(''),
      [proceed, setProceed] = useState(false),
+    //  [refresh, setRefresh] = useState(false),
      [token, setToken] = useState(''),
      [value, setValue] = useState(1);
     let sum=0;
+    // const { navigation } = props;
+    // const loadFunction =()=>{
+    //     navigation.setParams({'FarmStore': loadFarm})
+    //     // setRefresh(false)
+    // };
   
+    const loadFarm = ()=>{
+        // console.log('testing');
+        // handleWebView(newNavState);
+        // if(refresh){return null} 
+        return <WebView originWhitelist={['*']} 
+        style={styles.webPostion}
+        // ref={ref => (webview = ref)}
+        // source={{html: newsItems}}/>
+        onNavigationStateChange={handleWebView}
+        source={{uri:'https://farmcenta.com/mobile/shop?token='+token}}/>
+    }
     
     const retrieveUserInfo = async () => {
       try {
@@ -120,10 +137,14 @@ export default function StoreScreen() {
      };
 
      useEffect(() => {
-        fetchProducts();
+        // fetchProducts();
            // retrieveData();
+        //    loadFunction();
            retrieveUserInfo();
         }, []);
+        // useEffect(() => {
+        //        loadFunction();
+        //     }, [refresh]);
     
         const pickItemHandler = (itemId) =>{
             // console.log(itemId);
@@ -161,6 +182,26 @@ export default function StoreScreen() {
             }
           };
 
+         const  handleWebView = (newNavState) => {
+            // newNavState looks something like this:
+            // {
+            //   url?: string;
+            //   title?: string;
+            //   loading?: boolean;
+            //   canGoBack?: boolean;
+            //   canGoForward?: boolean;
+            // }
+            console.log(newNavState);
+            const { canGoBack } = newNavState;
+            if (!canGoBack) return;
+            console.log(canGoBack)
+        
+            // // handle certain doctypes
+            // if (url.includes('.pdf')) {
+            //   this.webview.stopLoading();
+            //   // open a modal with the PDF viewer
+            }
+
     return (
         <View style={styles.container}>
 
@@ -181,12 +222,7 @@ export default function StoreScreen() {
            </View>
            {/* {farmClicked? null:<TouchableOpacity onPress={toggleHandler} style={styles.backButton}><Text>Go Back</Text></TouchableOpacity>} */}
            </View>
-           <WebView originWhitelist={['*']} 
-    style={styles.webPostion}
-    // ref={ref => (webview = ref)}
-    // source={{html: newsItems}}/>
-    // onNavigationStateChange={loginToApp}
-    source={{uri:'https://farmcenta.com/mobile/shop?token='+token}}/>
+           {loadFarm()}
            {/* {farmClicked?<View>
                 <View style={styles.buttonContainer}>
       <TouchableOpacity onPress={sellHandler} style={{...styles.leftButton,...styles.buttonSet, backgroundColor:selling?'#0C9121':'#fff'}}>
