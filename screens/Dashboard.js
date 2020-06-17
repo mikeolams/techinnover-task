@@ -174,10 +174,6 @@ export default function Dashboard(props) {
           'image':require('../assets/images/layerDashboard.png')
         },
         {
-          'text':'Settings',
-          'image':require('../assets/images/layerSetting.png')
-        },
-        {
           'text':' Notification',
           'image':require('../assets/images/layerNotification.png')
         },
@@ -196,6 +192,10 @@ export default function Dashboard(props) {
         {
           'text':'Visit Website',
           'image':require('../assets/images/layerWorldwide.png')
+        },
+        {
+          'text':'Settings',
+          'image':require('../assets/images/layerSetting.png')
         }
         
       ],
@@ -208,26 +208,26 @@ export default function Dashboard(props) {
             break;
           case 1:
             setMenuOn(true);
-            navigation.navigate('Settings')
+            alert('you clicked coming soon '+ id+' try other menu');
             break;
           case 2:
-            setMenuOn(true);
-            alert('you clicked coming soon '+ id+' try other menu')
+            URL = "tel:+2347018231992";
+            openLink(URL);
             break;
             case 3:
-               URL = "tel:+2347018231992";
+              URL = "mailto:info@farmcenta.com?subject=Inquiry on Farm";
               openLink(URL);
               break;
             case 4:
-              URL = "mailto:info@farmcenta.com?subject=Inquiry on Farm";
-              openLink(URL)
+              URL = "whatsapp://send?text=Hello Farmcenta&phone=+2347018231992";
+              openLink(URL);
               break;
               case 5:
-                URL = "whatsapp://send?text=Hello Farmcenta&phone=+2347018231992";
                 openLink(URL)
                 break;
                 case 6:
-                  openLink(URL)
+                  setMenuOn(true);
+            navigation.navigate('Settings');
                   break;
         }
       },
@@ -451,10 +451,10 @@ export default function Dashboard(props) {
         <Image source={{uri:userAvatar}} style={styles.picImage}/>
            <Text>{userName}</Text>
            </View>
-           <TouchableOpacity  onPress={()=>navigation.navigate('Auth')} style={styles.signOut}>
+           {/* <TouchableOpacity  onPress={()=>navigation.navigate('Auth')} style={styles.signOut}>
            <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
            <Text>Log Off</Text>
-           </TouchableOpacity>
+           </TouchableOpacity> */}
         </View>
         <View style={styles.menuDiv}></View>
         <View style={styles.menu}>
@@ -462,9 +462,13 @@ export default function Dashboard(props) {
         // {console.log(list)}
         <TouchableOpacity key={i} onPress={handleMenuClick.bind(list,i)} style={styles.menuItem}>
            <Image source={list.image} style={styles.picImage}/>
-           <Text>{list.text}</Text>
+           <Text style={styles.menuText}>{list.text}</Text>
            </TouchableOpacity>
         ):null}
+        <TouchableOpacity  onPress={()=>navigation.navigate('Auth')} style={styles.signOut}>
+           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Text style={styles.menuText}>Log Off</Text>
+           </TouchableOpacity>
 
         </View>
       </View>
@@ -534,7 +538,7 @@ const styles = StyleSheet.create({
       zIndex:2,
       backgroundColor: '#eee',
       height:"90%",
-      width:"70%",
+      width:"65%",
       bottom:-72
     },
     menuBackground:{
@@ -556,6 +560,7 @@ const styles = StyleSheet.create({
     },
     signOut:{
       // marginHorizontal:0
+      // backgroundColor: '#f30',
       alignItems:'center',
         justifyContent:'center',
         width:'50%'
@@ -781,6 +786,10 @@ row3Container:{
         resizeMode: 'contain',
         marginLeft:10,
         borderRadius:20
+      },
+      menuText:{
+        textAlign:"left",
+        marginLeft:10
       },
 //   developmentModeText: {
 //     marginBottom: 20,
