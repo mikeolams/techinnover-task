@@ -99,79 +99,81 @@ export default function TransactionScreen() {
                 </View>
                 <View style={styles.transContent}>
               {/* </View> */}
-                 {loading ? <Fragment>
-                 <View style={styles.rowContainer} >
-                <Text style={styles.text2}>2</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>3</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>4</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>5</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>5</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>7</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>8</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>9</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View><View style={styles.rowContainer} >
-                <Text style={styles.text2}>10</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>11</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                <View style={styles.rowContainer} >
-                <Text style={styles.text2}>12</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View>
-                 </Fragment>:
+                 {loading ? 
+                //  <Fragment>
+                //  <View style={styles.rowContainer} >
+                // <Text style={styles.text2}>2</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View><View style={styles.rowContainer} >
+                // <Text style={styles.text2}>3</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View>
+                // <View style={styles.rowContainer} >
+                // <Text style={styles.text2}>4</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View>
+                // <View style={styles.rowContainer} >
+                // <Text style={styles.text2}>5</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View><View style={styles.rowContainer} >
+                // <Text style={styles.text2}>5</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View><View style={styles.rowContainer} >
+                // <Text style={styles.text2}>7</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View><View style={styles.rowContainer} >
+                // <Text style={styles.text2}>8</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View><View style={styles.rowContainer} >
+                // <Text style={styles.text2}>9</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View><View style={styles.rowContainer} >
+                // <Text style={styles.text2}>10</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View>
+                // <View style={styles.rowContainer} >
+                // <Text style={styles.text2}>11</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View>
+                // <View style={styles.rowContainer} >
+                // <Text style={styles.text2}>12</Text>
+                // <Text style={styles.text2}>27, Jan 2019</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>#3,000,000</Text>
+                // <Text style={styles.text2}>Returning</Text>
+                // </View>
+                //  </Fragment>
+                null :
                 trans.transactions.map(item=><View key={item.id} style={styles.rowMapContainer} >
                 {/* <Text style={styles.text2}>1</Text> */}
                 {/* <View style={styles.textcontent}> */}
