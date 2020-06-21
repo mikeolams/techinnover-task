@@ -19,7 +19,76 @@ export default function SettingsScreen() {
    * we just wanted to give you a quick view of your config.
    */
   // return <ExpoConfigView />;
+  const [settingProfile, setSettingProfile] = useState('');
+  const [dataLoaded, setDataLoaded] = useState(false);
 
+  const getProfile = (token)=> {
+
+        fetch('https://farmcenta.com/api/v1/profile?token='+token,{
+          method: 'POST',
+          header: {
+            'Content-Type': 'application/json'
+          }
+        })
+        .then(res => res.json())
+        .then(profile => {
+          
+        // console.log(profile);
+        console.log(token);
+        setSettingProfile(profile);
+        setDataLoaded(true)
+        console.log(settingProfile);
+        // if(transactions.transactions.length!=0){
+        //   console.log('yes');
+        //   console.log(transactions.transactions.length);
+        //   // setLoading(false)
+        //  };
+        /////
+      //   fetch('https://farmcenta.com/api/v1/products')
+      //   .then(resp=>resp.json())
+      //   .then(farmProducts=>{
+
+      //     // AsyncStorage.setItem('token', login.token);
+      //     props.navigation.navigate('Home', {
+      //       "name": login.details.name,
+      //       "email": login.details.email,
+      //       "avatar": login.details.avatar,
+      //       "token": login.token,
+      //       "transactions":transactions,
+      //       "farmProducts": farmProducts
+      //     });
+      //   })
+      //   .catch(err=> {
+      //     console.warn('issues fetching farmparameters '+err )
+      //   })
+      // })
+      // .catch(err=> {
+      //   console.warn('issues fetching trans parameters '+err )
+      // })
+      })
+      .catch(err=> {
+        console.warn('issues fetching profile parameters '+err )
+      });
+};
+
+const retrieveUserToken = async () => {
+  try {
+    const token= await AsyncStorage.getItem("token");
+getProfile(token);
+// if (avatar !== null) {
+//   // You can access your data
+//   setUserInfo([name, avatar])
+//   console.log(userInfo)
+
+// }
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+useEffect(() => {
+  retrieveUserToken();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -38,22 +107,22 @@ export default function SettingsScreen() {
                 />
               </TouchableOpacity>
             </View>
-            <View style={styles.bottomContainer}>
+            {dataLoaded?<View style={styles.bottomContainer}>
               <TouchableOpacity style={styles.itemContainer}>
                 <Text style={styles.text}>Name</Text><Text style={styles.text}>></Text>
               </TouchableOpacity>
               <TouchableOpacity  style={styles.itemContainer}>
-                <Text style={styles.text}>Mobile</Text><Text style={styles.text}>></Text>
+                <Text style={styles.text}>Mobile:</Text><Text style={styles.text}>{settingProfile.profile[0].mobile}</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Date of Birth</Text><Text style={{...styles.text,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Gender</Text><Text style={{...styles.text,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>State of Origin</Text><Text style={{...styles.text,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Bank</Text><Text style={{...styles.text,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Account Number</Text><Text style={styles.text}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Other Bank Details</Text><Text style={{...styles.text,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Next of Kin Name</Text><Text style={{...styles.text,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Next of Kin's Number</Text><Text style={{...styles.text,...styles.sign}}>></Text></TouchableOpacity>
-            </View>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Date of Birth:</Text><Text style={{...styles.text1,...styles.sign}}>{settingProfile.profile[0].dob}</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Gender:</Text><Text style={{...styles.text1,...styles.sign}}>{settingProfile.profile[0].gender}</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>State of Origin:</Text><Text style={{...styles.text1,...styles.sign}}>{settingProfile.profile[0].state}</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Bank</Text><Text style={{...styles.text1,...styles.sign}}>{settingProfile.profile[0].bank}</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Account Number:</Text><Text style={styles.text1}>{settingProfile.profile[0].bank_number}</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Other Bank Details:</Text><Text style={{...styles.text1,...styles.sign}}>{settingProfile.profile[0].other_details}></Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Next of Kin Name:</Text><Text style={{...styles.text1,...styles.sign}}>{settingProfile.profile[0].next_kin}</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Next of Kin's Number:</Text><Text style={{...styles.text1,...styles.sign}}>0{settingProfile.profile[0].next_kin_number}</Text></TouchableOpacity>
+            </View>:null}
         </View>
 
     </View>
@@ -117,9 +186,9 @@ text:{
   fontWeight:'bold',
   color:"#0C9121"
 },
-sign:{
-  fontSize:20
-},
+// sign:{
+//   fontSize:10
+// },
 
 
 
