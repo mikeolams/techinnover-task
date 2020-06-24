@@ -47,9 +47,9 @@ export default function OnboardingTwoScreen(props) {
           <Text style={styles.text}>Farm subscribers’ participation in food production is critical to achieving food security and improved nutrition in Sub-Sahara Africa.</Text>
         </View>
         <View style={styles.slideContainer}>
-        <TouchableOpacity onPress={()=>props.navigation.navigate('LandingOne')}><Text>1</Text></TouchableOpacity>
-          <TouchableOpacity style={styles.activeSlide}><Text style={styles.slideText}>2</Text></TouchableOpacity>
-          <TouchableOpacity onPress={()=>props.navigation.navigate('LandingThree')}><Text>3</Text></TouchableOpacity>
+        <TouchableOpacity style={styles.slideButton} onPress={()=>props.navigation.navigate('LandingOne')}><Text>.</Text></TouchableOpacity>
+          <TouchableOpacity style={{...styles.slideButton,...styles.activeSlide}} ><Text style={styles.slideText}>.</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.slideButton} onPress={()=>props.navigation.navigate('LandingThree')}><Text>.</Text></TouchableOpacity>
           {/* <TouchableOpacity onPress={()=>props.navigation.navigate('LandingFour')}><Text>4</Text></TouchableOpacity> */}
         </View>
       </View>
@@ -210,8 +210,11 @@ const styles = StyleSheet.create({
   },
   slideContainer:{
     // flex:1,
-    paddingTop:70,
-    paddingBottom:10,
+    // paddingTop:70,
+    height:30,
+    marginTop:70,
+    // paddingBottom:10,
+    marginBottom:10,
     // backgroundColor: '#2ca',
     width:'40%',
     flexDirection:'row',
@@ -227,8 +230,10 @@ const styles = StyleSheet.create({
     fontWeight:'bold',
     color:'white'
   },
-
-
+  slideButton:{
+    flex:1,
+    margin:6
+  },
   tabBarInfoContainer: {
     flexDirection:"row",
     justifyContent:'space-around',

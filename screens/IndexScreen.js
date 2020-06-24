@@ -85,9 +85,9 @@ export default function IndexScreen(props) {
           <Text style={styles.text}>We work with small-scale farmers by providing what they need to scale their farming activities from improved inputs, training, weather information and access to premium market.</Text>
         </View> 
         <View style={styles.slideContainer}>
-          <TouchableOpacity style={styles.activeSlide}><Text style={styles.slideText}>1</Text></TouchableOpacity>
-          <TouchableOpacity onPress={()=>props.navigation.navigate('LandingTwo')}><Text>2</Text></TouchableOpacity>
-          <TouchableOpacity onPress={()=>props.navigation.navigate('LandingThree')}><Text>3</Text></TouchableOpacity>
+          <TouchableOpacity style={{...styles.activeSlide,...styles.slideButton}}><Text style={styles.slideText}>.</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.slideButton} onPress={()=>props.navigation.navigate('LandingTwo')}><Text>.</Text></TouchableOpacity>
+          <TouchableOpacity style={styles.slideButton} onPress={()=>props.navigation.navigate('LandingThree')}><Text>.</Text></TouchableOpacity>
           {/* <TouchableOpacity onPress={()=>props.navigation.navigate('LandingFour')}><Text>4</Text></TouchableOpacity> */}
         </View>
       </View>
@@ -257,8 +257,11 @@ const styles = StyleSheet.create({
   },
   slideContainer:{
     // flex:1,
-    paddingTop:60,
-    paddingBottom:10,
+    // paddingTop:70,
+    height:30,
+    marginTop:70,
+    // paddingBottom:10,
+    marginBottom:10,
     // backgroundColor: '#2ca',
     width:'40%',
     flexDirection:'row',
@@ -273,6 +276,10 @@ const styles = StyleSheet.create({
   slideText:{
     fontWeight:'bold',
     color:'white'
+  },
+  slideButton:{
+    flex:1,
+    margin:6
   },
   tabBarInfoContainer: {
     flexDirection:"row",
