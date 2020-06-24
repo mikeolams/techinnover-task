@@ -74,7 +74,7 @@ if(actionType==='login'){
     
   };
 
-  const [actionType, setActionType] = useState('');
+  const [actionType, setActionType] = useState('login');
 
   // multiple api call
   // Created a function that returns a Promise.
@@ -114,7 +114,15 @@ transactionsCall= (login)=> {
           .then(resp=>resp.json())
           .then(farmProducts=>{
 
-            // AsyncStorage.setItem('token', login.token);
+            // fetch('https://farmcenta.com/api/v1/transactions?token='+login.token,{
+            //   method: 'POST',
+            //   header: {
+            //     'Content-Type': 'application/json'
+            //   }
+            // })
+            // .then(res => res.json())
+            // .then(transactions => {}
+         
             props.navigation.navigate('Home', {
               "name": login.details.name,
               "email": login.details.email,
@@ -325,7 +333,7 @@ const submitSignUp =async (values) => {
 {toggle? ( <SafeAreaView style={styles.formContainer}>
           <Formik
           initialValues={{ email: '', password: '' }}
-          
+          // style={styles.form}
           onSubmit={values => {handleSubmit(values)}}
           validationSchema={validationSchema}
         >
@@ -342,6 +350,7 @@ const submitSignUp =async (values) => {
                 iconColor="#2C384A"
                 touched
                 onBlur={formikProps.handleBlur('email')}
+                style={styles.form}
               />
              
               <ErrorMessage errorValue={formikProps.errors.email} />
@@ -394,9 +403,9 @@ const submitSignUp =async (values) => {
         </View>
        
         </SafeAreaView>):
-        (<SafeAreaView style={{...styles.formContainer,...styles.signUpContainer}}>
+        (<SafeAreaView style={{...styles.formContainer}}>
           <View
-           style={styles.inContainer}
+          //  style={styles.inContainer}
            >
           <Formik
           initialValues={{ name: '', email: '', password: '',password_confirmation: '' }}
@@ -595,12 +604,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     // top:-10
     // opacity:280
-    paddingBottom: 140
+    // paddingBottom: 140,
+    // marginBottom:100
   },
   mainAuthContainer:{
-    // marginVertical:30,
-    // flex:1,
-    height:150,
+    // marginVertical:40,
+    marginTop:90,
+    flex:1,
+    // height:150,
     justifyContent:'center',
     alignItems: 'center',
     // top:0,
@@ -641,11 +652,16 @@ const styles = StyleSheet.create({
     width:'70%'
   },
   formContainer: {
-    // flex:1,
+    flex:5.4,
     // backgroundColor: '#fff'
-    height:'80%',
+    // height:'50%',
+    paddingBottom:80,
     width:'86%'
   },
+  // form:{
+  //   paddingVertical:20,
+  //   margin:20
+  // },
   // signUpContainer: {
   //   // marginTop:3,
   //   // flex: 1,
