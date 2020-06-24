@@ -266,9 +266,10 @@ export default function WalletScreen(props) {
       //  console.log(item.id, item.amount,'imd:'+item.method,'imm:'+item.memo, 'iu:'+item.user,item.created_at)
        <View key={item.id} style={styles.walletItems} >
          <View style={styles.col}><Text style={styles.text2}>N{item.amount}</Text></View>
-         <View style={styles.col}><Text style={styles.text2}>{Date.UTC(item.created_at)}</Text></View>
+              <View style={styles.col}><Text style={styles.text2}>{item.created_at.split(' ')[0]}</Text></View>
+              {/* <View style={styles.col}><Text style={styles.text2}>{Date(item.created_at.split(' ')[0])}{console.log(item.created_at.split(' ')[0])}</Text></View> */}
          <View style={styles.col}><Text style={styles.text2}>{item.method}</Text></View>
-         <View style={styles.col}><Text style={styles.text2}>{item.amount < 0?'(Dr)':'(Cr)'}</Text></View>
+         <View style={{...styles.col}}><Text style={styles.text2}>{item.amount < 0?'(Dr)':'(Cr)'}</Text></View>
        
        {/* <Text style={styles.text2}>{item.created_at}</Text> */}
        {/* <Text style={styles.text2}>{item.created_at}</Text> */}
@@ -381,7 +382,7 @@ const styles = StyleSheet.create({
       justifyContent:'space-between',
   //   alignItems:'center',
       // backgroundColor: '#eee',
-      width:'90%',
+      width:'94%',
       borderRadius:10,
       // height:"20%"
   },
@@ -439,7 +440,10 @@ const styles = StyleSheet.create({
       col:{
         flex:1,
         // backgroundColor:'#32f',
-        paddingHorizontal:5,
+        paddingHorizontal:1,
+        height:30,
+        justifyContent:"center"
+        // marginHorizontal:2,
       },
   imageContainer:{
     // flex:1,
