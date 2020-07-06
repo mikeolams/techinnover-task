@@ -25,8 +25,11 @@ export default function Dashboard(props) {
   const [loading, setLoading] = useState(true);
   const [hold, setHold] = useState([]);
   const [menuOn, setMenuOn] = useState(true);
+  const [notifyOn, setNotifyOn] = useState(true);
+  const [receivedNote, setReceivedNote] = useState('');
+  const [read, setRead] = useState(false);
 
-  // const [transaction, setTransaction] = useState({
+  // const [transaction, setTransaction] = useState({ 
   //   "id":'',
   //           "amount":'',
   //           "quantity":'',
@@ -106,6 +109,17 @@ export default function Dashboard(props) {
         // console.log(userAvatar,userEmail)
         const getUserTransaction = () => {
           setTransaction(transactions);
+          fetch('https://farmcenta.com/api/v1/notification?token='+token,{
+            method: 'POST',
+            header: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(res => res.json())
+          .then(res => setReceivedNote(res))
+          .catch(err=> {
+            console.warn('issues fetching notifications '+err )
+          });
           // setHolsd([])
                  if(transactions.transactions.length!=0){
                   // console.log('yes')
@@ -208,7 +222,9 @@ export default function Dashboard(props) {
             break;
           case 1:
             setMenuOn(true);
-            alert('you clicked coming soon '+ id+' try other menu');
+            // alert('you clicked coming soon '+ id+' try other menu');
+            setNotifyOn(false);
+            // navigation.navigate('LinksStack');
             break;
           case 2:
             URL = "tel:+2347018231992";
@@ -230,6 +246,14 @@ export default function Dashboard(props) {
             navigation.navigate('Settings');
                   break;
         }
+      },
+      handleNote=(id)=>{
+        console.log('you clicked'+ id)
+        if(read===id){
+          setRead('')
+        }else{setRead(id)}
+        // console.log(read +' '+ id)
+        // switch(id){}
       },
       openLink= (link)=>{
       Linking.openURL(link);
@@ -253,6 +277,7 @@ export default function Dashboard(props) {
            {/* <Image source={{uri:userAvatar}} style={styles.picImage}/>
            <Text>{userName}</Text> */}
            </View>
+           {notifyOn?
             <ScrollView 
             style={styles.container}
             contentContainerStyle={styles.contentContainer}>
@@ -348,16 +373,16 @@ export default function Dashboard(props) {
 
                 {/* <View> */}
                 <View style={styles.contentHead}>
-  <View style={styles.content}>
+  <View style={styles.contentTitle}>
   <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
   </View>
-  <View style={styles.content}>
+  <View style={styles.contentTitle}>
   <Text style={{...styles.text2,...styles.boldText2}}>Payout Dates</Text>
   </View>
-  <View style={styles.content}>
+  <View style={styles.contentTitle}>
   <Text style={{...styles.text2,...styles.boldText2}}>Amount</Text>
   </View>
-  <View style={styles.content}>
+  <View style={styles.contentTitle}>
   <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
   </View>
   </View>
@@ -390,7 +415,7 @@ export default function Dashboard(props) {
                
             </View>
             <View style={styles.moreContainer} >
-                <TouchableOpacity>
+                <TouchableOpacity onPress={()=>navigation.navigate('Transaction')}>
                   <Text style={styles.text2}> See More ></Text>
                 </TouchableOpacity>
                 </View>
@@ -425,8 +450,48 @@ export default function Dashboard(props) {
           /> */}
                 </View>
             </View>
-            </ScrollView>
-            
+            </ScrollView>:
+            <View style={styles.contentContainer} >
+              {true? <TouchableOpacity style={styles.goBackButton}  onPress={()=>setNotifyOn(true)}><Text>Go back</Text></TouchableOpacity>:null}
+              <View style={styles.noticeContainer}>
+              <View style={styles.noteHead} >
+                <Text style={{...styles.noteHeadText,...styles.text}}>Notification</Text>
+                </View>
+              {true?<View style={styles.noteBody}>
+              {/* <TouchableOpacity style={styles.itemContainer}>
+                <Text style={styles.text}>Cattle Visitation Notice</Text><Text style={styles.text}>></Text>
+              </TouchableOpacity>
+              <TouchableOpacity  style={styles.itemContainer}>
+                <Text style={styles.text}>Farmcenta in Dubai Expos</Text><Text style={styles.text}>></Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Date of Birth:</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Gender:</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>State of Origin:</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Bank</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Account Number:</Text><Text style={styles.text1}>></Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Other Bank Details:</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
+              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Next of Kin Name:</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
+              */}
+              { receivedNote.messages!=''?receivedNote.messages.map((list,i)=>
+        <TouchableOpacity key={i} onPress={handleNote.bind(list,i)}  style={styles.noteContainer}>
+           <View style={styles.noteTitle}>
+           <Text style={styles.text}>{list.subject}</Text>
+           <Text style={{...styles.text1,...styles.sign}}>
+             {/* {console.log(list.content)}   */}
+             {read===i? <Image source={require('../assets/images/a-down.png')}/>:<Image source={require('../assets/images/a-close.png')}/>}
+           </Text>
+             </View>
+             <View style={styles.noteContent}>
+             {read===i?<Text style={styles.text}>{list.content}</Text>:null}
+             </View>
+           </TouchableOpacity>
+        ):null}
+            </View>:null}
+           
+            </View>
+                </View>
+          }
+    
         </View>
     
 
@@ -640,19 +705,30 @@ const styles = StyleSheet.create({
     // backgroundColor: '#1BBC2E',
   },
   contentHead:{
+    flex:1,
     flexDirection:"row",
     // justifyContent:'space-between',
     // paddingHorizontal:2,
   },
+  contentTitle:{
+    // flexDirection:"row",
+    justifyContent:'center',
+    flex:0.5,
+     alignItems:"center",
+    //  backgroundColor: '#777',
+    // marginVertical:5
+  },
   content:{
     // flexDirection:"row",
-    // justifyContent:'center',
-    flex:1,
+    justifyContent:'center',
+    flex:0.3,
      alignItems:"center",
+    //  backgroundColor: 'yellow',
+     top:-20
     // paddingHorizontal:5,
     // paddingLeft:30,
     // marginLeft:30
-    // marginHorizontal:20
+    // marginVertical:5
   },
   lastFarmHead:{
     flexDirection:"row",
@@ -723,7 +799,7 @@ const styles = StyleSheet.create({
         // height:"20%"
     },
     latestTrans:{
-      marginBottom:5,
+      // marginBottom:1,
       marginLeft:10,
       // backgroundColor: 'blue',
     },
@@ -788,8 +864,79 @@ row3Container:{
         borderRadius:20
       },
       menuText:{
+        // flex:1,
+        width:90,
         textAlign:"left",
         marginLeft:10
+      },
+      noticeContainer:{
+        width:'90%',
+        marginTop:40,
+        backgroundColor:"#0E861C33",
+        height:"80%",
+        justifyContent:"center",
+        alignContent:'center',
+        borderRadius:4
+      },
+      noteBody:{
+        flex:5,
+      },
+      noteHead:{
+        flex:1,
+        // justifyContent:"center"
+      },
+      itemContainer:{
+        flex:1,
+        flexDirection: "row",
+        // backgroundColor: '#03e',
+        // width:"90%",
+        justifyContent:"space-between",
+        // alignItems:"center",
+        borderBottomColor:"#0E861C33",
+        borderBottomWidth:1,
+        paddingHorizontal:20
+      
+      },
+      noteContainer:{
+        flex:0.3,
+        // flexDirection: "row",
+        // backgroundColor: '#03e',
+        // width:"90%",
+        // justifyContent:"center",
+        // alignItems:"center",
+        paddingVertical:3,
+        borderTopColor:"#0E861C33",
+        borderTopWidth:1,
+        paddingHorizontal:20
+      },
+      noteTitle:{
+        flex:1,
+        flexDirection: "row",
+        // backgroundColor: '#03e',
+        // width:"90%",
+        justifyContent:"space-between",
+        alignItems:"center",
+        // borderBottomColor:"#0E861C33",
+        // borderBottomWidth:1,
+        // paddingHorizontal:20
+      
+      },
+      noteContent:{
+        flex:1,
+        justifyContent:"flex-start",
+        alignItems:"flex-start",
+        marginVertical:5
+      },
+      noteHeadText:{
+        textAlign:'center',
+        fontWeight:"bold",
+        fontSize:20
+      },
+      goBackButton:{
+        // backgroundColor:'blue',
+        justifyContent:"flex-end",
+        height:30,
+        marginLeft:270
       },
 //   developmentModeText: {
 //     marginBottom: 20,

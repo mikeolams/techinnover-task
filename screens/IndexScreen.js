@@ -117,7 +117,14 @@ export default function IndexScreen(props) {
       </View>
        {/* </View> */}
     </ImageBackground>
-  );
+);
+//   );-------------------------------------------------------
+
+
+
+
+
+
 }
 
 IndexScreen.navigationOptions = {
@@ -166,6 +173,8 @@ const styles = StyleSheet.create({
     lineHeight: 19,
     textAlign: 'center',
   },
+ 
+
   contentContainer: {
     paddingTop: 30,
   },
