@@ -1,4 +1,3 @@
-import * as WebBrowser from 'expo-web-browser';
 import React, { useState, useEffect, Fragment} from 'react';
 import {
   Image,
@@ -12,11 +11,6 @@ import {
   Linking
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
-import TabBarImage from '../components/TabBarImage';
-import { Avatar } from 'react-native-elements';
-// import UserToken from '../components/UserToken';
-// import AsyncStorage from '@react-native-community/async-storage';
 
 export default function Dashboard(props) {
 
@@ -29,22 +23,6 @@ export default function Dashboard(props) {
   const [receivedNote, setReceivedNote] = useState('');
   const [read, setRead] = useState(false);
 
-  // const [transaction, setTransaction] = useState({ 
-  //   "id":'',
-  //           "amount":'',
-  //           "quantity":'',
-  //           "payback":'',
-  //           "paybackDate":"",
-  //           "method":"",
-  //           // "payment_details": "{\"system\":\"Mozilla\\/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit\\/537.36 (KHTML, like Gecko) Chrome\\/78.0.3904.97 Safari\\/537.36\",\"previous_link\":\"https:\\/\\/farmcenta.com\\/investors\\/view-details\\/410\\/investresponse\\/11565\",\"ip\":\"154.120.108.239\",\"adminstrator\":\"1\",\"confirmation_note\":\"Payment confirmed.\"}",
-  //           "product":'',
-  //           "return": '',
-  //           "period":'',
-  //           "status": "",
-  //           // "user": 410,
-  //           "createdAt": "",
-  //           "updatedAt": ""
-  // })
   const { navigation } = props;  
         const userName = navigation.getParam('name', 'NO-Username');  
         const userEmail = navigation.getParam('email', 'NO-email');  
@@ -52,33 +30,20 @@ export default function Dashboard(props) {
         const token = navigation.getParam('token', 'some default value');
         const farmProducts = navigation.getParam('farmProducts', 'default');
         const transactions = navigation.getParam('transactions', 'some default value');
-        // let hold=[];
-//TESTING
-        // console.log(navigation.actions)
-        // console.log(navigation.actions.setParams({9:'you'}))
-        // console.log(navigation.addListener)
-        // console.log(farmProducts.products)
-        // console.log(UserToken(token))
-        // await AsyncStorage.setItem('token', token);
+
         AsyncStorage.setItem('avatar',userAvatar);
         AsyncStorage.setItem('user', userName);
         AsyncStorage.setItem('token', token);
         const loadFunction =()=>navigation.setParams({'Menu': toggleMenu});
-        // AsyncStorage.multiSet([['tokena', token],['user', userName], ['avatar',userAvatar]]);
+       
         const menuFly =(e)=>{
           e.preventDefault();
           setMenuOn(true);
-          // navigation.setParams({'toggleMenu':menuOn});
-          // console.log( navigation);
         },
          toggleMenu = ()=>{
-          // {menuList?(// menuOn? setMenuOn(false):setMenuOn(true);
           setMenuOn(false)   
-        //   ):null
-        // }
-          // navigation.setParams({'toggleMenu':menuOn})
-          console.log( menuOn);
-          // console.log( navigation.getParam('toggleMenu'));
+       
+          // console.log( menuOn);
         };
         
         
@@ -86,27 +51,19 @@ export default function Dashboard(props) {
       const latestFarm=()=>{
         let date=[]
         farmProducts.products.map(product=>{
-            date.push(product.created_at)
-            date.sort()
-            // console.log(date)
-            // console.log(date.length)
+            date.push(product.created_at);
+            date.sort();
         })
         let farmArray=[];
         farmProducts.products.map(product=>{
           if(product.created_at===date[date.length-1] ||product.created_at===date[date.length-2] || product.created_at===date[date.length-3]){
-            // console.log(product.id);
             farmArray.push(product);
             setFarms(farmArray)
-            // console.log(farms)
          }
       })
        } 
 
 
-
-        // console.log(JSON.stringify(token))
-        // console.log(transactions.transactions);
-        // console.log(userAvatar,userEmail)
         const getUserTransaction = () => {
           setTransaction(transactions);
           fetch('https://farmcenta.com/api/v1/notification?token='+token,{
@@ -120,66 +77,23 @@ export default function Dashboard(props) {
           .catch(err=> {
             console.warn('issues fetching notifications '+err )
           });
-          // setHolsd([])
                  if(transactions.transactions.length!=0){
-                  // console.log('yes')
                   setLoading(false);
                    
-                  // console.log(hold)
-                  // hold=[],
+                  
                   transactions.transactions.map((transaction,i)=>{
-                    // if(hold.includes(transaction)){
-                      console.log(':+'+i,)
                       if(i>=transactions.transactions.length-2 && hold.length<2){
                       hold.push(transaction)
-                      // console.log(hold.length,i,transactions.transactions.length)
                     }
-                    // console.log(transaction.created_at);
                     });
-                    // hold.sort();
                  };
          };
 
-        //  transaction.transactions.map(transaction=>{
-        //   hold.push(transaction.created_at)
-      
-        //   console.log(hold.sort());
-        //   })
-
-      //   const getUserTransaction =async () => {    
-      //     await fetch('https://farmcenta.com/api/v1/transactions?token='+token,{
-      //       method: 'POST'
-      //     })
-      //   //  .then(resp=>console.log(JSON.parse(resp)))
-      //     .then(resp=>resp.json())
-      //     // .then(resp=>resp.text())
-      //     // .then(resp=>console.log(resp.json()))
-      //     .then(json=>{
-      //       setTransaction(json)
-      //       // console.log(json)
-      //       console.log(transaction)
-      //       console.log(transaction.transactions[0].amount)
-      //       if(transaction.transactions[0]){
-      //         setLoading(false)
-      //       }
-
-      //     })
-      //   //  .then(resp=>resp.json())JSON.stringify
-      //   //  .then(resp=>console.log(resp.json().stringify))
-      //    .catch(err=> {
-      //      console.warn('Error is: '+err )
-      //    })
-      //  };
-      // useEffect(() => {
-      //   toggleMenu();
-      // }, [menuOn]);
-
+       
        useEffect(() => {
         getUserTransaction();
         latestFarm();
-        // setHold([])
         loadFunction();
-        // toggleMenu();
       }, []);
 
       const menuList =[
@@ -222,9 +136,7 @@ export default function Dashboard(props) {
             break;
           case 1:
             setMenuOn(true);
-            // alert('you clicked coming soon '+ id+' try other menu');
             setNotifyOn(false);
-            // navigation.navigate('LinksStack');
             break;
           case 2:
             URL = "tel:+2347018231992";
@@ -252,8 +164,6 @@ export default function Dashboard(props) {
         if(read===id){
           setRead('')
         }else{setRead(id)}
-        // console.log(read +' '+ id)
-        // switch(id){}
       },
       openLink= (link)=>{
       Linking.openURL(link);
@@ -274,8 +184,6 @@ export default function Dashboard(props) {
          
           </View>
           <View style={styles.id}>
-           {/* <Image source={{uri:userAvatar}} style={styles.picImage}/>
-           <Text>{userName}</Text> */}
            </View>
            {notifyOn?
             <ScrollView 
@@ -297,26 +205,18 @@ export default function Dashboard(props) {
                   </View>
                 </View>
                 <View style={styles.rowContent} >
-                {/* {loading?null: <Fragment> */}
                   <View style={{...styles.colHeadings, paddingTop:6}}>
                   <Text style={{...styles.text1,...styles.boldText2}}>N{loading?0:transaction.transactions[0].amount}</Text>
-                  {/* <Text style={styles.text}>{transaction.transactions[0].product}</Text> */}
                   </View>
                   <View style={{...styles.colHeadings, paddingTop:6}}>
                   <Text style={{...styles.text,...styles.boldText2}}>N{loading?0:transaction.transactions[0].payback}</Text>
-                  {/* <Text style={styles.text}>{transaction.transactions[0].return}</Text> */}
+                 
                   </View>
                   <View style={{...styles.colHeadings, paddingTop:6}}>
                   <Text style={{...styles.text3,...styles.boldText2}}>{loading?0:transaction.transactions[0].quantity}</Text>
                   </View>
-                {/* </Fragment>
-                } */}
                 </View>
-                {/* <View style={styles.rowContainer} >
-                <Text style={styles.text}>See More</Text>
-                <Text style={styles.text}>See More</Text>
-                <Text style={styles.text}>See More</Text>
-                </View> */}
+              
                 <View style={styles.rowHeadContainer} >
                 <View style={styles.rowHead}>
                 <Text style={styles.rowText}>Next Payout Date:</Text>
@@ -332,46 +232,7 @@ export default function Dashboard(props) {
             <View style={styles.latestTrans} >
                 <Text style={{...styles.text2,...styles.boldText2}}>Lastest Transactions</Text>
                 </View>
-                {/* <View style={styles.rowContainer} >
-                <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
-                <Text style={{...styles.text2,...styles.boldText2}}>Payout Dates</Text>
-                <Text style={{...styles.text2,...styles.boldText2}}>Amount</Text>
-                <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
-                </View>
-                <View style={styles.rowContainerContent} >
-                <Text style={styles.text2}>{loading?0:transaction.transactions[0].quantity}</Text>
-                <Text style={styles.text2}>{loading?0:transaction.transactions[0].payback_date}</Text>
-                <Text style={styles.text2}>{loading?0:'#'+transaction.transactions[0].amount}</Text>
-                <Text style={styles.text2}>{loading?0:transaction.transactions[0].status}</Text>
-                </View> */}
 
-
-{/* <View style={styles.rowContainer} >
-  <View style={styles.content}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
-              <Text style={{...styles.text2,...styles.textMagin}}>{loading?0:transaction.transactions[0].quantity}</Text>
-                <Text style={styles.text2}>{loading?0:transaction.transactions[1].quantity}</Text>
-  </View>
-  <View style={styles.content}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Payout Dates</Text>
-                <Text style={{...styles.text2,...styles.textMagin}}>{loading?0:transaction.transactions[0].payback_date}</Text>
-                <Text style={styles.text2}>{loading?0:transaction.transactions[1].payback_date}</Text>
-  </View>
-  <View style={styles.content}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Amount</Text>
-                <Text style={{...styles.text2,...styles.textMagin}}>{loading?0:'#'+transaction.transactions[0].amount}</Text>
-                <Text style={styles.text2}>{loading?0:'#'+transaction.transactions[1].amount}</Text>
-  </View>
-  <View style={styles.content}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
-                <Text style={{...styles.text2,...styles.textMagin}}>{loading?0:transaction.transactions[0].status}</Text>
-                <Text style={styles.text2}>{loading?0:transaction.transactions[1].status}</Text>
-  </View>
-                </View> */}
-
-
-
-                {/* <View> */}
                 <View style={styles.contentHead}>
   <View style={styles.contentTitle}>
   <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
@@ -386,9 +247,7 @@ export default function Dashboard(props) {
   <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
   </View>
   </View>
-  {/* {  loading? <Text>No transaction yet</Text>:hold.map((item)=>{
-    console.log(item)
-    })} */}
+
     {  loading? <Text>No transaction yet</Text>:hold.map((item)=><View key={item.id} style={styles.contentHead}>
   <View style={styles.content}>
               <Text style={{...styles.text2,...styles.textMagin}}>{item.quantity}</Text>
@@ -405,13 +264,6 @@ export default function Dashboard(props) {
   </View>
   </View>)}
   
-                {/* </View> */}
-                {/* <View style={styles.rowContainer} >
-                <Text style={styles.text2}>20 Carbon</Text>
-                <Text style={styles.text2}>27, Jan 2019</Text>
-                <Text style={styles.text2}>#3,000,000</Text>
-                <Text style={styles.text2}>Returning</Text>
-                </View> */}
                
             </View>
             <View style={styles.moreContainer} >
@@ -424,30 +276,16 @@ export default function Dashboard(props) {
                 <Text style={{...styles.text2,...styles.boldText2}}>Lastest Farms</Text>
                 </View>
                 <View style={styles.row3Container} >
-                {/* {farms.map(farm =>console.log(farm.location))} */}
-                {/* {Object.values(farms).map(value =>console.log(value))} */}
                 {farms.map(farm =><TouchableOpacity  onPress={()=>props.navigation.navigate('Store')} key={farm.id}>
                   <Image
                
             source={
               {uri:"https://farmcenta.com"+farm.photo}
-              // require('../assets/images/cattle-farm3x.png')
             }
             style={styles.itemImage}
           />
           </TouchableOpacity>)}
-          {/* <Image
-            source={
-              require('../assets/images/ginger3x.png')
-            }
-            style={styles.logoImage}
-          />
-          <Image
-            source={
-              require('../assets/images/ginger3x.png')
-            }
-            style={styles.logoImage}
-          /> */}
+        
                 </View>
             </View>
             </ScrollView>:
@@ -458,26 +296,12 @@ export default function Dashboard(props) {
                 <Text style={{...styles.noteHeadText,...styles.text}}>Notification</Text>
                 </View>
               {true?<View style={styles.noteBody}>
-              {/* <TouchableOpacity style={styles.itemContainer}>
-                <Text style={styles.text}>Cattle Visitation Notice</Text><Text style={styles.text}>></Text>
-              </TouchableOpacity>
-              <TouchableOpacity  style={styles.itemContainer}>
-                <Text style={styles.text}>Farmcenta in Dubai Expos</Text><Text style={styles.text}>></Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Date of Birth:</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Gender:</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>State of Origin:</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Bank</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Account Number:</Text><Text style={styles.text1}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Other Bank Details:</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
-              <TouchableOpacity style={styles.itemContainer}><Text style={styles.text}>Next of Kin Name:</Text><Text style={{...styles.text1,...styles.sign}}>></Text></TouchableOpacity>
-              */}
+              
               { receivedNote.messages!=''?receivedNote.messages.map((list,i)=>
         <TouchableOpacity key={i} onPress={handleNote.bind(list,i)}  style={styles.noteContainer}>
            <View style={styles.noteTitle}>
            <Text style={styles.text}>{list.subject}</Text>
            <Text style={{...styles.text1,...styles.sign}}>
-             {/* {console.log(list.content)}   */}
              {read===i? <Image source={require('../assets/images/a-down.png')}/>:<Image source={require('../assets/images/a-close.png')}/>}
            </Text>
              </View>
@@ -493,20 +317,6 @@ export default function Dashboard(props) {
           }
     
         </View>
-    
-
-      {/* <View style={styles.tabBarInfoContainer}>
-        <Text style={styles.tabBarInfoText}>
-          This is a tab bar. You can edit it in:
-        </Text>
-
-        <View
-          style={[styles.codeHighlightContainer, styles.navigationFilename]}>
-          <MonoText style={styles.codeHighlightText}>
-            navigation/MainTabNavigator.js
-          </MonoText>
-        </View>
-      </View> */}
      
 {menuOn?null:
   <TouchableOpacity style={styles.menuBackground} onPress={menuFly}>
@@ -516,15 +326,11 @@ export default function Dashboard(props) {
         <Image source={{uri:userAvatar}} style={styles.picImage}/>
            <Text>{userName}</Text>
            </View>
-           {/* <TouchableOpacity  onPress={()=>navigation.navigate('Auth')} style={styles.signOut}>
-           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
-           <Text>Log Off</Text>
-           </TouchableOpacity> */}
+           
         </View>
         <View style={styles.menuDiv}></View>
         <View style={styles.menu}>
            { menuList?menuList.map((list,i)=>
-        // {console.log(list)}
         <TouchableOpacity key={i} onPress={handleMenuClick.bind(list,i)} style={styles.menuItem}>
            <Image source={list.image} style={styles.picImage}/>
            <Text style={styles.menuText}>{list.text}</Text>
@@ -548,41 +354,6 @@ Dashboard.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  );
-}
-
-function handleHelpPress() {
-  WebBrowser.openBrowserAsync(
-    'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  );
-}
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -590,14 +361,10 @@ const styles = StyleSheet.create({
   },
   innerContainer: {
       flex:1,
-        // alignItems:'center',
       },
       contentContainer:{
         flex:1,
       alignItems:'center',
-        // backgroundColor: '#fe2',
-        // width:'90%'
-        // paddingBottom:30
     },
     menuContainer:{
       zIndex:2,
@@ -607,16 +374,11 @@ const styles = StyleSheet.create({
       bottom:-72
     },
     menuBackground:{
-      // flex:1,
-      // paddingTop:'30%',
       height:"100%",
       width:"100%",
       zIndex:1,
       position:"absolute",
       backgroundColor: 'rgba(52, 52, 52, 0.5)',
-      // backgroundColor: 'transparent'
-      // bottom:250,
-      // backgroundColor: '#eee',
     },
     menuHead:{
       flex:0.4,
@@ -624,8 +386,6 @@ const styles = StyleSheet.create({
       flexDirection:"row"
     },
     signOut:{
-      // marginHorizontal:0
-      // backgroundColor: '#f30',
       alignItems:'center',
         justifyContent:'center',
         width:'50%'
@@ -637,38 +397,30 @@ const styles = StyleSheet.create({
     },
     menu:{
       flex:2,
-      // backgroundColor: '#2e3',
       backgroundColor: '#eed'
     },
     menuId:{
       flexDirection:"row",
-        // padding:10,
         marginVertical:25,
         marginLeft:35,
-        // alignSelf:"center",
         alignItems:'center',
         justifyContent:'space-between',
         width:'42%'
     },
     menuItem:{
       flexDirection:"row",
-        // backgroundColor:'blue',
         padding:10,
-        // marginBottom:2,
         alignItems:'center',
         justifyContent:'space-between',
         width:'50%'
     },
   imageContainer:{
-    // flex:1,
     paddingTop:6,
     alignItems:'center',
-    // backgroundColor: '#222',
   },
   content1Container:{
       flex:1,
       justifyContent:'space-around',
-    // alignItems:'center',
     backgroundColor:"#0E861C",
       width:'95%',
       borderRadius:10,
@@ -680,7 +432,6 @@ const styles = StyleSheet.create({
     paddingHorizontal:15,
     backgroundColor:"#0E861C",
     marginHorizontal:2
-    // flex:1
   },
   rowHead:{
     flexDirection:"row",
@@ -691,7 +442,6 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:'space-between',
     paddingHorizontal:10,
-    // backgroundColor: '#1BBC2E',
     backgroundColor: '#eee',
     flex:1,
     paddingTop:2
@@ -702,33 +452,21 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     paddingHorizontal:15,
     justifyContent:'flex-end',
-    // backgroundColor: '#1BBC2E',
   },
   contentHead:{
     flex:1,
     flexDirection:"row",
-    // justifyContent:'space-between',
-    // paddingHorizontal:2,
   },
   contentTitle:{
-    // flexDirection:"row",
     justifyContent:'center',
     flex:0.5,
      alignItems:"center",
-    //  backgroundColor: '#777',
-    // marginVertical:5
   },
   content:{
-    // flexDirection:"row",
     justifyContent:'center',
     flex:0.3,
      alignItems:"center",
-    //  backgroundColor: 'yellow',
      top:-20
-    // paddingHorizontal:5,
-    // paddingLeft:30,
-    // marginLeft:30
-    // marginVertical:5
   },
   lastFarmHead:{
     flexDirection:"row",
@@ -737,10 +475,6 @@ const styles = StyleSheet.create({
   },
   colHeadings:{
     flex:1,
-    // justifyContent: "center",
-    // alignItems: 'center',
-    // alignContent:'center',
-    // alignSelf: 'center'
   },
   colHeadings2:{
     flex:1.4,
@@ -750,7 +484,6 @@ const styles = StyleSheet.create({
   },
   text: {
         color: "#0E861C",
-        // backgroundColor:"#0E861C",
         textAlign:"center",
       },
       text1: {
@@ -763,7 +496,6 @@ const styles = StyleSheet.create({
       },
       rowText: {
         color: "#aaa",
-        // textAlign:"center"
       },
       boldText2:{
         fontWeight:'bold'
@@ -799,41 +531,23 @@ const styles = StyleSheet.create({
         // height:"20%"
     },
     latestTrans:{
-      // marginBottom:1,
       marginLeft:10,
-      // backgroundColor: 'blue',
     },
-    // row2Container:{
-    //     flexDirection:"row",
-    //     justifyContent:'space-between',
-    //     paddingHorizontal:15,
-    //   },
     text2: {
         color: '#0E861C'
       },
   content3Container:{
     flex:1,
-    // flexDirection:'row',
-    // paddingTop:20,
     marginTop:5,
     marginBottom:20,
-    // marginVertical:10,
     justifyContent:'space-between',
-//   alignItems:'center',
-    // backgroundColor: '#bec',
     width:'95%',
     borderRadius:10,
-    // height:"20%"
 },
 row3Container:{
     flexDirection:"row",
     justifyContent:'space-between',
   },
-  // logoImage: {
-  //       width: 120,
-  //       height: 80,
-  //       resizeMode: 'contain',
-  //     },
       logoImage: {
         width: 180,
         height: 50,
@@ -844,16 +558,11 @@ row3Container:{
         width: 100,
         height: 100,
         resizeMode: 'contain',
-        // margin:10,
         borderRadius:50
     },
       id:{
-        // flexDirection:"row",
-        // backgroundColor:'blue',
         paddingHorizontal:10,
         marginBottom:2,
-        // alignItems:'center',
-        // justifyContent:'flex-end'
         width:'30%'
       },
       picImage:{
@@ -864,7 +573,6 @@ row3Container:{
         borderRadius:20
       },
       menuText:{
-        // flex:1,
         width:90,
         textAlign:"left",
         marginLeft:10
@@ -883,15 +591,11 @@ row3Container:{
       },
       noteHead:{
         flex:1,
-        // justifyContent:"center"
       },
       itemContainer:{
         flex:1,
         flexDirection: "row",
-        // backgroundColor: '#03e',
-        // width:"90%",
         justifyContent:"space-between",
-        // alignItems:"center",
         borderBottomColor:"#0E861C33",
         borderBottomWidth:1,
         paddingHorizontal:20
@@ -899,11 +603,6 @@ row3Container:{
       },
       noteContainer:{
         flex:0.3,
-        // flexDirection: "row",
-        // backgroundColor: '#03e',
-        // width:"90%",
-        // justifyContent:"center",
-        // alignItems:"center",
         paddingVertical:3,
         borderTopColor:"#0E861C33",
         borderTopWidth:1,
@@ -912,13 +611,8 @@ row3Container:{
       noteTitle:{
         flex:1,
         flexDirection: "row",
-        // backgroundColor: '#03e',
-        // width:"90%",
         justifyContent:"space-between",
         alignItems:"center",
-        // borderBottomColor:"#0E861C33",
-        // borderBottomWidth:1,
-        // paddingHorizontal:20
       
       },
       noteContent:{
@@ -933,54 +627,10 @@ row3Container:{
         fontSize:20
       },
       goBackButton:{
-        // backgroundColor:'blue',
         justifyContent:"flex-end",
         height:30,
         marginLeft:270
       },
-//   developmentModeText: {
-//     marginBottom: 20,
-//     color: 'rgba(0,0,0,0.4)',
-//     fontSize: 14,
-//     lineHeight: 19,
-//     textAlign: 'center',
-//   },
-//   contentContainer: {
-//     paddingTop: 30,
-//   },
-//   welcomeContainer: {
-//     alignItems: 'center',
-//     marginTop: 10,
-//     marginBottom: 20,
-//   },
-//   welcomeImage: {
-//     width: 100,
-//     height: 80,
-//     resizeMode: 'contain',
-//     marginTop: 3,
-//     marginLeft: -10,
-//   },
-//   getStartedContainer: {
-//     alignItems: 'center',
-//     marginHorizontal: 50,
-//   },
-//   homeScreenFilename: {
-//     marginVertical: 7,
-//   },
-  // codeHighlightText: {
-  //   color: 'rgba(96,100,109, 0.8)',
-  // },
-//   codeHighlightContainer: {
-//     backgroundColor: 'rgba(0,0,0,0.05)',
-//     borderRadius: 3,
-//     paddingHorizontal: 4,
-//   },
-//   getStartedText: {
-//     fontSize: 17,
-//     color: 'rgba(96,100,109, 1)',
-//     lineHeight: 24,
-//     textAlign: 'center',
-//   },
   tabBarInfoContainer: {
     position: 'absolute',
     bottom: 0,

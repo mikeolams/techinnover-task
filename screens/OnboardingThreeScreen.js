@@ -1,26 +1,20 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
   Image,
   ImageBackground,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 
-import { MonoText } from '../components/StyledText';
 
 export default function OnboardingThreeScreen(props) {
 
   function handleNextPress() {
     props.navigation.navigate('Auth')
   }
-  // function handleSkipPress() {
-  //   props.navigation.navigate('Auth')
-  // }
   function handlePreviousPress() {
     console.log('remove skip')
     props.navigation.navigate('LandingTwo')
@@ -54,7 +48,6 @@ export default function OnboardingThreeScreen(props) {
         <TouchableOpacity style={styles.slideButton} onPress={()=>props.navigation.navigate('LandingOne')}><Text>.</Text></TouchableOpacity>
           <TouchableOpacity style={styles.slideButton} onPress={()=>props.navigation.navigate('LandingTwo')}><Text>.</Text></TouchableOpacity>
           <TouchableOpacity style={{...styles.slideButton,...styles.activeSlide}}><Text style={styles.slideText}>.</Text></TouchableOpacity>
-          {/* <TouchableOpacity onPress={()=>props.navigation.navigate('LandingFour')}><Text>4</Text></TouchableOpacity> */}
         </View>
       </View>
 
@@ -82,45 +75,10 @@ OnboardingThreeScreen.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-  // WebBrowser.openBrowserAsync(
-  //   'https://docs.expo.io/versions/latest/workflow/development-mode/'
-  // );
-}
-
-function handleHelpPress() {
-  // WebBrowser.openBrowserAsync(
-  //   'https://docs.expo.io/versions/latest/workflow/up-and-running/#cant-see-your-changes'
-  // );
-}
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#fff',
   },
   developmentModeText: {
     marginBottom: 20,
@@ -155,7 +113,6 @@ const styles = StyleSheet.create({
     color: 'rgba(96,100,109, 0.8)',
   },
   codeHighlightContainer: {
-    // backgroundColor: 'rgba(0,0,0,0.05)',
     borderRadius: 3,
     paddingHorizontal: 4,
   },
@@ -167,7 +124,6 @@ const styles = StyleSheet.create({
   },
 
   topContainer: {
-    // margin: 60,
     marginVertical:110,
     marginHorizontal:40,
     backgroundColor: '#FFF',
@@ -176,19 +132,15 @@ const styles = StyleSheet.create({
     justifyContent:'center',
     alignItems: 'center',
     top:-10
-    // opacity:280
   },
   logoContainer:{
     flex:1,
     justifyContent:'center',
-    // backgroundColor: '#fca',
   },
   logoImage: {
     width: 120,
     height: 120,
     resizeMode: 'contain',
-    // marginTop: 3,
-    // marginLeft: -10,
   },
   messageImage: {
     width: 160,
@@ -198,14 +150,12 @@ const styles = StyleSheet.create({
   circleContainer:{
     flex:1,
     justifyContent:'center',
-    // backgroundColor: '#aca',
   },
   textContainer:{
     marginTop:70,
     flex:1,
     justifyContent:'center',
     paddingHorizontal:30,
-    // backgroundColor: '#aaa',
   },
   text: {
     color: '#0E861C',
@@ -213,13 +163,9 @@ const styles = StyleSheet.create({
     textAlign:"center"
   },
   slideContainer:{
-    // flex:1,
-    // paddingTop:70,
     height:30,
     marginTop:70,
-    // paddingBottom:10,
     marginBottom:10,
-    // backgroundColor: '#2ca',
     width:'40%',
     flexDirection:'row',
     justifyContent:"space-evenly"
@@ -258,18 +204,15 @@ const styles = StyleSheet.create({
       },
     }),
     alignItems: 'center',
-    // backgroundColor: '#fbfbfb',
     paddingVertical: 20,
   },
   skipButton: {
-    // paddingVertical: 15,
     justifyContent:'center',
     backgroundColor: '#0C9121',
     width:100,
     height:40
   },
   nextButton: {
-    // paddingVertical: 15,
     justifyContent:'center',
     backgroundColor: '#fff',
     width:100,
