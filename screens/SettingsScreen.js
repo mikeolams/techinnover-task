@@ -1,16 +1,13 @@
-import * as WebBrowser from 'expo-web-browser';
 import React, { useState, useEffect } from 'react';
 import {
     Image,
     Platform,
-    ScrollView,
     StyleSheet,
     Text,
     TouchableOpacity,
     View,
     AsyncStorage
 } from 'react-native';
-import { ExpoConfigView } from '@expo/samples';
 import Header from '../components/Header';
 
 export default function SettingsScreen() {
@@ -38,33 +35,6 @@ export default function SettingsScreen() {
         setSettingProfile(profile);
         setDataLoaded(true)
         console.log(settingProfile);
-        // if(transactions.transactions.length!=0){
-        //   console.log('yes');
-        //   console.log(transactions.transactions.length);
-        //   // setLoading(false)
-        //  };
-        /////
-      //   fetch('https://farmcenta.com/api/v1/products')
-      //   .then(resp=>resp.json())
-      //   .then(farmProducts=>{
-
-      //     // AsyncStorage.setItem('token', login.token);
-      //     props.navigation.navigate('Home', {
-      //       "name": login.details.name,
-      //       "email": login.details.email,
-      //       "avatar": login.details.avatar,
-      //       "token": login.token,
-      //       "transactions":transactions,
-      //       "farmProducts": farmProducts
-      //     });
-      //   })
-      //   .catch(err=> {
-      //     console.warn('issues fetching farmparameters '+err )
-      //   })
-      // })
-      // .catch(err=> {
-      //   console.warn('issues fetching trans parameters '+err )
-      // })
       })
       .catch(err=> {
         console.warn('issues fetching profile parameters '+err )
