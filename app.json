@@ -15,9 +15,9 @@
     },
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/hdpi.png",
+    "icon": "./assets/images/applogo.jpg",
     "splash": {
-      "image": "./assets/images/logo.png",
+      "image": "./assets/images/logo-start.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
