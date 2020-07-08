@@ -18,7 +18,7 @@
     "@react-navigation/web": "~1.0.0-alpha.9",
     "expo": "~36.0.0",
     "expo-asset": "~8.0.0",
-    "expo-cli": "^3.11.3",
+    "expo-cli": "^3.21.13",
     "expo-constants": "~8.0.0",
     "expo-font": "~8.0.0",
     "expo-web-browser": "~8.0.0",
@@ -32,11 +32,11 @@
     "react-native-safe-area-context": "0.6.0",
     "react-native-screens": "2.0.0-alpha.12",
     "react-native-web": "~0.11.7",
+    "react-native-webview": "7.4.3",
     "react-navigation": "~4.0.10",
     "react-navigation-stack": "~1.10.3",
     "react-navigation-tabs": "~2.6.2",
-    "yup": "^0.28.0",
-    "react-native-webview": "7.4.3"
+    "yup": "^0.28.0"
   },
   "devDependencies": {
     "@babel/core": "^7.0.0",
