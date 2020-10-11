@@ -18,7 +18,8 @@ export default function StoreScreen(props) {
         return <WebView originWhitelist={['*']} 
         style={styles.webPostion}
         onNavigationStateChange={handleWebView}
-        source={{uri:'https://farmcenta.com/mobile/shop?token='+token}}/>
+        // source={{uri:'https://farmcenta.com/mobile/shop?token='+token}}/>
+        source={{uri:'https://centavestng.com/mobile/shop?token='+token}}/>
     }
     
     const retrieveUserInfo = async () => {
@@ -59,7 +60,7 @@ export default function StoreScreen(props) {
                 <View style={styles.imageContainer} >
                     <Image
                         source={
-                            require('../assets/images/logo.png')
+                            require('../assets/images/centavestLogoMd.png')
                         }
                         style={styles.logoImage}
                     />

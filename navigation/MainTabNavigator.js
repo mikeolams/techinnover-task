@@ -24,7 +24,7 @@ const HomeStack = createStackNavigator(
 HomeStack.navigationOptions = {
   tabBarLabel: 'Menu',
   tabBarIcon: ({ focused }) => (
-    <TabBarImage focused={focused} icon={require('../assets/images/menu.png')} />
+    <TabBarImage focused={focused} icon={require('../assets/images/menux.png')} />
   ),
   tabBarOnPress:({ navigation })=>{
     navigation.navigate('HomeStack');
@@ -44,7 +44,7 @@ const StoreStack = createStackNavigator(
 StoreStack.navigationOptions = {
   tabBarLabel: 'Farm',
   tabBarIcon: ({ focused }) => (
-    <TabBarImage focused={focused} icon={require('../assets/images/field.png')} />
+    <TabBarImage focused={focused} icon={require('../assets/images/store-investment.png')} />
   ),
   
 };
@@ -62,7 +62,7 @@ const TransactionStack = createStackNavigator(
 TransactionStack.navigationOptions = {
   tabBarLabel: 'Transaction',
   tabBarIcon: ({ focused }) => (
-    <TabBarImage focused={focused} icon={require('../assets/images/payment.png')} />
+    <TabBarImage focused={focused} icon={require('../assets/images/digital-wallet.png')} />
   ),
 };
 
@@ -79,7 +79,7 @@ const WalletStack = createStackNavigator(
 WalletStack.navigationOptions = {
   tabBarLabel: 'Wallet',
   tabBarIcon: ({ focused }) => (
-    <TabBarImage focused={focused} icon={require('../assets/images/wallet.png')} />
+    <TabBarImage focused={focused} icon={require('../assets/images/wallet-credit-card.png')} />
   ),
 };
 
@@ -95,7 +95,7 @@ const SettingsStack = createStackNavigator(
 SettingsStack.navigationOptions = {
   tabBarLabel: 'Settings',
   tabBarIcon: ({ focused }) => (
-    <TabBarImage focused={focused} icon={require('../assets/images/settings.jpeg')} />
+    <TabBarImage focused={focused} icon={require('../assets/images/private-wage.png')} />
   ),
 };
 

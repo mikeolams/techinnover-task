@@ -18,7 +18,8 @@ export default function SettingsScreen(props) {
         return <WebView originWhitelist={['*']} 
         style={styles.webPostion}
         onNavigationStateChange={handleWebView}
-        source={{uri:'https://farmcenta.com/api/v1/profile?token='+token}}/>
+        source={{uri:'https://centavestng.com/api/v1/profile?token='+token}}/>
+        // source={{uri:'https://farmcenta.com/api/v1/profile?token='+token}}/>
     }
     
     const retrieveUserInfo = async () => {
@@ -59,7 +60,7 @@ export default function SettingsScreen(props) {
                 <View style={styles.imageContainer} >
                     <Image
                         source={
-                            require('../assets/images/logo.png')
+                            require('../assets/images/centavestLogoMd.png')
                         }
                         style={styles.logoImage}
                     />

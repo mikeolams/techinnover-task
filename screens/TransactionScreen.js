@@ -17,7 +17,8 @@ export default function TransactionScreen() {
   let sum=0;
 
   const fetchTrans =async (value) => {  
-    await fetch('https://farmcenta.com/api/v1/transactions?token='+value,{
+    await fetch('https://centavestng.com/api/v1/transactions?token='+value,{
+      // await fetch('https://farmcenta.com/api/v1/transactions?token='+value,{
             method: 'POST'
           })  
    .then(resp=>resp.json())
@@ -57,7 +58,7 @@ export default function TransactionScreen() {
             <View style={styles.imageContainer} >
             <Image
             source={
-              require('../assets/images/logo.png')
+              require('../assets/images/centavestLogoMd.png')
             }
             style={styles.logoImage}
           />

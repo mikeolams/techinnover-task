@@ -17,7 +17,7 @@ export default function WalletScreen(props) {
   let sum=0;
 
   const fetchWallet =async (value) => {  
-    await fetch('https://farmcenta.com/api/v1/wallet?token='+value,{
+    await fetch('https://centavestng.com/api/v1/wallet?token='+value,{
             method: 'POST'
           })  
    .then(resp=>resp.json())
@@ -57,7 +57,7 @@ export default function WalletScreen(props) {
             <View style={styles.imageContainer} >
             <Image
             source={
-              require('../assets/images/logo.png')
+              require('../assets/images/centavestLogoMd.png')
             }
             style={styles.logoImage}
           />
@@ -69,12 +69,15 @@ export default function WalletScreen(props) {
                 <View style={styles.rowContainer} >
                 <Text style={styles.text}>Wallet Ballance</Text>
                 </View>
-                
+                {/* (wallets.error || wallets.wallet.length === 0) */}
                 <View style={styles.rowContainer} >
-                {wallets ==='' || wallets.wallet.length === 0?<Text>Nil</Text>:<Text style={styles.balanceText}>N{wallets.wallet.map((item,id)=>{
+                {wallets ==='' || (wallets.error || wallets.wallet.length === 0)?<Text>Nil{console.log(wallets)}</Text>:<Text style={styles.balanceText}>N{
+                wallets.wallet.map((item,id)=>{
                   sum+=item.amount;
+                  // console.log(wallets)
                   if (wallets.wallet.length===id+1){return sum}
-                })}</Text>}
+                })
+                }</Text>}
                 </View>
             </View>
             <View style={styles.contentContainer}>
@@ -84,17 +87,18 @@ export default function WalletScreen(props) {
               </View>
               <View style={styles.walletContainer} >
               <View style={styles.titleContainer} >
-              <Text style={styles.text2}>Amount</Text>
-              <Text style={styles.text2}>Dates</Text>
-              <Text style={styles.text2}>Method</Text>
-              <Text style={styles.text2}>Status</Text>
+              <Text style={{...styles.text2,color:"#000",fontWeight:'bold'}}>Amount</Text>
+              <Text style={{...styles.text2,color:"#000",fontWeight:'bold'}}>Dates</Text>
+              <Text style={{...styles.text2,color:"#000",fontWeight:'bold'}}>Method</Text>
+              <Text style={{...styles.text2,color:"#000",fontWeight:'bold'}}>Status</Text>
               </View>
                 <View style={styles.walletContent}>
-                {wallets ==='' || wallets.wallet.length === 0? null
+                {wallets ==='' || (wallets.error || wallets.wallet.length === 0)? null 
               :
               <ScrollView style={styles.container}>
-            
-              {wallets.wallet.map((item)=>
+            {/* {console.log(wallets.error)} */}
+              {
+              wallets.wallet.map((item)=>
        <View key={item.id} style={styles.walletItems} >
          <View style={styles.col}><Text style={styles.text2}>N{item.amount}</Text></View>
               <View style={styles.col}><Text style={styles.text2}>{item.created_at.split(' ')[0]}</Text></View>
@@ -103,7 +107,8 @@ export default function WalletScreen(props) {
        
        
        </View>
-     )}
+     )
+     }
                </ScrollView>
               }
                 </View>
@@ -138,7 +143,8 @@ const styles = StyleSheet.create({
           justifyContent:'center',
         alignItems:'center',
         alignSelf:'center',
-          backgroundColor:"#0E861C",
+          // backgroundColor:"#0E861C","#ADCF29",
+          backgroundColor:"#ADCF29",
           width:'90%',
           borderRadius:10,
           paddingVertical:20
@@ -158,8 +164,10 @@ const styles = StyleSheet.create({
     flex:0.1,
     justifyContent:'center',
     alignItems:'center',
-    borderBottomWidth:1,
-    borderBottomColor:"#0E861C33",
+    borderBottomWidth:3,
+    borderBottomColor:"#F7FAE9",
+    marginBottom:10
+    // borderBottomColor:"#0E861C33","#F7FAE9"
   },
   walletContainer:{
     flex:1,
@@ -184,7 +192,8 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         justifyContent:'space-evenly',
         alignItems:"center",
-        backgroundColor:"#0E861C33",
+        // backgroundColor:"#0E861C33",'#F7FAE9'
+        backgroundColor:"#F7FAE9",
         margin:4
       },
       col:{
@@ -198,7 +207,9 @@ const styles = StyleSheet.create({
     alignItems:'center',
   },  
   text: {
-        color: 'white',
+        color: '#7B9115',
+        fontWeight:'700'
+        // color: 'white','#7B9115'
       },
     boldText: {
     color: 'white',
@@ -210,7 +221,8 @@ const styles = StyleSheet.create({
       fontSize:30 
       },
     text2: {
-        color: '#0E861C',
+        color: "#7B9115",
+        // color: '#0E861C',"#7B9115"
         textAlign:"center"
       },
       id:{
@@ -226,8 +238,10 @@ const styles = StyleSheet.create({
       },
       walletHeaderText: {
         // color: '#06360B'
-        color: '#0E861C',
-        fontWeight:'bold'
+        color: '#7B9115',
+        // color: '#0E861C',#7B9115
+        fontWeight:'bold',
+        fontSize:18
       },
 row3Container:{
     flexDirection:"row",
@@ -237,7 +251,7 @@ row3Container:{
     width: 180,
     height: 50,
     resizeMode: 'contain',
-    marginTop:40
+    marginTop:60
 },
   tabBarInfoContainer: {
     position: 'absolute',

@@ -9,6 +9,7 @@ import {
   Text,
   View,
   AsyncStorage,
+  ImageBackground,
   TouchableHighlight
 } from 'react-native';
 import FormButton from '../components/FormButton';
@@ -43,7 +44,8 @@ if(actionType==='login'){
   const [actionType, setActionType] = useState('login');
 
 const loginCall= async (values)=> {
-  return await fetch('https://farmcenta.com/api/v1/login',{
+  return await fetch('https://centavestng.com/api/v1/login',{
+  // return await fetch('https://farmcenta.com/api/v1/login',{https://centavestng.com
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -56,7 +58,8 @@ const loginCall= async (values)=> {
 
 transactionsCall= (login)=> {
 
-          fetch('https://farmcenta.com/api/v1/transactions?token='+login.token,{
+          fetch('https://centavestng.com/api/v1/transactions?token='+login.token,{
+            // fetch('https://centavestng.com/api/v1/transactions?token='+login.token,{
             method: 'POST',
             header: {
               'Content-Type': 'application/json'
@@ -64,7 +67,7 @@ transactionsCall= (login)=> {
           })
           .then(res => res.json())
           .then(transactions => {
-          fetch('https://farmcenta.com/api/v1/products')
+          fetch('https://centavestng.com/api/v1/products')
           .then(resp=>resp.json())
           .then(farmProducts=>{         
             props.navigation.navigate('Home', {
@@ -90,7 +93,8 @@ const submitLogin =async (values) => {
  }
 //  Sign up logic
 const submitSignUp =async (values) => {    
-  await fetch('https://farmcenta.com/api/v1/signup',{
+  await fetch('https://centavestng.com/api/v1/signup',{
+    // await fetch('https://farmcenta.com/api/v1/signup',{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -120,12 +124,14 @@ const submitSignUp =async (values) => {
   };
   return (
     <View style={styles.container}>
+      
     
-      <View style={styles.innerContainer}>
+      {/* <View style={styles.innerContainer}> */}
+      <ImageBackground source={require('../assets/images/log-in-bg.png')} style={styles.innerContainer}>
       <View style={styles.mainAuthContainer}>
       <Image
             source={
-              require('../assets/images/logo.png')
+              require('../assets/images/centavestLogoMd.png')
             }
             style={styles.logoImage}
           />
@@ -142,7 +148,7 @@ const submitSignUp =async (values) => {
         >
           {formikProps => (
             <Fragment>
-             
+             {/* log-in-bg.png */}
               <FormInput
                 name="email"
                 value={formikProps.values.email}
@@ -177,8 +183,9 @@ const submitSignUp =async (values) => {
                   buttonType="outline"
                   onPress={formikProps.handleSubmit}
                   title="Log in"
-                  backgroundColor="#0C9121"
+                  backgroundColor="#ADCF29"
                   buttonColor = "#fff"
+                  borderRadius={20}
                   disabled={!formikProps.isValid || formikProps.isSubmitting}
                   loading = { formikProps.isSubmitting }
                 />
@@ -268,8 +275,9 @@ const submitSignUp =async (values) => {
                   buttonType="outline"
                   onPress={formikProps.handleSubmit}
                   title="Register"
-                  backgroundColor="#0C9121"
+                  backgroundColor="#ADCF29"
                   buttonColor = "#fff"
+                  borderRadius={20}
                   disabled={!formikProps.isValid || formikProps.isSubmitting}
                   loading = { formikProps.isSubmitting }
                 />
@@ -293,9 +301,11 @@ const submitSignUp =async (values) => {
         </SafeAreaView>
       )}
 
-      </View>
-     
+      {/* </View> */}
+      </ImageBackground>
+      
     </View>
+    
   );
 }
 
@@ -372,11 +382,12 @@ const styles = StyleSheet.create({
   },
   textHead: {
     fontWeight:"bold",
-    color: '#0E861C',
+    // color: '#0E861C',
     height:30,
   },
   text: {
-    color: '#0E861C',
+    // color: '#0E861C',"#ccc"
+    color:"#ccc",
   },
   dividerContainer:{
     flexDirection:"row",
@@ -386,7 +397,7 @@ const styles = StyleSheet.create({
   },
   line:{
     borderBottomWidth:1,
-    borderBottomColor:'#0E861C',
+    borderBottomColor:'#ccc',
     width:'40%',
     marginHorizontal:5
   },
@@ -406,9 +417,10 @@ const styles = StyleSheet.create({
     margin: 25
   },
   logoImage: {
-    width: 120,
+    width: 150,
     height: 120,
     resizeMode: 'contain',
+    marginBottom:30
   },
   circleContainer:{
     flex:1,

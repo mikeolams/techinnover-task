@@ -21,39 +21,48 @@ export default function IndexScreen(props) {
   }
 
   return (
-    <ImageBackground source={require('../assets/images/farmcenta-8.png')} style={styles.container}>
+    <ImageBackground source={require('../assets/images/centavest-onboarding-1.png')} style={styles.container}>
       
       <View style={styles.topContainer}>
-        <View style={styles.logoContainer}>
+
+      <Image
+            source={
+              require('../assets/images/centavestLogoMd.png')
+            }
+            style={styles.messageImage}
+          />
+
+        {/* <View style={styles.logoContainer}>
         <Image
             source={
               require('../assets/images/logo.png')
             }
             style={styles.logoImage}
           />
-        </View>
-        <View style={styles.circleContainer}>
+        </View> */}
+        {/* <View style={styles.circleContainer}>
         <Image
             source={
               require('../assets/images/unique_one.png')
             }
             style={styles.messageImage}
           />
-          </View>
-        <View style={styles.textContainer}>
+          </View> */}
+        {/* <View style={styles.textContainer}>
           <Text style={styles.text}>We work with small-scale farmers by providing what they need to scale their farming activities from improved inputs, training, weather information and access to premium market.</Text>
         </View> 
         <View style={styles.slideContainer}>
           <TouchableOpacity style={{...styles.activeSlide,...styles.slideButton}}><Text style={styles.slideText}>.</Text></TouchableOpacity>
           <TouchableOpacity style={styles.slideButton} onPress={()=>props.navigation.navigate('LandingTwo')}><Text>.</Text></TouchableOpacity>
           <TouchableOpacity style={styles.slideButton} onPress={()=>props.navigation.navigate('LandingThree')}><Text>.</Text></TouchableOpacity>
-        </View>
+        </View> */}
       </View>
 
       <View style={styles.tabBarInfoContainer}>
 
 <TouchableOpacity onPress={handleSkipPress} style={styles.skipButton}>
-            <Text style={styles.skipButtonText}>
+            <Text style={styles.helpLinkText}>
+            {/* <Text style={styles.skipButtonText}> */}
               Skip
             </Text>
           </TouchableOpacity>
@@ -128,7 +137,7 @@ const styles = StyleSheet.create({
   topContainer: {
     marginVertical:110,
     marginHorizontal:40,
-    backgroundColor: '#FFFFFF',
+    // backgroundColor: '#FFFFFF',
     borderRadius: 10,
     flex:1,
     justifyContent:'center',
@@ -210,13 +219,13 @@ const styles = StyleSheet.create({
   },
   skipButton: {
     justifyContent:'center',
-    backgroundColor: '#0C9121',
+    // backgroundColor: '#0C9121',
     width:100,
     height:40
   },
   nextButton: {
     justifyContent:'center',
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
     width:100,
     height:40
   },

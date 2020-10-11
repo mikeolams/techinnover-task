@@ -10,12 +10,14 @@ import {
   AsyncStorage,
   Linking
 } from 'react-native';
+import FormButton from '../components/FormButton';
 
 
 export default function Dashboard(props) {
 
   const [transaction, setTransaction] = useState('');
   const [farms, setFarms] = useState([]);
+  const [random, setRandom] = useState([1,2]);
   const [loading, setLoading] = useState(true);
   const [hold, setHold] = useState([]);
   const [menuOn, setMenuOn] = useState(true);
@@ -66,6 +68,7 @@ export default function Dashboard(props) {
 
         const getUserTransaction = () => {
           setTransaction(transactions);
+          // fetch('https://centavestng.com/api/v1/notification?token='+token,{
           fetch('https://farmcenta.com/api/v1/notification?token='+token,{
             method: 'POST',
             header: {
@@ -99,64 +102,67 @@ export default function Dashboard(props) {
       const menuList =[
         {
           'text':'Dashboard',
-          'image':require('../assets/images/layerDashboard.png')
-        },
-        {
-          'text':' Notification',
-          'image':require('../assets/images/layerNotification.png')
-        },
-        {
-          'text':'Call',
-          'image':require('../assets/images/layerCall.png')
-        },
-        {
-          'text':'Email',
-          'image':require('../assets/images/layerEmail.png')
-        },
-        {
-          'text':'Whatsapp',
-          'image':require('../assets/images/layerWhatsapp.png')
-        },
-        {
-          'text':'Visit Website',
-          'image':require('../assets/images/layerWorldwide.png')
+          'image':require('../assets/images/dashboard.png')
         },
         {
           'text':'Settings',
-          'image':require('../assets/images/layerSetting.png')
+          'image':require('../assets/images/group-setting.png')
+        },
+        {
+          'text':' Notification',
+          'image':require('../assets/images/notification.png')
+        },
+        {
+          'text':'Call',
+          'image':require('../assets/images/call-icon.png')
+        },
+        {
+          'text':'Email',
+          'image':require('../assets/images/email.png')
+        },
+        {
+          'text':'Whatsapp',
+          'image':require('../assets/images/whatsapp.png')
+        },
+        {
+          'text':'Visit Website',
+          'image':require('../assets/images/web-icon.png')
         }
         
       ],
       handleMenuClick=(id)=>{
-        let URL = "https://www.farmcenta.com";
+        let URL = "https://www.centavestng.com";
+        // let URL = "https://www.farmcenta.comhttps://centavestng.com";
         console.log('you clicked'+ id)
         switch(id){
           case 0:
             setMenuOn(true);
             break;
           case 1:
+              setMenuOn(true);
+        navigation.navigate('Settings');
+              break;
+          case 2:
             setMenuOn(true);
             setNotifyOn(false);
             break;
-          case 2:
+          case 3:
             URL = "tel:+2347018231992";
             openLink(URL);
             break;
-            case 3:
-              URL = "mailto:info@farmcenta.com?subject=Inquiry on Farm";
-              openLink(URL);
-              break;
             case 4:
-              URL = "whatsapp://send?text=Hello Farmcenta&phone=+2347018231992";
+              URL = "mailto:info@centavestng.com?subject=Inquiry on Farm";
+              // URL = "mailto:info@farmcenta.com?subject=Inquiry on Farm";
               openLink(URL);
               break;
-              case 5:
+            case 5:
+              URL = "whatsapp://send?text=Hello centavestng&phone=+2347018231992";
+              // URL = "whatsapp://send?text=Hello Farmcenta&phone=+2347018231992";
+              openLink(URL);
+              break;
+              case 6:
                 openLink(URL)
                 break;
-                case 6:
-                  setMenuOn(true);
-            navigation.navigate('Settings');
-                  break;
         }
       },
       handleNote=(id)=>{
@@ -177,7 +183,7 @@ export default function Dashboard(props) {
             <View style={styles.imageContainer} >
             <Image
             source={
-              require('../assets/images/logo.png')
+              require('../assets/images/centavestLogoMd.png')
             }
             style={styles.logoImage}
           />
@@ -228,11 +234,12 @@ export default function Dashboard(props) {
                   </View>
                 </View>
             </View>
-            <View style={styles.content2Container}>
+            <View style={styles.content2MainContainer}>
             <View style={styles.latestTrans} >
-                <Text style={{...styles.text2,...styles.boldText2}}>Lastest Transactions</Text>
+                <Text style={{...styles.latestTransText2,...styles.boldText2}}>Lastest Transactions</Text>
                 </View>
 
+                <View style={styles.content2Container}>
                 <View style={styles.contentHead}>
   <View style={styles.contentTitle}>
   <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
@@ -262,30 +269,46 @@ export default function Dashboard(props) {
   <View style={styles.content}>
                 <Text style={{...styles.text2,...styles.textMagin}}>{item.status}</Text>
   </View>
-  </View>)}
-  
-               
+  </View>)}  
+  </View> 
             </View>
+
             <View style={styles.moreContainer} >
                 <TouchableOpacity onPress={()=>navigation.navigate('Transaction')}>
                   <Text style={styles.text2}> See More ></Text>
                 </TouchableOpacity>
                 </View>
             <View style={styles.content3Container}>
-            <View style={styles.lastFarmHead} >
+            {/* <View style={styles.lastFarmHead} >
                 <Text style={{...styles.text2,...styles.boldText2}}>Lastest Farms</Text>
-                </View>
+                </View> */}
+
                 <View style={styles.row3Container} >
-                {farms.map(farm =><TouchableOpacity  onPress={()=>props.navigation.navigate('Store')} key={farm.id}>
-                  <Image
+                {random.map(i =>
+                <View key={i} style={styles.buttonContainer}>
+                  <View style={styles.buttonTitle}>
+                    <Text style={i===1?{...styles.text2}:{...styles.text2,...styles.boldText2}}>{i===1?"Open Investments":"Private Investments"}</Text>
+                  </View>
+                <FormButton
+                buttonType="outline"
+                onPress={()=>navigation.navigate('Store')}
+                title="Start Here  >"
+                backgroundColor= {i===1?"#fff":"#ADCF29"}
+                buttonColor = {i===1?"#ADCF29":"#fff"}
+                borderRadius={20}
+              />
+              </View>
+              // console.log(i)
+          //       <TouchableOpacity  onPress={()=>props.navigation.navigate('Store')} key={farm.id}>
+          //         <Image
                
-            source={
-              {uri:"https://farmcenta.com"+farm.photo}
-            }
-            style={styles.itemImage}
-          />
-          </TouchableOpacity>)}
-        
+          //   source={
+          //     {uri:"https://farmcenta.com"+farm.photo}
+          //   }
+          //   style={styles.itemImage}
+          // />
+          // </TouchableOpacity>
+          )}
                 </View>
             </View>
             </ScrollView>:
@@ -337,7 +360,7 @@ export default function Dashboard(props) {
            </TouchableOpacity>
         ):null}
         <TouchableOpacity  onPress={()=>navigation.navigate('Auth')} style={styles.signOut}>
-           <Image source={require('../assets/images/dashboard.svg')} style={styles.picImage}/>
+           <Image source={require('../assets/images/off.png')} style={styles.picImage}/>
            <Text style={styles.menuText}>Log Off</Text>
            </TouchableOpacity>
 
@@ -386,9 +409,12 @@ const styles = StyleSheet.create({
       flexDirection:"row"
     },
     signOut:{
+      flexDirection:"row",
       alignItems:'center',
         justifyContent:'center',
-        width:'50%'
+        width:'50%',
+        paddingTop:10,
+        margin:25
     },
     menuDiv:{
       width:"80%",
@@ -421,7 +447,8 @@ const styles = StyleSheet.create({
   content1Container:{
       flex:1,
       justifyContent:'space-around',
-    backgroundColor:"#0E861C",
+    // backgroundColor:"#0E861C","#ADCF29"
+    backgroundColor:"#ADCF29",
       width:'95%',
       borderRadius:10,
       paddingVertical:4,
@@ -430,11 +457,11 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:'space-between',
     paddingHorizontal:15,
-    backgroundColor:"#0E861C",
+    backgroundColor:"#ADCF29",
     marginHorizontal:2
   },
   rowHead:{
-    flexDirection:"row",
+    // flexDirection:"row",
     height:35,
     alignItems:"center"
   },
@@ -442,7 +469,8 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:'space-between',
     paddingHorizontal:10,
-    backgroundColor: '#eee',
+    // backgroundColor: '#eee',
+    backgroundColor:"#ADCF29",
     flex:1,
     paddingTop:2
   },
@@ -483,19 +511,24 @@ const styles = StyleSheet.create({
     borderColor: "#aaa",
   },
   text: {
-        color: "#0E861C",
+        color: "#fff",
+        // color: "#0E861C",
         textAlign:"center",
+        fontSize:20
       },
       text1: {
-        color: "#0E861C",
+        color: "#fff",
         textAlign:"left",
+        fontSize:20
       },
       text3: {
-        color: "#0E861C",
-        textAlign:"right",
+        color: "#fff",
+        textAlign:"center",
+        fontSize:20
       },
       rowText: {
-        color: "#aaa",
+        // color: "#aaa","#7B9115"
+        color: "#7B9115",
       },
       boldText2:{
         fontWeight:'bold'
@@ -504,37 +537,66 @@ const styles = StyleSheet.create({
         marginVertical:1
       },
   colText: {
-    color: 'white',
+    color:"#7B9115",
+    // color: '#aaa',"#7B9115"
+    // color: 'white',
   },
   colText2: {
-    color: 'white',
+    // color: '#aaa',
+    color:"#7B9115",
     textAlign:"center"
   },
   colText3: {
-    color: 'white',
-    textAlign:"right"
+    // color: '#aaa',
+    color:"#7B9115",
+    textAlign:"center"
   },
     boldText: {
     color: 'white',
     fontWeight:'bold'
     },
-    content2Container:{
+    content2MainContainer:{
         flex:1,
         paddingVertical:10,
         marginTop:15,
         // marginVertical:15,
-        justifyContent:'space-between',
+        // justifyContent:'space-between',
     //   alignItems:'center',
-        backgroundColor: '#eee',
+        // backgroundColor: '#eee',
         width:'95%',
         borderRadius:10,
         // height:"20%"
     },
-    latestTrans:{
-      marginLeft:10,
-    },
+    content2Container:{
+      flex:1,
+      // paddingVertical:10,
+      marginTop:15,
+      // marginVertical:15,
+      justifyContent:'space-between',
+  //   alignItems:'center',
+      // backgroundColor: '#eee',#F7FAE9
+      backgroundColor: '#F7FAE9',
+      width:'100%',
+      borderRadius:10,
+      // height:"20%"
+  },
+    // latestTrans:{
+    //   // marginLeft:10,
+    //   // width:'100%',
+    //   // textAlign:"center",
+    //   // justifyContent:'center'
+    // },
     text2: {
-        color: '#0E861C'
+        // color: "#ADCF29",
+        color: "#7B9115",
+        // color: '#0E861C',"#ADCF29"
+        textAlign:"center",
+        // fontSize:17
+      },
+      latestTransText2: {
+        // color: '#0E861C',
+        textAlign:"center",
+        fontSize:17
       },
   content3Container:{
     flex:1,
@@ -545,8 +607,15 @@ const styles = StyleSheet.create({
     borderRadius:10,
 },
 row3Container:{
+  width:'95%',
     flexDirection:"row",
-    justifyContent:'space-between',
+    justifyContent:'space-around',
+  },
+  buttonTitle:{
+    marginVertical:10
+  },
+  buttonContainer:{
+    marginVertical:35
   },
       logoImage: {
         width: 180,
