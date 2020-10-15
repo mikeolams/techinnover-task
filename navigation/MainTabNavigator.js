@@ -42,7 +42,7 @@ const StoreStack = createStackNavigator(
 );
 
 StoreStack.navigationOptions = {
-  tabBarLabel: 'Farm',
+  tabBarLabel: 'Invest',
   tabBarIcon: ({ focused }) => (
     <TabBarImage focused={focused} icon={require('../assets/images/store-investment.png')} />
   ),
@@ -93,10 +93,17 @@ const SettingsStack = createStackNavigator(
 );
 
 SettingsStack.navigationOptions = {
-  tabBarLabel: 'Settings',
+  tabBarLabel: 'Premium',
   tabBarIcon: ({ focused }) => (
     <TabBarImage focused={focused} icon={require('../assets/images/private-wage.png')} />
   ),
+  tabBarOnPress:({ navigation })=>{
+    navigation.navigate('SettingsStack');
+    // console.log(navigation.state)
+    // navigation.state.routes[0].params===undefined?null:navigation.state.routes[0].params.screenToggle;
+    navigation.state.routes[0].params===undefined?null:navigation.state.routes[0].params.Page();
+    // navigation.state.routes[0].params.Page();'screenToggle'
+  }
 };
 
 SettingsStack.path = '';
@@ -104,9 +111,9 @@ SettingsStack.path = '';
 const tabNavigator = createBottomTabNavigator({
   HomeStack,
   StoreStack,
-  TransactionStack,
-  WalletStack,
   SettingsStack,
+  TransactionStack,
+  WalletStack
 });
  
 

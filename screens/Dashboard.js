@@ -28,6 +28,7 @@ export default function Dashboard(props) {
   const { navigation } = props;  
         const userName = navigation.getParam('name', 'NO-Username');  
         const userEmail = navigation.getParam('email', 'NO-email');  
+        // const userSetting = navigation.getParam('setting', 'NO-set');  
         const userAvatar = navigation.getParam('avatar', 'NO-User');  
         const token = navigation.getParam('token', 'some default value');
         const farmProducts = navigation.getParam('farmProducts', 'default');
@@ -36,6 +37,10 @@ export default function Dashboard(props) {
         AsyncStorage.setItem('avatar',userAvatar);
         AsyncStorage.setItem('user', userName);
         AsyncStorage.setItem('token', token);
+        AsyncStorage.setItem('setting', 'false');
+
+        const load = ()=> AsyncStorage.setItem('setting', 'true')
+
         const loadFunction =()=>navigation.setParams({'Menu': toggleMenu});
        
         const menuFly =(e)=>{
@@ -140,7 +145,14 @@ export default function Dashboard(props) {
             break;
           case 1:
               setMenuOn(true);
-        navigation.navigate('Settings');
+              // navigation.state.routes[0].params.Page();
+              // console.log(navigation.state.params)
+              load();
+        navigation.navigate('Settings', { 'screenToggle':'true'
+          // AsyncStorage.setItem('setting', userSetting);
+          // "setting": true
+          // navigation.state.routes[0].params.Page()
+        });
               break;
           case 2:
             setMenuOn(true);
@@ -207,7 +219,7 @@ export default function Dashboard(props) {
                   </View>
                   <View style={styles.colHeadings}>
                    <Text style={styles.colText3}>Total</Text>
-                   <Text style={styles.colText3}>Farm Units:</Text>
+                   <Text style={styles.colText3}>Units:</Text>
                   </View>
                 </View>
                 <View style={styles.rowContent} >
@@ -239,16 +251,14 @@ export default function Dashboard(props) {
                 <Text style={{...styles.latestTransText2,...styles.boldText2}}>Lastest Transactions</Text>
                 </View>
 
-                <View style={styles.content2Container}>
+                {/* <View style={styles.content2Container}>
                 <View style={styles.contentHead}>
   <View style={styles.contentTitle}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Farm Units</Text>
+  <Text style={{...styles.text21,...styles.boldText2}}>Amount</Text>
   </View>
+
   <View style={styles.contentTitle}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Payout Dates</Text>
-  </View>
-  <View style={styles.contentTitle}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Amount</Text>
+  <Text style={{...styles.text21,...styles.boldText2}}>Units</Text>
   </View>
   <View style={styles.contentTitle}>
   <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
@@ -257,20 +267,84 @@ export default function Dashboard(props) {
 
     {  loading? <Text>No transaction yet</Text>:hold.map((item)=><View key={item.id} style={styles.contentHead}>
   <View style={styles.content}>
-              <Text style={{...styles.text2,...styles.textMagin}}>{item.quantity}</Text>
+              <Text style={{...styles.text2,...styles.textUnitContentA,...styles.textMagin,...styles.boldText2,...styles.textSizeM}}>{'N'+item.amount}</Text>
   </View>
   
   <View style={styles.content}>
-                <Text style={{...styles.text2,...styles.textMagin}}>{item.payback_date}</Text>
+                <Text style={{...styles.text2,...styles.textUnitContent,...styles.textMagin,...styles.textSizeM}}>{item.quantity}</Text>
+                <View style={styles.subContent}>
+                <Text style={{...styles.text2,...styles.textSizeS,...styles.boldText2}}>Payout Dates: </Text>
+                <Text style={{...styles.text2, ...styles.textSizeS}}>{item.payback_date}</Text>
+  </View>
   </View>
   <View style={styles.content}>
-                <Text style={{...styles.text2,...styles.textMagin}}>{'N'+item.amount}</Text>
-  </View>
-  <View style={styles.content}>
-                <Text style={{...styles.text2,...styles.textMagin}}>{item.status}</Text>
+                <Text style={{...styles.text2,...styles.textMagin1}}>{item.status}</Text>
   </View>
   </View>)}  
+  </View>  */}
+
+<View style={styles.latestTransContainer}>
+                <View style={styles.contentColOne}>
+  <View style={styles.content}>
+  <Text style={{...styles.text21,...styles.boldText2}}>Amount</Text>
+  </View>
+
+  <View style={styles.content}>
+  <Text style={{...styles.text21,...styles.boldText2}}>Units</Text>
+  </View>
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
+  </View>
+  </View>
+
+  <View style={styles.contentColTwo}>
+  <View style={styles.content}>
+  <Text style={{...styles.text21,...styles.boldText2}}>Amount</Text>
+  </View>
+
+  <View style={styles.content}>
+  <Text style={{...styles.text21,...styles.boldText2}}>Units</Text>
+  </View>
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
+  </View>
+  </View>
+
+  <View style={styles.contentColThree}>
+  <View style={styles.content}>
+  <Text style={{...styles.text21,...styles.boldText2}}>Amount</Text>
+  </View>
+
+  <View style={styles.content}>
+  <Text style={{...styles.text21,...styles.boldText2}}>Units</Text>
+  </View>
+  <View style={styles.content}>
+  <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
+  </View>
+  </View>
+
+    {/* {  loading? <Text>No transaction yet</Text>:hold.map((item)=><View key={item.id} style={styles.contentHead}>
+  <View style={styles.content}>
+              <Text style={{...styles.text2,...styles.textUnitContentA,...styles.textMagin,...styles.boldText2,...styles.textSizeM}}>{'N'+item.amount}</Text>
+  </View>
+  
+  <View style={styles.content}>
+                <Text style={{...styles.text2,...styles.textUnitContent,...styles.textMagin,...styles.textSizeM}}>{item.quantity}</Text>
+                <View style={styles.subContent}>
+                <Text style={{...styles.text2,...styles.textSizeS,...styles.boldText2}}>Payout Dates: </Text>
+                <Text style={{...styles.text2, ...styles.textSizeS}}>{item.payback_date}</Text>
+  </View>
+  </View>
+  <View style={styles.content}>
+                <Text style={{...styles.text2,...styles.textMagin1}}>{item.status}</Text>
+  </View>
+  </View>)}   */}
   </View> 
+
+
+
+
+
             </View>
 
             <View style={styles.moreContainer} >
@@ -287,11 +361,11 @@ export default function Dashboard(props) {
                 {random.map(i =>
                 <View key={i} style={styles.buttonContainer}>
                   <View style={styles.buttonTitle}>
-                    <Text style={i===1?{...styles.text2}:{...styles.text2,...styles.boldText2}}>{i===1?"Open Investments":"Private Investments"}</Text>
+                    <Text style={i===1?{...styles.text2}:{...styles.text2,...styles.boldText2}}>{i===1?"Open Investments":"Premium Investments"}</Text>
                   </View>
                 <FormButton
                 buttonType="outline"
-                onPress={()=>navigation.navigate('Store')}
+                onPress= {i===1?()=>navigation.navigate('Store'):()=>navigation.navigate('Settings')}
                 title="Start Here  >"
                 backgroundColor= {i===1?"#fff":"#ADCF29"}
                 buttonColor = {i===1?"#ADCF29":"#fff"}
@@ -380,7 +454,7 @@ Dashboard.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    // backgroundColor: '#fff',
   },
   innerContainer: {
       flex:1,
@@ -405,7 +479,7 @@ const styles = StyleSheet.create({
     },
     menuHead:{
       flex:0.4,
-      backgroundColor: '#eed',
+      // backgroundColor: '#eed',
       flexDirection:"row"
     },
     signOut:{
@@ -417,13 +491,15 @@ const styles = StyleSheet.create({
         margin:25
     },
     menuDiv:{
-      width:"80%",
-      borderBottomWidth:2,
-      borderBottomColor:"#0E861C33",
+      width:"60%",
+      borderBottomWidth:0.8,
+      borderBottomColor:"#ADCF29",
+      marginBottom:30
+      // borderBottomColor:"#0E861C33","#7B9115"#ADCF29
     },
     menu:{
       flex:2,
-      backgroundColor: '#eed'
+      // backgroundColor: '#eed'
     },
     menuId:{
       flexDirection:"row",
@@ -449,15 +525,20 @@ const styles = StyleSheet.create({
       justifyContent:'space-around',
     // backgroundColor:"#0E861C","#ADCF29"
     backgroundColor:"#ADCF29",
-      width:'95%',
-      borderRadius:10,
+      width:'100%',
+      // borderRadius:10,
+      borderTopRightRadius:25,
+      borderBottomRightRadius:6,
       paddingVertical:4,
+      paddingLeft:25,
+      marginRight:25,
+      marginTop:25,
   },
   rowHeadContainer:{
     flexDirection:"row",
     justifyContent:'space-between',
     paddingHorizontal:15,
-    backgroundColor:"#ADCF29",
+    // backgroundColor:"#ADCF29",
     marginHorizontal:2
   },
   rowHead:{
@@ -487,14 +568,22 @@ const styles = StyleSheet.create({
   },
   contentTitle:{
     justifyContent:'center',
-    flex:0.5,
-     alignItems:"center",
+    flex:1,
+    //  alignItems:"center",
   },
   content:{
     justifyContent:'center',
     flex:0.3,
+     alignItems:"flex-start",
+     top:-15,
+  },
+  subContent:{
+    flexDirection:"row",
+    justifyContent:'center',
+    flex:0.3,
      alignItems:"center",
-     top:-20
+     right:-50,
+    marginVertical:4,
   },
   lastFarmHead:{
     flexDirection:"row",
@@ -533,12 +622,17 @@ const styles = StyleSheet.create({
       boldText2:{
         fontWeight:'bold'
       },
+      textMagin1:{
+        marginVertical:2,
+        paddingLeft:55
+      },
       textMagin:{
-        marginVertical:1
+        marginVertical:2,
+        // paddingLeft:55
       },
   colText: {
     color:"#7B9115",
-    // color: '#aaa',"#7B9115"
+    // color: '#aaa',"#7B9115"#ADCF29
     // color: 'white',
   },
   colText2: {
@@ -580,6 +674,18 @@ const styles = StyleSheet.create({
       borderRadius:10,
       // height:"20%"
   },
+  latestTransContainer:{
+    flex:1,
+    flexDirection:"row",
+    marginTop:15,
+    paddingVertical:10,
+    justifyContent:'space-between',
+  // alignItems:'flex-start',
+    // backgroundColor: '#eee',#F7FAE9
+    backgroundColor: '#F7FAE9',
+    width:'100%',
+    // borderRadius:10,
+  },
     // latestTrans:{
     //   // marginLeft:10,
     //   // width:'100%',
@@ -592,6 +698,23 @@ const styles = StyleSheet.create({
         // color: '#0E861C',"#ADCF29"
         textAlign:"center",
         // fontSize:17
+        // marginVertical:1
+      },
+      text21: {
+        color: "#7B9115",
+        paddingLeft:15,
+      },
+      textSizeS: {
+        fontSize:12
+      },
+      textSizeM: {
+        fontSize:17
+      },
+      textUnitContent: {
+        paddingLeft:28,
+      },
+      textUnitContentA: {
+        paddingLeft:15,
       },
       latestTransText2: {
         // color: '#0E861C',

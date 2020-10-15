@@ -12,27 +12,53 @@ export default function SettingsScreen(props) {
 
     const [userInfo, setUserInfo] = useState(''),
      [token, setToken] = useState('');
-    let sum=0;
+    //  [userSetting, setUserSetting] = useState(navigation.getParam('setting'));
+    //  [userSetting, setUserSetting] = useState(false);
+    //  console.log(props.navigation.getParam('setting')) const userSetting = navigation.getParam('setting', 'NO-set');
+    //  const userSetting = navigation.getParam('setting', 'NO-set');
+    // let sum=0;
+    // let sum = await AsyncStorage.getItem("setting");
+    // console.log('sum: ' +sum);
+    // console.log(props.navigation.state.params.screenToggle);
+    // console.log(props.navigation.state);
   
+    const loadPrivateInvest = ()=>{
+        return <WebView originWhitelist={['*']} 
+        style={styles.webPostion}
+        onNavigationStateChange={handleWebView}
+        source={{uri:'https://centavestng.com/mobile/private?token='+token}}/>
+    };
     const loadSetting = ()=>{
         return <WebView originWhitelist={['*']} 
         style={styles.webPostion}
         onNavigationStateChange={handleWebView}
         source={{uri:'https://centavestng.com/api/v1/profile?token='+token}}/>
         // source={{uri:'https://farmcenta.com/api/v1/profile?token='+token}}/>
-    }
+    };
+    // const loadFunction =()=>props.navigation.setParams({'screenToggle':'false'});
+    const loadFunction =()=>props.navigation.setParams({'Page': togglePage});
+       
+        const togglePage = ()=>{
+            // setUserSetting(false);
+            props.navigation.setParams({'screenToggle':'false'});   
+        };
+        
     
     const retrieveUserInfo = async () => {
       try {
         const name = await AsyncStorage.getItem("user"),
     tokenKey= await AsyncStorage.getItem("token"),
+    // settings= await AsyncStorage.getItem("setting"),
     avatar= await AsyncStorage.getItem("avatar");
     setToken(tokenKey);
+    // setUserSetting(settings);
     if (avatar !== null) {
       // You can access your data
-      setUserInfo([name, avatar])
-      console.log(userInfo)
-  
+      setUserInfo([name, avatar]);
+    //   console.log(userInfo,settings);
+    //   console.log('fun: '+settings);
+    //   setUserSetting(settings);
+    //   console.log(userSetting);
     }
       } catch (error) {
         console.log(error);
@@ -41,6 +67,7 @@ export default function SettingsScreen(props) {
 
      useEffect(() => {
            retrieveUserInfo();
+           loadFunction();
         }, []);
         
 
@@ -48,7 +75,7 @@ export default function SettingsScreen(props) {
         // console.log(newNavState);
             const { canGoBack } = newNavState;
             if (!canGoBack) return;
-            console.log(canGoBack)
+            // console.log(canGoBack)
             }
 
     return (
@@ -56,7 +83,7 @@ export default function SettingsScreen(props) {
 
             <View style={styles.innerContainer}>
             
-            <View>
+            {/* <View> */}
                 <View style={styles.imageContainer} >
                     <Image
                         source={
@@ -65,10 +92,18 @@ export default function SettingsScreen(props) {
                         style={styles.logoImage}
                     />
                 </View>
-                <View style={styles.id}>
-           </View>
-           </View>
-           {loadSetting()}
+                {/* <View style={styles.id}>
+           </View> */}
+           {/* </View> */}
+           {/* {settings? loadSetting():loadPrivateInvest()} */}
+           {
+            props.navigation.state.params===undefined?null:
+           props.navigation.state.params.screenToggle==='true'? loadSetting():loadPrivateInvest()
+           }
+           {/* {userSetting? loadSetting():loadPrivateInvest()} */}
+           {/* {false? loadSetting():loadPrivateInvest()} */}
+           {/* {console.log('us ' +userSetting)} */}
+           {/* {console.log('nav: '+props.navigation.getParam('setting'))} */}
             </View> 
         </View>
     );
@@ -120,7 +155,9 @@ const styles = StyleSheet.create({
         marginTop:15,
     },
     imageContainer: {
+        flex:0.2,
         paddingTop: 1,
+        marginTop:10,
         alignItems: 'center',
     },
     
