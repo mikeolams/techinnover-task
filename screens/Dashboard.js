@@ -218,8 +218,8 @@ export default function Dashboard(props) {
                     <Text style={styles.colText2}>Returns:</Text>
                   </View>
                   <View style={styles.colHeadings}>
-                   <Text style={styles.colText3}>Total</Text>
-                   <Text style={styles.colText3}>Units:</Text>
+                   <Text style={styles.colText2}>Total</Text>
+                   <Text style={styles.colText2}>Units:</Text>
                   </View>
                 </View>
                 <View style={styles.rowContent} >
@@ -283,63 +283,61 @@ export default function Dashboard(props) {
   </View>)}  
   </View>  */}
 
-<View style={styles.latestTransContainer}>
-                <View style={styles.contentColOne}>
+{/* {  loading? <Text>No transaction yet</Text>:hold.map((item)=>console.log(item) )} */}
+{  loading? <Text>No transaction yet</Text>:hold.map((item)=>
+<View key={item.id} style={{...styles.latestTransContainer, backgroundColor: item.status==='running'?'#F7FAE9':'#FCECED',}}>
+{/* {item.status==='running'? :} */}
+                <View style={styles.contentCol}>
   <View style={styles.content}>
-  <Text style={{...styles.text21,...styles.boldText2}}>Amount</Text>
+  <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B',...styles.boldText2}}>Amount</Text>
   </View>
 
   <View style={styles.content}>
-  <Text style={{...styles.text21,...styles.boldText2}}>Units</Text>
+  {/* <Text style={{...styles.text21,...styles.boldText2}}>figure</Text> */}
+  <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B',...styles.textUnitContentA,...styles.textMagin,...styles.boldText2,...styles.textSizeM}}>{'N'+item.amount}</Text>
   </View>
   <View style={styles.content}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
+  <View style={styles.subContent}>
+                <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B',...styles.textSizeS,...styles.boldText2}}>Created Date: </Text>
+                <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B', ...styles.textSizeS}}>{item.created_at}</Text>
+  </View>
   </View>
   </View>
 
-  <View style={styles.contentColTwo}>
+  <View style={styles.contentCol}>
   <View style={styles.content}>
-  <Text style={{...styles.text21,...styles.boldText2}}>Amount</Text>
+  <Text style={{...styles.text2,  color: item.status==='running'? "#7B9115":'#E8505B',...styles.boldText2}}>Units</Text>
   </View>
 
   <View style={styles.content}>
-  <Text style={{...styles.text21,...styles.boldText2}}>Units</Text>
+  {/* <Text style={{...styles.text21,...styles.boldText2}}>catlle</Text> */}
+  <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B', ...styles.textUnitContent,...styles.textMagin,...styles.textSizeM}}>{item.quantity}</Text>
   </View>
   <View style={styles.content}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
+  {/* <Text style={{...styles.text2,...styles.boldText2}}>payday</Text> */}
+  <View style={styles.subContent}>
+                <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B',...styles.textSizeS,...styles.boldText2}}>Payout Dates: </Text>
+                <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B', ...styles.textSizeS}}>{item.payback_date}</Text>
+  </View>
   </View>
   </View>
 
-  <View style={styles.contentColThree}>
+  <View style={styles.contentCol}>
   <View style={styles.content}>
-  <Text style={{...styles.text21,...styles.boldText2}}>Amount</Text>
+  <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B',...styles.boldText2,...styles.textMagin1}}>Status</Text>
   </View>
 
   <View style={styles.content}>
-  <Text style={{...styles.text21,...styles.boldText2}}>Units</Text>
+  {/* <Text style={{...styles.text2,...styles.textMagin1}}>image</Text> */}
+  {item.status==='running'? <Image style={{...styles.imgStatus}} source={require('../assets/images/running.png')}/>:<Image style={{...styles.imgStatus}} source={require('../assets/images/stopped.png')}/>}
   </View>
   <View style={styles.content}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
+  {/* <Text style={{...styles.text2,...styles.boldText2}}>Status</Text> */}
+  <Text style={{...styles.text2, padding:5,color: item.status==='running'? "#7B9115":'#E8505B',...styles.textMagin1}}>{item.status}</Text>
   </View>
   </View>
-
-    {/* {  loading? <Text>No transaction yet</Text>:hold.map((item)=><View key={item.id} style={styles.contentHead}>
-  <View style={styles.content}>
-              <Text style={{...styles.text2,...styles.textUnitContentA,...styles.textMagin,...styles.boldText2,...styles.textSizeM}}>{'N'+item.amount}</Text>
-  </View>
-  
-  <View style={styles.content}>
-                <Text style={{...styles.text2,...styles.textUnitContent,...styles.textMagin,...styles.textSizeM}}>{item.quantity}</Text>
-                <View style={styles.subContent}>
-                <Text style={{...styles.text2,...styles.textSizeS,...styles.boldText2}}>Payout Dates: </Text>
-                <Text style={{...styles.text2, ...styles.textSizeS}}>{item.payback_date}</Text>
-  </View>
-  </View>
-  <View style={styles.content}>
-                <Text style={{...styles.text2,...styles.textMagin1}}>{item.status}</Text>
-  </View>
-  </View>)}   */}
-  </View> 
+  </View>  
+  )}
 
 
 
@@ -349,7 +347,7 @@ export default function Dashboard(props) {
 
             <View style={styles.moreContainer} >
                 <TouchableOpacity onPress={()=>navigation.navigate('Transaction')}>
-                  <Text style={styles.text2}> See More ></Text>
+                  <Text style={styles.text21}> See More ></Text>
                 </TouchableOpacity>
                 </View>
             <View style={styles.content3Container}>
@@ -361,20 +359,20 @@ export default function Dashboard(props) {
                 {random.map(i =>
                 <View key={i} style={styles.buttonContainer}>
                   <View style={styles.buttonTitle}>
-                    <Text style={i===1?{...styles.text2}:{...styles.text2,...styles.boldText2}}>{i===1?"Open Investments":"Premium Investments"}</Text>
+                    <Text style={i===1?{...styles.textButton}:{...styles.textButton,...styles.boldText2}}>{i===1?"Open Investments":"Premium Investments"}</Text>
                   </View>
                 <FormButton
                 buttonType="outline"
                 onPress= {i===1?()=>navigation.navigate('Store'):()=>navigation.navigate('Settings')}
                 title="Start Here  >"
-                backgroundColor= {i===1?"#fff":"#ADCF29"}
-                buttonColor = {i===1?"#ADCF29":"#fff"}
+                backgroundColor= {i===1?"#fff":"#7B9115"}
+                buttonColor = {i===1?"#7B9115":"#fff"}
                 borderRadius={20}
               />
               </View>
               // console.log(i)
           //       <TouchableOpacity  onPress={()=>props.navigation.navigate('Store')} key={farm.id}>
-          //         <Image
+          //         <Image"#ADCF29"
                
           //   source={
           //     {uri:"https://farmcenta.com"+farm.photo}
@@ -521,10 +519,11 @@ const styles = StyleSheet.create({
     alignItems:'center',
   },
   content1Container:{
-      flex:1,
+      flex:1.3,
       justifyContent:'space-around',
     // backgroundColor:"#0E861C","#ADCF29"
-    backgroundColor:"#ADCF29",
+    // backgroundColor:"#ADCF29",
+    backgroundColor:"#7B9115",
       width:'100%',
       // borderRadius:10,
       borderTopRightRadius:25,
@@ -533,6 +532,7 @@ const styles = StyleSheet.create({
       paddingLeft:25,
       marginRight:25,
       marginTop:25,
+      marginBottom:25,
   },
   rowHeadContainer:{
     flexDirection:"row",
@@ -551,11 +551,13 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     paddingHorizontal:10,
     // backgroundColor: '#eee',
-    backgroundColor:"#ADCF29",
+    backgroundColor:"#7B9115",
+    // backgroundColor:"#ADCF29",
     flex:1,
     paddingTop:2
   },
   moreContainer:{
+    flex:.3,
     flexDirection:"row",
     width:"100%",
     justifyContent:'space-between',
@@ -572,17 +574,20 @@ const styles = StyleSheet.create({
     //  alignItems:"center",
   },
   content:{
-    justifyContent:'center',
-    flex:0.3,
+    // justifyContent:'flex-start',
+    // flex:0.3,
+    flex:1,
      alignItems:"flex-start",
-     top:-15,
+    //  top:-15,
+    // backgroundColor:"#eee"
   },
   subContent:{
-    flexDirection:"row",
+    // flexDirection:"row",
     justifyContent:'center',
-    flex:0.3,
+    flex:1.2,
      alignItems:"center",
-     right:-50,
+    //  right:-50,
+    marginTop:16,
     marginVertical:4,
   },
   lastFarmHead:{
@@ -602,7 +607,8 @@ const styles = StyleSheet.create({
   text: {
         color: "#fff",
         // color: "#0E861C",
-        textAlign:"center",
+        // textAlign:"center",
+        textAlign:"left",
         fontSize:20
       },
       text1: {
@@ -612,53 +618,69 @@ const styles = StyleSheet.create({
       },
       text3: {
         color: "#fff",
-        textAlign:"center",
+        // textAlign:"center",
+        paddingLeft:22,
         fontSize:20
       },
       rowText: {
         // color: "#aaa","#7B9115"
-        color: "#7B9115",
+        // color: "#7B9115",
+        color:"#ADCF29",
       },
       boldText2:{
         fontWeight:'bold'
       },
       textMagin1:{
         marginVertical:2,
-        paddingLeft:55
+        paddingLeft:35
       },
       textMagin:{
         marginVertical:2,
         // paddingLeft:55
       },
+      imgStatus:{
+        // marginVertical:2,
+        // paddingLeft:35,
+        // flex: 1,
+        left:-5,
+        alignSelf:"center",
+        height:25,
+        // marginBottom:20,
+        // width:20
+      },
   colText: {
-    color:"#7B9115",
+    // color:"#7B9115",
+    color:"#ADCF29",
     // color: '#aaa',"#7B9115"#ADCF29
     // color: 'white',
   },
   colText2: {
     // color: '#aaa',
-    color:"#7B9115",
-    textAlign:"center"
+    // color:"#7B9115","#ADCF29"
+    color:"#ADCF29",
+    // textAlign:"center"
+    paddingLeft:10
   },
-  colText3: {
-    // color: '#aaa',
-    color:"#7B9115",
-    textAlign:"center"
-  },
+  // colText3: {
+  //   // color: '#aaa',
+  //   color:"#7B9115",
+  //   textAlign:"center"
+  // },
     boldText: {
     color: 'white',
     fontWeight:'bold'
     },
     content2MainContainer:{
-        flex:1,
-        paddingVertical:10,
-        marginTop:15,
+        flex:2,
+        // paddingVertical:10,
+        // marginTop:15,
         // marginVertical:15,
         // justifyContent:'space-between',
     //   alignItems:'center',
         // backgroundColor: '#eee',
-        width:'95%',
-        borderRadius:10,
+        width:'100%',
+        // width:'95%',
+        // borderRadius:10,
         // height:"20%"
     },
     content2Container:{
@@ -675,16 +697,23 @@ const styles = StyleSheet.create({
       // height:"20%"
   },
   latestTransContainer:{
-    flex:1,
+    // flex:1,
     flexDirection:"row",
     marginTop:15,
-    paddingVertical:10,
+    paddingHorizontal:10,
+    // paddingVertical:10,
     justifyContent:'space-between',
-  // alignItems:'flex-start',
+  alignItems:'flex-start',
     // backgroundColor: '#eee',#F7FAE9
-    backgroundColor: '#F7FAE9',
+    // backgroundColor: '#F7FAE9',
     width:'100%',
+    height:80,
     // borderRadius:10,
+  },
+  contentCol:{
+    marginVertical:10,
+    // backgroundColor: '#e1e',
+    width:'33%'
   },
     // latestTrans:{
     //   // marginLeft:10,
@@ -694,24 +723,36 @@ const styles = StyleSheet.create({
     // },
     text2: {
         // color: "#ADCF29",
-        color: "#7B9115",
+        // color: "#7B9115",
         // color: '#0E861C',"#ADCF29"
-        textAlign:"center",
-        // fontSize:17
+        // textAlign:"center",
+        paddingLeft:15,
+        fontSize:11
         // marginVertical:1
       },
       text21: {
+        color: "#bba",
+        fontSize:13,
+        fontWeight:"bold",
+        paddingRight:25
+      },
+      textButton: {
+        // color: "#ADCF29",
         color: "#7B9115",
-        paddingLeft:15,
+        // color: '#0E861C',"#ADCF29"
+        textAlign:"center",
+        // paddingLeft:15,
+        // fontSize:17
+  
       },
       textSizeS: {
-        fontSize:12
+        fontSize:9,
       },
       textSizeM: {
         fontSize:17
       },
       textUnitContent: {
-        paddingLeft:28,
+        paddingLeft:15,
       },
       textUnitContentA: {
         paddingLeft:15,
@@ -723,8 +764,9 @@ const styles = StyleSheet.create({
       },
   content3Container:{
     flex:1,
-    marginTop:5,
-    marginBottom:20,
+    // marginTop:5,
+    // marginBottom:25,
+    bottom:40,
     justifyContent:'space-between',
     width:'95%',
     borderRadius:10,
