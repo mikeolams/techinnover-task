@@ -57,7 +57,8 @@ export default function WalletScreen(props) {
             <View style={styles.imageContainer} >
             <Image
             source={
-              require('../assets/images/centavestLogoMd.png')
+              // require('../assets/images/centavestLogoMd.png')
+              require('../assets/images/centavest-logo-sm.png')
             }
             style={styles.logoImage}
           />
@@ -144,7 +145,8 @@ const styles = StyleSheet.create({
         alignItems:'center',
         alignSelf:'center',
           // backgroundColor:"#0E861C","#ADCF29",
-          backgroundColor:"#ADCF29",
+          // backgroundColor:"#ADCF29",
+          backgroundColor:"#7B9115",
           width:'90%',
           borderRadius:10,
           paddingVertical:20
@@ -207,7 +209,7 @@ const styles = StyleSheet.create({
     alignItems:'center',
   },  
   text: {
-        color: '#7B9115',
+        color: '#ADCF29',
         fontWeight:'700'
         // color: 'white','#7B9115'
       },

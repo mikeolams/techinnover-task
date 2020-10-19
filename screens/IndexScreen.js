@@ -14,7 +14,8 @@ import {
 export default function IndexScreen(props) {
 
   function handleNextPress() {
-    props.navigation.navigate('LandingTwo')
+    props.navigation.navigate('Auth')
+    // props.navigation.navigate('LandingTwo')
   }
   function handleSkipPress() {
     props.navigation.navigate('Auth')
@@ -27,7 +28,8 @@ export default function IndexScreen(props) {
 
       <Image
             source={
-              require('../assets/images/centavestLogoMd.png')
+              // require('../assets/images/centavestLogoMd.png')
+              require('../assets/images/centavest-logo-sm.png')
             }
             style={styles.messageImage}
           />

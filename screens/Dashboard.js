@@ -73,8 +73,8 @@ export default function Dashboard(props) {
 
         const getUserTransaction = () => {
           setTransaction(transactions);
-          // fetch('https://centavestng.com/api/v1/notification?token='+token,{
-          fetch('https://farmcenta.com/api/v1/notification?token='+token,{
+          fetch('https://centavestng.com/api/v1/notification?token='+token,{
+          // fetch('https://farmcenta.com/api/v1/notification?token='+token,{
             method: 'POST',
             header: {
               'Content-Type': 'application/json'
@@ -195,7 +195,8 @@ export default function Dashboard(props) {
             <View style={styles.imageContainer} >
             <Image
             source={
-              require('../assets/images/centavestLogoMd.png')
+              // require('../assets/images/centavestLogoMd.png')centavest-logo-sm.png
+              require('../assets/images/centavest-logo-sm.png')
             }
             style={styles.logoImage}
           />
@@ -329,7 +330,7 @@ export default function Dashboard(props) {
 
   <View style={styles.content}>
   {/* <Text style={{...styles.text2,...styles.textMagin1}}>image</Text> */}
-  {item.status==='running'? <Image style={{...styles.imgStatus}} source={require('../assets/images/running.png')}/>:<Image style={{...styles.imgStatus}} source={require('../assets/images/stopped.png')}/>}
+  {item.status==='running'? <Image style={{...styles.imgStatus}} source={require('../assets/images/runningCircle.png')}/>:<Image style={{...styles.imgStatus}} source={require('../assets/images/closedCircle.png')}/>}
   </View>
   <View style={styles.content}>
   {/* <Text style={{...styles.text2,...styles.boldText2}}>Status</Text> */}
@@ -385,23 +386,26 @@ export default function Dashboard(props) {
             </View>
             </ScrollView>:
             <View style={styles.contentContainer} >
-              {true? <TouchableOpacity style={styles.goBackButton}  onPress={()=>setNotifyOn(true)}><Text>Go back</Text></TouchableOpacity>:null}
+              
               <View style={styles.noticeContainer}>
               <View style={styles.noteHead} >
-                <Text style={{...styles.noteHeadText,...styles.text}}>Notification</Text>
+              <Image source={require('../assets/images/bell-icon.png')}/>
+                <Text style={{...styles.noteHeadText,...styles.textNote}}>Notification</Text>
                 </View>
+                {true? <TouchableOpacity style={styles.goBackButton}  onPress={()=>setNotifyOn(true)}><Text>Go back</Text></TouchableOpacity>:null}
               {true?<View style={styles.noteBody}>
               
               { receivedNote.messages!=''?receivedNote.messages.map((list,i)=>
         <TouchableOpacity key={i} onPress={handleNote.bind(list,i)}  style={styles.noteContainer}>
            <View style={styles.noteTitle}>
-           <Text style={styles.text}>{list.subject}</Text>
+           <Text style={styles.textNote}>{list.subject}</Text>
            <Text style={{...styles.text1,...styles.sign}}>
              {read===i? <Image source={require('../assets/images/a-down.png')}/>:<Image source={require('../assets/images/a-close.png')}/>}
            </Text>
              </View>
              <View style={styles.noteContent}>
-             {read===i?<Text style={styles.text}>{list.content}</Text>:null}
+               {/* {console.log(list)} */}
+             {read===i?<Text style={styles.textNoteP}>{list.content}</Text>:null}
              </View>
            </TouchableOpacity>
         ):null}
@@ -606,7 +610,7 @@ const styles = StyleSheet.create({
   },
   text: {
         color: "#fff",
-        // color: "#0E861C",
+        // color: "#0E861C","#7B9115"#ADCF29
         // textAlign:"center",
         textAlign:"left",
         fontSize:20
@@ -637,6 +641,13 @@ const styles = StyleSheet.create({
       textMagin:{
         marginVertical:2,
         // paddingLeft:55
+      },
+      textNote: {
+        color: "#7B9115",
+        // color: "#0E861C","#7B9115"#ADCF29
+        // textAlign:"center",
+        textAlign:"left",
+        fontSize:20
       },
       imgStatus:{
         // marginVertical:2,
@@ -813,8 +824,9 @@ row3Container:{
       },
       noticeContainer:{
         width:'90%',
-        marginTop:40,
-        backgroundColor:"#0E861C33",
+        marginTop:20,
+        // backgroundColor:"#0E861C33",
+        // backgroundColor:"#0E861C33",
         height:"80%",
         justifyContent:"center",
         alignContent:'center',
@@ -825,6 +837,10 @@ row3Container:{
       },
       noteHead:{
         flex:1,
+        flexDirection: "row",
+        justifyContent:"center",
+        alignItems:"center",
+        // backgroundColor:"#0E861C33",
       },
       itemContainer:{
         flex:1,
@@ -857,13 +873,17 @@ row3Container:{
       },
       noteHeadText:{
         textAlign:'center',
-        fontWeight:"bold",
-        fontSize:20
+        fontWeight:"600",
+        fontSize:20,
+        marginLeft:20,
+        // paddingTop:10,
+        // marginTop:2,
       },
       goBackButton:{
         justifyContent:"flex-end",
         height:30,
-        marginLeft:270
+        marginLeft:270,
+        top:-10
       },
   tabBarInfoContainer: {
     position: 'absolute',

@@ -132,7 +132,8 @@ const submitSignUp =async (values) => {
       <View style={styles.mainAuthContainer}>
       <Image
             source={
-              require('../assets/images/centavestLogoMd.png')
+              // require('../assets/images/centavestLogoMd.png')
+              require('../assets/images/centavest-logo-sm.png')
             }
             style={styles.logoImage}
           />
