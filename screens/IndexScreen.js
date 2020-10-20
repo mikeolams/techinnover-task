@@ -14,8 +14,9 @@ import {
 export default function IndexScreen(props) {
 
   function handleNextPress() {
-    props.navigation.navigate('Auth')
-    // props.navigation.navigate('LandingTwo')
+    // props.navigation.navigate('Auth')
+    props.navigation.navigate('LandingTwo');
+    console.log('ikop')
   }
   function handleSkipPress() {
     props.navigation.navigate('Auth')
