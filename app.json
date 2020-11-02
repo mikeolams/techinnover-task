@@ -17,7 +17,7 @@
     "orientation": "portrait",
     "icon": "./assets/images/hdpi.png",
     "splash": {
-      "image": "./assets/images/group401.png",
+      "image": "./assets/images/centavestOnboard.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

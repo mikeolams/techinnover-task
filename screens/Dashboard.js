@@ -655,9 +655,9 @@ const styles = StyleSheet.create({
         // flex: 1,
         left:-5,
         alignSelf:"center",
-        height:25,
+        height:20,
         // marginBottom:20,
-        // width:20
+        width:20
       },
   colText: {
     // color:"#7B9115",

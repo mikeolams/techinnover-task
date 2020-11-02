@@ -7,7 +7,8 @@ import OnboardingTwoScreen from '../screens/OnboardingTwoScreen';
 
 export default createAppContainer(
   createSwitchNavigator({
-    LandingOne: IndexScreen,
+    // LandingOne: OnboardingTwoScreen,,
+    // LandingOne: IndexScreen,
     LandingTwo: OnboardingTwoScreen,
     Auth: AccessScreen,
     Main: MainTabNavigator,

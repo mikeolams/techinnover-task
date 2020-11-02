@@ -72,9 +72,9 @@ export default function TransactionScreen() {
               <View style={styles.rowHeadContainer} >
                 <Text style={{...styles.textHead, ...styles.textSize}}>Transactions</Text>
                 </View>
-                <View style={styles.rowHeadContainer} >
+                {/* <View style={styles.rowHeadContainer} >
                 <Text style={{...styles.textHead, ...styles.textSize}}>buttons</Text>
-                </View>
+                </View> */}
             <View style={styles.content2Container}>
                 <View style={styles.rowTitleContainer} >
                   <View style={styles.Title}>
