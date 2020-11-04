@@ -48,8 +48,8 @@ export default function Dashboard(props) {
           setMenuOn(true);
         },
          toggleMenu = ()=>{
-          setMenuOn(false)   
-       
+          setMenuOn(false)
+          setNotifyOn(true)
           // console.log( menuOn);
         };
         
@@ -392,7 +392,10 @@ export default function Dashboard(props) {
               <Image source={require('../assets/images/bell-icon.png')}/>
                 <Text style={{...styles.noteHeadText,...styles.textNote}}>Notification</Text>
                 </View>
-                {true? <TouchableOpacity style={styles.goBackButton}  onPress={()=>setNotifyOn(true)}><Text>Go back</Text></TouchableOpacity>:null}
+                {true? <TouchableOpacity style={styles.goBackButton}  onPress={()=>setNotifyOn(true)}>
+                  <Image style={styles.goBackImg} source={require('../assets/images/backwardArrow.png')}/>
+                  {/* <Text>Go back</Text> */}
+                  </TouchableOpacity>:null}
               {true?<View style={styles.noteBody}>
               
               { receivedNote.messages!=''?receivedNote.messages.map((list,i)=>
@@ -762,6 +765,12 @@ const styles = StyleSheet.create({
       textSizeM: {
         fontSize:17
       },
+      textNoteP: {
+        fontSize:10,
+      },
+      // textNotePContainer:{
+      //   marginBottom:10
+      // },
       textUnitContent: {
         paddingLeft:15,
       },
@@ -827,7 +836,7 @@ row3Container:{
         marginTop:20,
         // backgroundColor:"#0E861C33",
         // backgroundColor:"#0E861C33",
-        height:"80%",
+        height:"70%",
         justifyContent:"center",
         alignContent:'center',
         borderRadius:4
@@ -852,11 +861,14 @@ row3Container:{
       
       },
       noteContainer:{
-        flex:0.3,
+        // flex:1,
+        height:150,
         paddingVertical:3,
         borderTopColor:"#0E861C33",
         borderTopWidth:1,
-        paddingHorizontal:20
+        paddingHorizontal:20,
+        // marginBottom:35,
+        paddingBottom:35
       },
       noteTitle:{
         flex:1,
@@ -868,8 +880,9 @@ row3Container:{
       noteContent:{
         flex:1,
         justifyContent:"flex-start",
-        alignItems:"flex-start",
-        marginVertical:5
+        // alignItems:"flex-start",
+        marginVertical:5,
+        // marginBottom:25
       },
       noteHeadText:{
         textAlign:'center',
@@ -879,11 +892,15 @@ row3Container:{
         // paddingTop:10,
         // marginTop:2,
       },
+      goBackImg:{
+        width:25,
+        height:20
+      },
       goBackButton:{
         justifyContent:"flex-end",
         height:30,
-        marginLeft:270,
-        top:-10
+        marginLeft:290,
+        top:-20
       },
   tabBarInfoContainer: {
     position: 'absolute',
