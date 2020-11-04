@@ -173,7 +173,7 @@ const styles = StyleSheet.create({
     paddingHorizontal:30,
   },
   text: {
-    color: '#0E861C',
+    color: '#0e861c',
     justifyContent:'center',
     textAlign:"center"
   },
@@ -186,7 +186,7 @@ const styles = StyleSheet.create({
     justifyContent:"space-evenly"
   },
   activeSlide:{
-    backgroundColor: '#0C9121',
+    backgroundColor: '#0c9121',
     borderRadius:20,
     width:20,
     alignItems:'center'

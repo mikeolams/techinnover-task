@@ -166,7 +166,7 @@ const styles = StyleSheet.create({
     // textAlign:"center"#7B9115#ADCF29
   },
   textTwo: {
-    color: "#7B9115",
+    color: "#7b9115",
     fontSize:15,
     justifyContent:'center',
     textAlign:"center"
@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
   regButton: {
     // paddingVertical: 15,
     justifyContent:'center',
-    backgroundColor: '#ADCF29',
+    backgroundColor: '#adcf29',
     width:"100%",
     height:45,
     borderRadius:20

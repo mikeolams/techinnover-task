@@ -495,7 +495,7 @@ const styles = StyleSheet.create({
     menuDiv:{
       width:"60%",
       borderBottomWidth:0.8,
-      borderBottomColor:"#ADCF29",
+      borderBottomColor:"#adcf29",
       marginBottom:30
       // borderBottomColor:"#0E861C33","#7B9115"#ADCF29
     },
@@ -555,7 +555,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     paddingHorizontal:10,
     // backgroundColor: '#eee',
-    backgroundColor:"#7B9115",
+    backgroundColor:"#7b9115",
     // backgroundColor:"#ADCF29",
     flex:1,
     paddingTop:2
@@ -629,7 +629,7 @@ const styles = StyleSheet.create({
       rowText: {
         // color: "#aaa","#7B9115"
         // color: "#7B9115",
-        color:"#ADCF29",
+        color:"#adcf29",
       },
       boldText2:{
         fontWeight:'bold'
@@ -643,7 +643,7 @@ const styles = StyleSheet.create({
         // paddingLeft:55
       },
       textNote: {
-        color: "#7B9115",
+        color: "#7b9115",
         // color: "#0E861C","#7B9115"#ADCF29
         // textAlign:"center",
         textAlign:"left",
@@ -661,14 +661,14 @@ const styles = StyleSheet.create({
       },
   colText: {
     // color:"#7B9115",
-    color:"#ADCF29",
+    color:"#adcf29",
     // color: '#aaa',"#7B9115"#ADCF29
     // color: 'white',
   },
   colText2: {
     // color: '#aaa',
     // color:"#7B9115","#ADCF29"
-    color:"#ADCF29",
+    color:"#adcf29",
     // textAlign:"center"
     paddingLeft:10
   },
@@ -702,7 +702,7 @@ const styles = StyleSheet.create({
       justifyContent:'space-between',
   //   alignItems:'center',
       // backgroundColor: '#eee',#F7FAE9
-      backgroundColor: '#F7FAE9',
+      backgroundColor: '#f7fae9',
       width:'100%',
       borderRadius:10,
       // height:"20%"
@@ -749,7 +749,7 @@ const styles = StyleSheet.create({
       },
       textButton: {
         // color: "#ADCF29",
-        color: "#7B9115",
+        color: "#7b9115",
         // color: '#0E861C',"#ADCF29"
         textAlign:"center",
         // paddingLeft:15,

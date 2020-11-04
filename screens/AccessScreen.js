@@ -367,7 +367,7 @@ const styles = StyleSheet.create({
   },
 
   innerContainer: {
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#ffffff',
     flex:1,
     justifyContent:'center',
     alignItems: 'center',
@@ -464,7 +464,7 @@ const styles = StyleSheet.create({
   },
   skipButton: {
     justifyContent:'center',
-    backgroundColor: '#0C9121',
+    backgroundColor: '#0c9121',
     width:100,
     height:40
   },
