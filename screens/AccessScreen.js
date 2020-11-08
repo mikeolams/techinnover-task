@@ -158,7 +158,8 @@ const submitSignUp =async (values) => {
                 placeholder="Enter email"
                 autoCapitalize="none"
                 iconName="ios-mail"
-                iconColor="#2C384A"
+                iconColor="#2c384a"
+                // iconColor="#2C384A"
                 touched
                 onBlur={formikProps.handleBlur('email')}
                 style={styles.form}
@@ -173,7 +174,7 @@ const submitSignUp =async (values) => {
                 placeholder="Enter password"
                 secureTextEntry
                 iconName="ios-lock"
-                iconColor="#2C384A"
+                iconColor="#2c384a"
                 touched
                 onBlur={formikProps.handleBlur('password')}
               />
@@ -185,8 +186,8 @@ const submitSignUp =async (values) => {
                   buttonType="outline"
                   onPress={formikProps.handleSubmit}
                   title="Log in"
-                  backgroundColor="#ADCF29"
-                  buttonColor = "#fff"
+                  backgroundColor="#adcf29"
+                  // buttonColor = "#fff"
                   borderRadius={20}
                   disabled={!formikProps.isValid || formikProps.isSubmitting}
                   loading = { formikProps.isSubmitting }
@@ -198,7 +199,7 @@ const submitSignUp =async (values) => {
          
         <View style={styles.optionContainer}>
           <Text style={styles.text}>Forgotten your log in details?</Text>
-          <TouchableHighlight style={{paddingLeft:8}} activeOpacity={0.6} underlayColor="#DDDDDD" onPress={() => alert('Pressed!')}>
+          <TouchableHighlight style={{paddingLeft:8}} activeOpacity={0.6} underlayColor="#dddddd" onPress={() => alert('Pressed!')}>
           <Text style={styles.textHead}>Get help.</Text>
           </TouchableHighlight>
           </View>
@@ -209,7 +210,7 @@ const submitSignUp =async (values) => {
           </View>
         <View style={styles.optionContainer}>
           <Text style={styles.text}>Don't have an acoount?</Text>
-        <TouchableHighlight style={{paddingLeft:8}} activeOpacity={0.6} underlayColor="#DDDDDD" onPress={signUpHandler}>
+        <TouchableHighlight style={{paddingLeft:8}} activeOpacity={0.6} underlayColor="#dddddd" onPress={signUpHandler}>
           <Text style={styles.textHead}>Register Now.</Text>
           </TouchableHighlight>
         </View>
@@ -229,7 +230,7 @@ const submitSignUp =async (values) => {
                 value={formikProps.values.name}
                 onChangeText={formikProps.handleChange('name')}
                 placeholder="Enter Full Name"
-                iconColor="#2C384A"
+                iconColor="#2c384a"
                 touched
                 onBlur={formikProps.handleBlur('name')}
               />
@@ -241,7 +242,7 @@ const submitSignUp =async (values) => {
                 placeholder="Enter email"
                 autoCapitalize="none"
                 iconName="ios-mail"
-                iconColor="#2C384A"
+                iconColor="#2c384a"
                 touched
                 onBlur={formikProps.handleBlur('email')}
               />
@@ -253,7 +254,7 @@ const submitSignUp =async (values) => {
                 placeholder="Enter password"
                 secureTextEntry
                 iconName="ios-lock"
-                iconColor="#2C384A"
+                iconColor="#2c384a"
                 touched
                 onBlur={formikProps.handleBlur('password')}
               />
@@ -266,7 +267,7 @@ const submitSignUp =async (values) => {
                 placeholder="confirm password"
                 secureTextEntry
                 iconName="ios-lock"
-                iconColor="#2C384A"
+                iconColor="#2c384a"
                 touched
                 onBlur={formikProps.handleBlur('password_confirmation')}
               />
@@ -277,8 +278,8 @@ const submitSignUp =async (values) => {
                   buttonType="outline"
                   onPress={formikProps.handleSubmit}
                   title="Register"
-                  backgroundColor="#ADCF29"
-                  buttonColor = "#fff"
+                  backgroundColor="#adcf29"
+                  // buttonColor = "#fff"
                   borderRadius={20}
                   disabled={!formikProps.isValid || formikProps.isSubmitting}
                   loading = { formikProps.isSubmitting }
@@ -295,7 +296,7 @@ const submitSignUp =async (values) => {
           </View>
         <View style={styles.optionContainer}>
           <Text style={styles.text}>Already have an acoount?</Text>
-        <TouchableHighlight style={{paddingLeft:8}} activeOpacity={0.6} underlayColor="#DDDDDD" onPress={loginHandler}>
+        <TouchableHighlight style={{paddingLeft:8}} activeOpacity={0.6} underlayColor="#dddddd" onPress={loginHandler}>
           <Text style={styles.textHead}>Log in</Text>
           </TouchableHighlight>
         </View>

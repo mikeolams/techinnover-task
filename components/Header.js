@@ -32,11 +32,11 @@ const styles = StyleSheet.create({
     flex:0.15,
     marginTop:30,
     flexDirection: "row",
-    backgroundColor: "#0E861C33",
+    backgroundColor: "#0e861c33",
     width:"100%",
     justifyContent:"space-between",
     alignItems:"center",
-    borderBottomColor:"#0E861C33",
+    borderBottomColor:"#0e861c33",
     borderBottomWidth:2,
     paddingHorizontal:20
   
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   text:{
     // textAlign:'center',
     fontWeight:'bold',
-    color:"#0C9121"
+    color:"#0c9121"
   },
   sign:{
     fontSize:20
