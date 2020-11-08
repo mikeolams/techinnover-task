@@ -31,14 +31,14 @@ export default function App(props) {
 async function loadResourcesAsync() {
   await Promise.all([
     Asset.loadAsync([
-      require('./assets/images/robot-dev.png'),
-      require('./assets/images/robot-prod.png'),
-      require('./assets/images/farmcenta-8.png'),
+      // require('./assets/images/robot-dev.png'),
+      // require('./assets/images/robot-prod.png'),
+      // require('./assets/images/farmcenta-8.png'),
       require('./assets/images/logo.png'),
-      require('./assets/images/Leveraging-Technology.jpg'),
-      require('./assets/images/Ensuring-Security.jpg'),
-      require('./assets/images/Addressing-Needs.jpg'),
-      require('./assets/images/Empowering-Farmers.png')
+      // require('./assets/images/Leveraging-Technology.jpg'),
+      // require('./assets/images/Ensuring-Security.jpg'),
+      // require('./assets/images/Addressing-Needs.jpg'),
+      // require('./assets/images/Empowering-Farmers.png')
 
     ]),
     Font.loadAsync({
