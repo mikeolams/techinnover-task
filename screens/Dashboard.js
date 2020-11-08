@@ -27,8 +27,7 @@ export default function Dashboard(props) {
 
   const { navigation } = props;  
         const userName = navigation.getParam('name', 'NO-Username');  
-        const userEmail = navigation.getParam('email', 'NO-email');  
-        // const userSetting = navigation.getParam('setting', 'NO-set');  
+        const userEmail = navigation.getParam('email', 'NO-email');    
         const userAvatar = navigation.getParam('avatar', 'NO-User');  
         const token = navigation.getParam('token', 'some default value');
         const farmProducts = navigation.getParam('farmProducts', 'default');
@@ -50,7 +49,6 @@ export default function Dashboard(props) {
          toggleMenu = ()=>{
           setMenuOn(false)
           setNotifyOn(true)
-          // console.log( menuOn);
         };
         
         
@@ -74,7 +72,6 @@ export default function Dashboard(props) {
         const getUserTransaction = () => {
           setTransaction(transactions);
           fetch('https://centavestng.com/api/v1/notification?token='+token,{
-          // fetch('https://farmcenta.com/api/v1/notification?token='+token,{
             method: 'POST',
             header: {
               'Content-Type': 'application/json'
@@ -137,7 +134,6 @@ export default function Dashboard(props) {
       ],
       handleMenuClick=(id)=>{
         let URL = "https://www.centavestng.com";
-        // let URL = "https://www.farmcenta.comhttps://centavestng.com";
         console.log('you clicked'+ id)
         switch(id){
           case 0:
@@ -145,13 +141,9 @@ export default function Dashboard(props) {
             break;
           case 1:
               setMenuOn(true);
-              // navigation.state.routes[0].params.Page();
-              // console.log(navigation.state.params)
               load();
         navigation.navigate('Settings', { 'screenToggle':'true'
-          // AsyncStorage.setItem('setting', userSetting);
-          // "setting": true
-          // navigation.state.routes[0].params.Page()
+
         });
               break;
           case 2:
@@ -164,12 +156,10 @@ export default function Dashboard(props) {
             break;
             case 4:
               URL = "mailto:info@centavestng.com?subject=Inquiry on Farm";
-              // URL = "mailto:info@farmcenta.com?subject=Inquiry on Farm";
               openLink(URL);
               break;
             case 5:
               URL = "whatsapp://send?text=Hello centavestng&phone=+2347018231992";
-              // URL = "whatsapp://send?text=Hello Farmcenta&phone=+2347018231992";
               openLink(URL);
               break;
               case 6:
@@ -195,7 +185,6 @@ export default function Dashboard(props) {
             <View style={styles.imageContainer} >
             <Image
             source={
-              // require('../assets/images/centavestLogoMd.png')centavest-logo-sm.png
               require('../assets/images/centavest-logo-sm.png')
             }
             style={styles.logoImage}
@@ -252,49 +241,15 @@ export default function Dashboard(props) {
                 <Text style={{...styles.latestTransText2,...styles.boldText2}}>Lastest Transactions</Text>
                 </View>
 
-                {/* <View style={styles.content2Container}>
-                <View style={styles.contentHead}>
-  <View style={styles.contentTitle}>
-  <Text style={{...styles.text21,...styles.boldText2}}>Amount</Text>
-  </View>
 
-  <View style={styles.contentTitle}>
-  <Text style={{...styles.text21,...styles.boldText2}}>Units</Text>
-  </View>
-  <View style={styles.contentTitle}>
-  <Text style={{...styles.text2,...styles.boldText2}}>Status</Text>
-  </View>
-  </View>
-
-    {  loading? <Text>No transaction yet</Text>:hold.map((item)=><View key={item.id} style={styles.contentHead}>
-  <View style={styles.content}>
-              <Text style={{...styles.text2,...styles.textUnitContentA,...styles.textMagin,...styles.boldText2,...styles.textSizeM}}>{'N'+item.amount}</Text>
-  </View>
-  
-  <View style={styles.content}>
-                <Text style={{...styles.text2,...styles.textUnitContent,...styles.textMagin,...styles.textSizeM}}>{item.quantity}</Text>
-                <View style={styles.subContent}>
-                <Text style={{...styles.text2,...styles.textSizeS,...styles.boldText2}}>Payout Dates: </Text>
-                <Text style={{...styles.text2, ...styles.textSizeS}}>{item.payback_date}</Text>
-  </View>
-  </View>
-  <View style={styles.content}>
-                <Text style={{...styles.text2,...styles.textMagin1}}>{item.status}</Text>
-  </View>
-  </View>)}  
-  </View>  */}
-
-{/* {  loading? <Text>No transaction yet</Text>:hold.map((item)=>console.log(item) )} */}
 {  loading? <Text>No transaction yet</Text>:hold.map((item)=>
 <View key={item.id} style={{...styles.latestTransContainer, backgroundColor: item.status==='running'?'#F7FAE9':'#FCECED',}}>
-{/* {item.status==='running'? :} */}
                 <View style={styles.contentCol}>
   <View style={styles.content}>
   <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B',...styles.boldText2}}>Amount</Text>
   </View>
 
   <View style={styles.content}>
-  {/* <Text style={{...styles.text21,...styles.boldText2}}>figure</Text> */}
   <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B',...styles.textUnitContentA,...styles.textMagin,...styles.boldText2,...styles.textSizeM}}>{'N'+item.amount}</Text>
   </View>
   <View style={styles.content}>
@@ -311,11 +266,9 @@ export default function Dashboard(props) {
   </View>
 
   <View style={styles.content}>
-  {/* <Text style={{...styles.text21,...styles.boldText2}}>catlle</Text> */}
   <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B', ...styles.textUnitContent,...styles.textMagin,...styles.textSizeM}}>{item.quantity}</Text>
   </View>
   <View style={styles.content}>
-  {/* <Text style={{...styles.text2,...styles.boldText2}}>payday</Text> */}
   <View style={styles.subContent}>
                 <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B',...styles.textSizeS,...styles.boldText2}}>Payout Dates: </Text>
                 <Text style={{...styles.text2, color: item.status==='running'? "#7B9115":'#E8505B', ...styles.textSizeS}}>{item.payback_date}</Text>
@@ -329,19 +282,14 @@ export default function Dashboard(props) {
   </View>
 
   <View style={styles.content}>
-  {/* <Text style={{...styles.text2,...styles.textMagin1}}>image</Text> */}
   {item.status==='running'? <Image style={{...styles.imgStatus}} source={require('../assets/images/runningCircle.png')}/>:<Image style={{...styles.imgStatus}} source={require('../assets/images/closedCircle.png')}/>}
   </View>
   <View style={styles.content}>
-  {/* <Text style={{...styles.text2,...styles.boldText2}}>Status</Text> */}
   <Text style={{...styles.text2, padding:5,color: item.status==='running'? "#7B9115":'#E8505B',...styles.textMagin1}}>{item.status}</Text>
   </View>
   </View>
   </View>  
   )}
-
-
-
 
 
             </View>
@@ -352,9 +300,6 @@ export default function Dashboard(props) {
                 </TouchableOpacity>
                 </View>
             <View style={styles.content3Container}>
-            {/* <View style={styles.lastFarmHead} >
-                <Text style={{...styles.text2,...styles.boldText2}}>Lastest Farms</Text>
-                </View> */}
 
                 <View style={styles.row3Container} >
                 {random.map(i =>
@@ -371,16 +316,6 @@ export default function Dashboard(props) {
                 borderRadius={20}
               />
               </View>
-              // console.log(i)
-          //       <TouchableOpacity  onPress={()=>props.navigation.navigate('Store')} key={farm.id}>
-          //         <Image"#ADCF29"
-               
-          //   source={
-          //     {uri:"https://farmcenta.com"+farm.photo}
-          //   }
-          //   style={styles.itemImage}
-          // />
-          // </TouchableOpacity>
           )}
                 </View>
             </View>
@@ -394,7 +329,6 @@ export default function Dashboard(props) {
                 </View>
                 {true? <TouchableOpacity style={styles.goBackButton}  onPress={()=>setNotifyOn(true)}>
                   <Image style={styles.goBackImg} source={require('../assets/images/backwardArrow.png')}/>
-                  {/* <Text>Go back</Text> */}
                   </TouchableOpacity>:null}
               {true?<View style={styles.noteBody}>
               
@@ -407,7 +341,6 @@ export default function Dashboard(props) {
            </Text>
              </View>
              <View style={styles.noteContent}>
-               {/* {console.log(list)} */}
              {read===i?<Text style={styles.textNoteP}>{list.content}</Text>:null}
              </View>
            </TouchableOpacity>
@@ -459,7 +392,6 @@ Dashboard.navigationOptions = {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '#fff',
   },
   innerContainer: {
       flex:1,
@@ -484,7 +416,6 @@ const styles = StyleSheet.create({
     },
     menuHead:{
       flex:0.4,
-      // backgroundColor: '#eed',
       flexDirection:"row"
     },
     signOut:{
@@ -500,11 +431,9 @@ const styles = StyleSheet.create({
       borderBottomWidth:0.8,
       borderBottomColor:"#adcf29",
       marginBottom:30
-      // borderBottomColor:"#0E861C33","#7B9115"#ADCF29
     },
     menu:{
       flex:2,
-      // backgroundColor: '#eed'
     },
     menuId:{
       flexDirection:"row",
@@ -528,11 +457,8 @@ const styles = StyleSheet.create({
   content1Container:{
       flex:1.3,
       justifyContent:'space-around',
-    // backgroundColor:"#0E861C","#ADCF29"
-    // backgroundColor:"#ADCF29",
     backgroundColor:"#7B9115",
       width:'100%',
-      // borderRadius:10,
       borderTopRightRadius:25,
       borderBottomRightRadius:6,
       paddingVertical:4,
@@ -545,11 +471,9 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:'space-between',
     paddingHorizontal:15,
-    // backgroundColor:"#ADCF29",
     marginHorizontal:2
   },
   rowHead:{
-    // flexDirection:"row",
     height:35,
     alignItems:"center"
   },
@@ -557,9 +481,7 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:'space-between',
     paddingHorizontal:10,
-    // backgroundColor: '#eee',
     backgroundColor:"#7b9115",
-    // backgroundColor:"#ADCF29",
     flex:1,
     paddingTop:2
   },
@@ -578,22 +500,15 @@ const styles = StyleSheet.create({
   contentTitle:{
     justifyContent:'center',
     flex:1,
-    //  alignItems:"center",
   },
   content:{
-    // justifyContent:'flex-start',
-    // flex:0.3,
     flex:1,
      alignItems:"flex-start",
-    //  top:-15,
-    // backgroundColor:"#eee"
   },
   subContent:{
-    // flexDirection:"row",
     justifyContent:'center',
     flex:1.2,
      alignItems:"center",
-    //  right:-50,
     marginTop:16,
     marginVertical:4,
   },
@@ -613,8 +528,6 @@ const styles = StyleSheet.create({
   },
   text: {
         color: "#fff",
-        // color: "#0E861C","#7B9115"#ADCF29
-        // textAlign:"center",
         textAlign:"left",
         fontSize:20
       },
@@ -625,13 +538,10 @@ const styles = StyleSheet.create({
       },
       text3: {
         color: "#fff",
-        // textAlign:"center",
         paddingLeft:22,
         fontSize:20
       },
       rowText: {
-        // color: "#aaa","#7B9115"
-        // color: "#7B9115",
         color:"#adcf29",
       },
       boldText2:{
@@ -643,106 +553,57 @@ const styles = StyleSheet.create({
       },
       textMagin:{
         marginVertical:2,
-        // paddingLeft:55
       },
       textNote: {
         color: "#7b9115",
-        // color: "#0E861C","#7B9115"#ADCF29
-        // textAlign:"center",
         textAlign:"left",
         fontSize:20
       },
       imgStatus:{
-        // marginVertical:2,
-        // paddingLeft:35,
-        // flex: 1,
         left:-5,
         alignSelf:"center",
         height:20,
-        // marginBottom:20,
         width:20
       },
   colText: {
-    // color:"#7B9115",
     color:"#adcf29",
-    // color: '#aaa',"#7B9115"#ADCF29
-    // color: 'white',
   },
   colText2: {
-    // color: '#aaa',
-    // color:"#7B9115","#ADCF29"
     color:"#adcf29",
-    // textAlign:"center"
     paddingLeft:10
   },
-  // colText3: {
-  //   // color: '#aaa',
-  //   color:"#7B9115",
-  //   textAlign:"center"
-  // },
     boldText: {
     color: 'white',
     fontWeight:'bold'
     },
     content2MainContainer:{
         flex:2,
-        // paddingVertical:10,
-        // marginTop:15,
-        // marginVertical:15,
-        // justifyContent:'space-between',
-    //   alignItems:'center',
-        // backgroundColor: '#eee',
         width:'100%',
-        // width:'95%',
-        // borderRadius:10,
-        // height:"20%"
     },
     content2Container:{
       flex:1,
-      // paddingVertical:10,
       marginTop:15,
-      // marginVertical:15,
       justifyContent:'space-between',
-  //   alignItems:'center',
-      // backgroundColor: '#eee',#F7FAE9
       backgroundColor: '#f7fae9',
       width:'100%',
       borderRadius:10,
-      // height:"20%"
   },
   latestTransContainer:{
-    // flex:1,
     flexDirection:"row",
     marginTop:15,
     paddingHorizontal:10,
-    // paddingVertical:10,
     justifyContent:'space-between',
   alignItems:'flex-start',
-    // backgroundColor: '#eee',#F7FAE9
-    // backgroundColor: '#F7FAE9',
     width:'100%',
     height:80,
-    // borderRadius:10,
   },
   contentCol:{
     marginVertical:10,
-    // backgroundColor: '#e1e',
     width:'33%'
   },
-    // latestTrans:{
-    //   // marginLeft:10,
-    //   // width:'100%',
-    //   // textAlign:"center",
-    //   // justifyContent:'center'
-    // },
     text2: {
-        // color: "#ADCF29",
-        // color: "#7B9115",
-        // color: '#0E861C',"#ADCF29"
-        // textAlign:"center",
         paddingLeft:15,
         fontSize:11
-        // marginVertical:1
       },
       text21: {
         color: "#bba",
@@ -751,13 +612,8 @@ const styles = StyleSheet.create({
         paddingRight:25
       },
       textButton: {
-        // color: "#ADCF29",
         color: "#7b9115",
-        // color: '#0E861C',"#ADCF29"
         textAlign:"center",
-        // paddingLeft:15,
-        // fontSize:17
-  
       },
       textSizeS: {
         fontSize:9,
@@ -768,9 +624,6 @@ const styles = StyleSheet.create({
       textNoteP: {
         fontSize:10,
       },
-      // textNotePContainer:{
-      //   marginBottom:10
-      // },
       textUnitContent: {
         paddingLeft:15,
       },
@@ -778,14 +631,11 @@ const styles = StyleSheet.create({
         paddingLeft:15,
       },
       latestTransText2: {
-        // color: '#0E861C',
         textAlign:"center",
         fontSize:17
       },
   content3Container:{
     flex:1,
-    // marginTop:5,
-    // marginBottom:25,
     bottom:40,
     justifyContent:'space-between',
     width:'95%',
@@ -834,8 +684,6 @@ row3Container:{
       noticeContainer:{
         width:'90%',
         marginTop:20,
-        // backgroundColor:"#0E861C33",
-        // backgroundColor:"#0E861C33",
         height:"70%",
         justifyContent:"center",
         alignContent:'center',
@@ -849,7 +697,6 @@ row3Container:{
         flexDirection: "row",
         justifyContent:"center",
         alignItems:"center",
-        // backgroundColor:"#0E861C33",
       },
       itemContainer:{
         flex:1,
@@ -861,13 +708,11 @@ row3Container:{
       
       },
       noteContainer:{
-        // flex:1,
         height:150,
         paddingVertical:3,
         borderTopColor:"#0E861C33",
         borderTopWidth:1,
         paddingHorizontal:20,
-        // marginBottom:35,
         paddingBottom:35
       },
       noteTitle:{
@@ -880,17 +725,13 @@ row3Container:{
       noteContent:{
         flex:1,
         justifyContent:"flex-start",
-        // alignItems:"flex-start",
         marginVertical:5,
-        // marginBottom:25
       },
       noteHeadText:{
         textAlign:'center',
         fontWeight:"600",
         fontSize:20,
         marginLeft:20,
-        // paddingTop:10,
-        // marginTop:2,
       },
       goBackImg:{
         width:25,

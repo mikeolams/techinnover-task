@@ -1,4 +1,3 @@
-import * as WebBrowser from 'expo-web-browser';
 import React, { useState, useEffect, Fragment} from 'react';
 import {
   Image,
@@ -57,7 +56,6 @@ export default function WalletScreen(props) {
             <View style={styles.imageContainer} >
             <Image
             source={
-              // require('../assets/images/centavestLogoMd.png')
               require('../assets/images/centavest-logo-sm.png')
             }
             style={styles.logoImage}
@@ -70,12 +68,10 @@ export default function WalletScreen(props) {
                 <View style={styles.rowContainer} >
                 <Text style={styles.text}>Wallet Ballance</Text>
                 </View>
-                {/* (wallets.error || wallets.wallet.length === 0) */}
                 <View style={styles.rowContainer} >
                 {wallets ==='' || (wallets.error || wallets.wallet.length === 0)?<Text>Nil{console.log(wallets)}</Text>:<Text style={styles.balanceText}>N{
                 wallets.wallet.map((item,id)=>{
                   sum+=item.amount;
-                  // console.log(wallets)
                   if (wallets.wallet.length===id+1){return sum}
                 })
                 }</Text>}
@@ -97,7 +93,6 @@ export default function WalletScreen(props) {
                 {wallets ==='' || (wallets.error || wallets.wallet.length === 0)? null 
               :
               <ScrollView style={styles.container}>
-            {/* {console.log(wallets.error)} */}
               {
               wallets.wallet.map((item)=>
        <View key={item.id} style={styles.walletItems} >
@@ -144,8 +139,6 @@ const styles = StyleSheet.create({
           justifyContent:'center',
         alignItems:'center',
         alignSelf:'center',
-          // backgroundColor:"#0E861C","#ADCF29",
-          // backgroundColor:"#ADCF29",
           backgroundColor:"#7B9115",
           width:'90%',
           borderRadius:10,
@@ -169,7 +162,6 @@ const styles = StyleSheet.create({
     borderBottomWidth:3,
     borderBottomColor:"#F7FAE9",
     marginBottom:10
-    // borderBottomColor:"#0E861C33","#F7FAE9"
   },
   walletContainer:{
     flex:1,
@@ -194,7 +186,6 @@ const styles = StyleSheet.create({
         flexDirection:"row",
         justifyContent:'space-evenly',
         alignItems:"center",
-        // backgroundColor:"#0E861C33",'#F7FAE9'
         backgroundColor:"#F7FAE9",
         margin:4
       },
@@ -211,7 +202,6 @@ const styles = StyleSheet.create({
   text: {
         color: '#ADCF29',
         fontWeight:'700'
-        // color: 'white','#7B9115'
       },
     boldText: {
     color: 'white',
@@ -224,7 +214,6 @@ const styles = StyleSheet.create({
       },
     text2: {
         color: "#7B9115",
-        // color: '#0E861C',"#7B9115"
         textAlign:"center"
       },
       id:{
@@ -239,9 +228,7 @@ const styles = StyleSheet.create({
         borderRadius:20
       },
       walletHeaderText: {
-        // color: '#06360B'
         color: '#7B9115',
-        // color: '#0E861C',#7B9115
         fontWeight:'bold',
         fontSize:18
       },

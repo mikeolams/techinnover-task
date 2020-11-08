@@ -12,15 +12,6 @@ export default function SettingsScreen(props) {
 
     const [userInfo, setUserInfo] = useState(''),
      [token, setToken] = useState('');
-    //  [userSetting, setUserSetting] = useState(navigation.getParam('setting'));
-    //  [userSetting, setUserSetting] = useState(false);
-    //  console.log(props.navigation.getParam('setting')) const userSetting = navigation.getParam('setting', 'NO-set');
-    //  const userSetting = navigation.getParam('setting', 'NO-set');
-    // let sum=0;
-    // let sum = await AsyncStorage.getItem("setting");
-    // console.log('sum: ' +sum);
-    // console.log(props.navigation.state.params.screenToggle);
-    // console.log(props.navigation.state);
   
     const loadPrivateInvest = ()=>{
         return <WebView originWhitelist={['*']} 
@@ -33,13 +24,10 @@ export default function SettingsScreen(props) {
         style={styles.webPostion}
         onNavigationStateChange={handleWebView}
         source={{uri:'https://centavestng.com/api/v1/profile?token='+token}}/>
-        // source={{uri:'https://farmcenta.com/api/v1/profile?token='+token}}/>
     };
-    // const loadFunction =()=>props.navigation.setParams({'screenToggle':'false'});
     const loadFunction =()=>props.navigation.setParams({'Page': togglePage});
        
         const togglePage = ()=>{
-            // setUserSetting(false);
             props.navigation.setParams({'screenToggle':'false'});   
         };
         
@@ -48,17 +36,10 @@ export default function SettingsScreen(props) {
       try {
         const name = await AsyncStorage.getItem("user"),
     tokenKey= await AsyncStorage.getItem("token"),
-    // settings= await AsyncStorage.getItem("setting"),
     avatar= await AsyncStorage.getItem("avatar");
     setToken(tokenKey);
-    // setUserSetting(settings);
     if (avatar !== null) {
-      // You can access your data
       setUserInfo([name, avatar]);
-    //   console.log(userInfo,settings);
-    //   console.log('fun: '+settings);
-    //   setUserSetting(settings);
-    //   console.log(userSetting);
     }
       } catch (error) {
         console.log(error);
@@ -72,39 +53,26 @@ export default function SettingsScreen(props) {
         
 
          const  handleWebView = (newNavState) => {    
-        // console.log(newNavState);
             const { canGoBack } = newNavState;
             if (!canGoBack) return;
-            // console.log(canGoBack)
             }
 
     return (
         <View style={styles.container}>
 
             <View style={styles.innerContainer}>
-            
-            {/* <View> */}
                 <View style={styles.imageContainer} >
                     <Image
                         source={
-                            // require('../assets/images/centavestLogoMd.png')
                             require('../assets/images/centavest-logo-sm.png')
                         }
                         style={styles.logoImage}
                     />
                 </View>
-                {/* <View style={styles.id}>
-           </View> */}
-           {/* </View> */}
-           {/* {settings? loadSetting():loadPrivateInvest()} */}
            {
             props.navigation.state.params===undefined?null:
            props.navigation.state.params.screenToggle==='true'? loadSetting():loadPrivateInvest()
            }
-           {/* {userSetting? loadSetting():loadPrivateInvest()} */}
-           {/* {false? loadSetting():loadPrivateInvest()} */}
-           {/* {console.log('us ' +userSetting)} */}
-           {/* {console.log('nav: '+props.navigation.getParam('setting'))} */}
             </View> 
         </View>
     );
@@ -118,7 +86,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        // paddingTop:80
     },
     innerContainer: {
         flex: 1,
@@ -165,7 +132,6 @@ const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: "row",
         justifyContent: 'space-between',
-        // paddingHorizontal: 15,
     },
       leftButton:{
         borderBottomLeftRadius:10,
@@ -177,7 +143,6 @@ const styles = StyleSheet.create({
       },
       buttonSet: {
         justifyContent:'center',
-        // backgroundColor: '#0C9121',
         width:"40%",
         height:20,
         borderColor:'#2e78b7',

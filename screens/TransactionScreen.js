@@ -18,7 +18,6 @@ export default function TransactionScreen() {
 
   const fetchTrans =async (value) => {  
     await fetch('https://centavestng.com/api/v1/transactions?token='+value,{
-      // await fetch('https://farmcenta.com/api/v1/transactions?token='+value,{
             method: 'POST'
           })  
    .then(resp=>resp.json())
@@ -58,7 +57,6 @@ export default function TransactionScreen() {
             <View style={styles.imageContainer} >
             <Image
             source={
-              // require('../assets/images/centavestLogoMd.png')
               require('../assets/images/centavest-logo-sm.png')
             }
             style={styles.logoImage}
@@ -72,9 +70,6 @@ export default function TransactionScreen() {
               <View style={styles.rowHeadContainer} >
                 <Text style={{...styles.textHead, ...styles.textSize}}>Transactions</Text>
                 </View>
-                {/* <View style={styles.rowHeadContainer} >
-                <Text style={{...styles.textHead, ...styles.textSize}}>buttons</Text>
-                </View> */}
             <View style={styles.content2Container}>
                 <View style={styles.rowTitleContainer} >
                   <View style={styles.Title}>
@@ -94,7 +89,6 @@ export default function TransactionScreen() {
                 
             </View>
             <View style={styles.transContent}>
-              {/* </View> */}
                  {loading ? 
                
                 null :
@@ -132,14 +126,11 @@ const styles = StyleSheet.create({
       alignItems:'center'
     },
   imageContainer:{
-    // paddingTop:1,
-    // marginTop:20,
     marginVertical:15,
     alignItems:'center',
   },
   transContent:{
     flex:1,
-    // backgroundColor:'#e1c'
   },
   rowContainer:{
     flex:0.5,
@@ -152,13 +143,11 @@ const styles = StyleSheet.create({
     flexDirection:"row",
     justifyContent:'space-between',
     alignItems:"center",
-    // paddingHorizontal:5,
   },
   rowHeadContainer:{
     flexDirection:"row",
     justifyContent:'center',
     width:'100%',
-    // paddingHorizontal:15,
     borderBottomColor:"#eee",
     borderBottomWidth:2
   },
@@ -189,21 +178,15 @@ const styles = StyleSheet.create({
         flex:1,
         marginVertical:2,
         justifyContent:'space-between',
-        // backgroundColor: '#eee',
         width:'90%',
         borderRadius:10,
     },
-    // text2: {
-    //     // color: "#7B9115"
-    //     // color: '#0E861C'"#ADCF29"
-    //   },
       textHead: {
         fontWeight:"bold",
         color: "#7B9115",
       },
       textSize: {
         fontSize:20,
-        // textAlign:"center"
       },
       Title:{
         flex:1,
@@ -211,13 +194,11 @@ const styles = StyleSheet.create({
       },
       TitleB:{
         flex:1,
-        // marginRight:2,
       },
       textTitle: {
         fontWeight:"bold",
         fontSize:12,
         left:6
-        // color: "#7B9115",
       },
   content3Container:{
     flex:1,

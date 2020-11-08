@@ -18,7 +18,6 @@ export default function StoreScreen(props) {
         return <WebView originWhitelist={['*']} 
         style={styles.webPostion}
         onNavigationStateChange={handleWebView}
-        // source={{uri:'https://farmcenta.com/mobile/shop?token='+token}}/>
         source={{uri:'https://centavestng.com/mobile/shop?token='+token}}/>
     }
     
@@ -45,7 +44,6 @@ export default function StoreScreen(props) {
         
 
          const  handleWebView = (newNavState) => {    
-        // console.log(newNavState);
             const { canGoBack } = newNavState;
             if (!canGoBack) return;
             console.log(canGoBack)
@@ -60,7 +58,6 @@ export default function StoreScreen(props) {
                 <View style={styles.imageContainer} >
                     <Image
                         source={
-                            // require('../assets/images/centavestLogoMd.png')
                             require('../assets/images/centavest-logo-sm.png')
                         }
                         style={styles.logoImage}
@@ -83,7 +80,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        // paddingTop:80
     },
     innerContainer: {
         flex: 1,
@@ -128,7 +124,6 @@ const styles = StyleSheet.create({
     rowContainer: {
         flexDirection: "row",
         justifyContent: 'space-between',
-        // paddingHorizontal: 15,
     },
       leftButton:{
         borderBottomLeftRadius:10,
@@ -140,7 +135,6 @@ const styles = StyleSheet.create({
       },
       buttonSet: {
         justifyContent:'center',
-        // backgroundColor: '#0C9121',
         width:"40%",
         height:20,
         borderColor:'#2e78b7',
@@ -252,7 +246,6 @@ const styles = StyleSheet.create({
     },
     productTop:{
         flexDirection:"row",
-        // flex:1,
         justifyContent:"center",
         borderTopColor:"#0E861C33",
         borderTopWidth:2,

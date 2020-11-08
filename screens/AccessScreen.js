@@ -45,7 +45,6 @@ if(actionType==='login'){
 
 const loginCall= async (values)=> {
   return await fetch('https://centavestng.com/api/v1/login',{
-  // return await fetch('https://farmcenta.com/api/v1/login',{https://centavestng.com
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -59,7 +58,6 @@ const loginCall= async (values)=> {
 transactionsCall= (login)=> {
 
           fetch('https://centavestng.com/api/v1/transactions?token='+login.token,{
-            // fetch('https://centavestng.com/api/v1/transactions?token='+login.token,{
             method: 'POST',
             header: {
               'Content-Type': 'application/json'
@@ -77,7 +75,6 @@ transactionsCall= (login)=> {
               "token": login.token,
               "transactions":transactions,
               "farmProducts": farmProducts,
-              // "setting": 'false'
             });
           })
           .catch(err=> {
@@ -92,10 +89,8 @@ transactionsCall= (login)=> {
 const submitLogin =async (values) => {
   loginCall(values);
  }
-//  Sign up logic
 const submitSignUp =async (values) => {    
   await fetch('https://centavestng.com/api/v1/signup',{
-    // await fetch('https://farmcenta.com/api/v1/signup',{
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
@@ -125,14 +120,11 @@ const submitSignUp =async (values) => {
   };
   return (
     <View style={styles.container}>
-      
-    
-      {/* <View style={styles.innerContainer}> */}
+
       <ImageBackground source={require('../assets/images/log-in-bg.png')} style={styles.innerContainer}>
       <View style={styles.mainAuthContainer}>
       <Image
             source={
-              // require('../assets/images/centavestLogoMd.png')
               require('../assets/images/centavest-logo-sm.png')
             }
             style={styles.logoImage}
@@ -150,7 +142,6 @@ const submitSignUp =async (values) => {
         >
           {formikProps => (
             <Fragment>
-             {/* log-in-bg.png */}
               <FormInput
                 name="email"
                 value={formikProps.values.email}
@@ -159,7 +150,6 @@ const submitSignUp =async (values) => {
                 autoCapitalize="none"
                 iconName="ios-mail"
                 iconColor="#2c384a"
-                // iconColor="#2C384A"
                 touched
                 onBlur={formikProps.handleBlur('email')}
                 style={styles.form}
@@ -187,7 +177,6 @@ const submitSignUp =async (values) => {
                   onPress={formikProps.handleSubmit}
                   title="Log in"
                   backgroundColor="#adcf29"
-                  // buttonColor = "#fff"
                   borderRadius={20}
                   disabled={!formikProps.isValid || formikProps.isSubmitting}
                   loading = { formikProps.isSubmitting }
@@ -279,7 +268,6 @@ const submitSignUp =async (values) => {
                   onPress={formikProps.handleSubmit}
                   title="Register"
                   backgroundColor="#adcf29"
-                  // buttonColor = "#fff"
                   borderRadius={20}
                   disabled={!formikProps.isValid || formikProps.isSubmitting}
                   loading = { formikProps.isSubmitting }
@@ -304,7 +292,6 @@ const submitSignUp =async (values) => {
         </SafeAreaView>
       )}
 
-      {/* </View> */}
       </ImageBackground>
       
     </View>
@@ -385,11 +372,9 @@ const styles = StyleSheet.create({
   },
   textHead: {
     fontWeight:"bold",
-    // color: '#0E861C',
     height:30,
   },
   text: {
-    // color: '#0E861C',"#ccc"
     color:"#ccc",
   },
   dividerContainer:{
