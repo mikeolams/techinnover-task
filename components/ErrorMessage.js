@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     marginLeft: 25
   },
   errorText: {
-    color: '#f00'
+    color: 'red'
   }
 })
 
