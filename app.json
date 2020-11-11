@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "FarmCenta",
-    "slug": "farmcenta",
+    "name": "Centavest",
+    "slug": "centavest",
     "privacy": "public",
     "platforms": [
       "ios",
@@ -9,12 +9,12 @@
       "web"
     ],
     "android": {
-      "package": "com.GLT.FarmCenta",
+      "package": "com.GLT.centavest",
       "versionCode": 1
     },
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/hdpi.png",
+    "icon": "./assets/images/centvest.png",
     "splash": {
       "image": "./assets/images/centavestOnboard.png",
       "resizeMode": "contain",
@@ -29,6 +29,6 @@
     "ios": {
       "supportsTablet": true
     },
-    "description": "An app use by farmers sponsor by farmcenta"
+    "description": "An app use by investors in farming sponsor by Centavest"
   }
 }
