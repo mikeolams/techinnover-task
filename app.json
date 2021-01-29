@@ -9,14 +9,15 @@
       "web"
     ],
     "android": {
-      "package": "com.GLT.centavest",
-      "versionCode": 1
+      "package": "com.GLT.FarmCenta",
+      "versionCode": 4,
+      "permissions":[]
     },
-    "version": "1.0.0",
+    "version": "3.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/centvest.png",
+    "icon": "./assets/images/tec-group.png",
     "splash": {
-      "image": "./assets/images/centavestOnboard.png",
+      "image": "./assets/images/tec-group.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -27,7 +28,9 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.GLT.Centavest",
+      "buildNumber": "1.0.0"
     },
     "description": "An app use by investors in farming sponsor by Centavest"
   }

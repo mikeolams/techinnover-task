@@ -21,24 +21,221 @@ export default function OnboardingTwoScreen(props) {
   }
 
   return (
-    <ImageBackground source={require('../assets/images/centavest-onboarding-1.png')} style={styles.container}>
-      
-      <View style={styles.topContainer}>
-        <View style={styles.logoContainer}>
+    // <ImageBackground source={require('../assets/images/centavest-onboarding-1.png')} style={styles.container}>
+      <View style={styles.container}>
+      <View style={styles.container1}>
+      <View style={styles.content1}>
+        <Image
+            source={
+              require('../assets/images/tec-rectangle4.png')
+            }
+            style={styles.image2}
+          />
+          <Text> Hi Dustin!</Text>
+          </View>
+          <TouchableOpacity>
+        <Image
+            source={
+              require('../assets/images/tec-vector-6.png')
+            }
+            style={styles.image2}
+          />
+          </TouchableOpacity>
+
+      </View>
+
+
+      <View style={styles.container2}>
+      <View>
+          <Text style={styles.boldText}>
+            Popular Books
+            </Text>
+          </View>
+        <View style={styles.content3}>
+        <View>
+          <TouchableOpacity>
+        <Image
+            source={
+              require('../assets/images/tec-image-15.png')
+            }
+            style={styles.image2}
+          />
+          </TouchableOpacity>
+          <Text style={styles.boldText}>
+             Fashionopolis
+            </Text>
+            <Text style={styles.smallText}>
+             Dana Thomas
+            </Text>
+          </View>
+          <View>
+          <TouchableOpacity>
+        <Image
+            source={
+              require('../assets/images/tec-image-14.png')
+            }
+            style={styles.image2}
+          />
+          </TouchableOpacity>
+          <Text style={styles.boldText}>
+             Chanel
+            </Text>
+            <Text style={styles.smallText}>
+             Patrick Mauries
+            </Text>
+          </View>
+         
+          </View>
+        </View>
+
+
+        <View style={styles.container3}>
+          <View>
+          <Text style={styles.boldText}>
+             Newest
+            </Text>
+          </View>
+        <View style={styles.content3}>
+        <View>
+          <TouchableOpacity onPress={() => props.navigation.navigate('Auth')}>
+        <Image
+            source={
+              require('../assets/images/tec-image16.png')
+            }
+            style={styles.image3}
+          />
+          </TouchableOpacity>
+          </View>
+          <View>
+          <Text style={styles.boldText}>
+             Yves Saint Laurent
+            </Text>
+            <Text style={styles.smallText}>
+             Suzy Monkas
+            </Text>
+            <View style={styles.rateContainer}>
+            <Image
+            source={
+              require('../assets/images/tec-star2.png')
+            }
+          />
+           <Image
+            source={
+              require('../assets/images/tec-star2.png')
+            }
+          />
+           <Image
+            source={
+              require('../assets/images/tec-star2.png')
+            }
+          />
+           <Image
+            source={
+              require('../assets/images/tec-star2.png')
+            }
+          />
+            </View>
+          </View>
+          <View>
+          <Image
+            source={
+              require('../assets/images/tec-vector5.png')
+            }
+            // style={styles.logoImage}
+          />
+          </View>
+          <View>
+          <Image
+            source={
+              require('../assets/images/tec-star5.png')
+            }
+            // style={styles.logoImage}
+          />
+          </View>
+          </View>
+
+
+        </View>
+        <View style={styles.container4}>
+          <View>
+          <TouchableOpacity>
+        <Image
+            source={
+              require('../assets/images/tec-image17.png')
+            }
+            // style={styles.logoImage}
+          />
+          </TouchableOpacity>
+          </View>
+          <View>
+          <Text style={styles.boldText}>
+             The Book of Signs
+            </Text>
+            <Text style={styles.smallText}>
+             Rudolf Koch
+            </Text>
+          </View>
+          <View>
+          <Image
+            source={
+              require('../assets/images/tec-vector5.png')
+            }
+            // style={styles.logoImage}
+          />
+          </View>
+          
+        </View>
+        <View style={styles.container5}>
+
+        <TouchableOpacity>
+        <Image
+            source={
+              require('../assets/images/tec-vectpor.png')
+            }
+            // style={styles.logoImage}
+          />
+          </TouchableOpacity>
+          <TouchableOpacity>
+        <Image
+            source={
+              require('../assets/images/tec-vector.png')
+            }
+            // style={styles.logoImage}
+          />
+          </TouchableOpacity>
+          <TouchableOpacity>
+        <Image
+            source={
+              require('../assets/images/tec-vector-buy.png')
+            }
+            // style={styles.logoImage}
+          />
+          </TouchableOpacity>
+          <TouchableOpacity>
+        <Image
+            source={
+              require('../assets/images/tec-vector-set.png')
+            }
+            // style={styles.logoImage}
+          />
+          </TouchableOpacity>
+          
+        </View>
+        {/* <View style={styles.logoContainer}>
         <Image
             source={
               require('../assets/images/centavest-logo-sm.png')
             }
             style={styles.logoImage}
           />
-        </View>
-        <View style={styles.bodyContainer}>
-        <View style={styles.textContainer}>
+        </View> */}
+       
+        {/* <View style={styles.textContainer}>
           <Text style={styles.textOne}>Let Your Money Work For You</Text>
-          <Text style={styles.textTwo}>Your Parner In Sustainable Wealth Creation</Text>
-        </View>
-        <View style={styles.buttonContainer}>
-        <TouchableOpacity onPress={handleSkipPress} style={styles.regButton}>
+          <Text style={styles.textTwo}>Your Partner In Sustainable Wealth Creation</Text>
+        </View> */}
+        {/* <View style={styles.buttonContainer}> */}
+        {/* <TouchableOpacity onPress={handleSkipPress} style={styles.regButton}>
             <Text style={styles.regButtonText}>
              Register
             </Text>
@@ -47,15 +244,16 @@ export default function OnboardingTwoScreen(props) {
             <Text style={styles.logButtonText}>
              Login
             </Text>
-          </TouchableOpacity>
-        </View>
+          </TouchableOpacity> */}
+        
           
-          </View>
+         
          
         
-      </View>
      
-    </ImageBackground>
+     
+    {/* </ImageBackground> */}
+    </View>
   );
 }
 
@@ -95,8 +293,75 @@ function handleHelpPress() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingVertical:40
+    paddingVertical:40,
+    paddingHorizontal:35,
+    backgroundColor:"#FDFDFD"
   },
+  container1:{
+    flex:0.6,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center"
+    // backgroundColor:"#116"
+  },
+  container2:{
+    flex:2.3,
+    // backgroundColor:"#716"
+  },
+  container3:{
+    flex:1.3,
+    // flex:0.8,
+    // flexDirection:"row",
+    // justifyContent:"space-between",
+    // alignItems:"center"
+    // backgroundColor:"#816"
+  },
+  container4:{
+    flex:0.8,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+   // backgroundColor:"#133"
+  },
+  container5:{
+    flex:0.5,
+    zIndex:2,
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center",
+    borderRadius:15,
+    backgroundColor:"#fff",
+    bottom:30
+  },
+  boldText:{
+    fontSize: 17,
+    textAlign: 'left',
+    fontWeight:"bold"
+  },
+  smallText:{
+    fontSize: 11,
+    textAlign: 'left',
+  },
+  image3: {
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+  },
+  content3:{
+    flexDirection:"row",
+    justifyContent:"space-between",
+    alignItems:"center"
+  },
+  rateContainer:{
+    flexDirection:"row",
+    marginTop:20,
+  },
+  content1:{
+    alignItems:"center",
+    flexDirection:"row",
+  },
+
+
   topContainer: {
     marginVertical:70,
     marginHorizontal:20,
