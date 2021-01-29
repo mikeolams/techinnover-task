@@ -132,7 +132,6 @@ if(actionType==='login'){
             source={
               require('../assets/images/tec-x34hWkZU.png')
             }
-            // style={styles.bioImage}handleNextPress
           />
         </TouchableOpacity>
         
@@ -156,131 +155,23 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  // developmentModeText: {
-  //   marginBottom: 20,
-  //   color: 'rgba(0,0,0,0.4)',
-  //   fontSize: 14,
-  //   lineHeight: 19,
-  //   textAlign: 'center',
-  // },
  
-
-  // contentContainer: {
-  //   paddingTop: 30,
-  // },
-  // welcomeContainer: {
-  //   alignItems: 'center',
-  //   marginTop: 10,
-  //   marginBottom: 20,
-  // },
-  // welcomeImage: {
-  //   width: 100,
-  //   height: 80,
-  //   resizeMode: 'contain',
-  //   marginTop: 3,
-  //   marginLeft: -10,
-  // },
-  // getStartedContainer: {
-  //   alignItems: 'center',
-  //   marginHorizontal: 50,
-  // },
-  // homeScreenFilename: {
-  //   marginVertical: 7,
-  // },
-  // codeHighlightText: {
-  //   color: 'rgba(96,100,109, 0.8)',
-  // },
-  // codeHighlightContainer: {
-  //   borderRadius: 3,
-  //   paddingHorizontal: 4,
-  // },
-  // getStartedText: {
-  //   fontSize: 17,
-  //   color: 'rgba(96,100,109, 1)',
-  //   lineHeight: 24,
-  //   textAlign: 'center',
-  // },
-
   topContainer: {
     paddingTop:40,
-    // marginVertical:110,
       paddingHorizontal:40,
-    // backgroundColor: '#FFFFFF',
     borderRadius: 10,
     flex:2,
     justifyContent:'center',
-    // alignItems: 'center',
-    // top:-10
   },
-  // logoContainer:{
-  //   flex:1,
-  //   justifyContent:'center',
-  //   marginBottom:40,
-  // },
-  // logoImage: {
-  //   // width: 12,
-  //   // height: 12,
-  //   // resizeMode: 'contain',
-  //   textAlign: 'center',
-  // },
+  
   bioImageContainer:{
     marginTop:20,
     marginHorizontal:100,
-    // justifyContent:"center",
-    // backgroundColor:"black",
     alignItems:"center"
   },
-  // bioImage:{
-  //   // width: 30,
-  //   // height: 30,
-  // },
-  // messageImage: {
-  //   width: 160,
-  //   height: 160,
-  //   resizeMode: 'contain',
-  // },
-  // circleContainer:{
-  //   flex:1,
-  //   justifyContent:'center',
-  // },
-  // textContainer:{
-  //   marginTop:70,
-  //   flex:1,
-  //   justifyContent:'center',
-  //   paddingHorizontal:30,
-  // },
-  // text: {
-  //   color: '#0e861c',
-  //   justifyContent:'center',
-  //   textAlign:"center"
-  // },
-  // slideContainer:{
-  //   height:30,
-  //   marginTop:70,
-  //   marginBottom:10,
-  //   width:'40%',
-  //   flexDirection:'row',
-  //   justifyContent:"space-evenly"
-  // },
-  // activeSlide:{
-  //   backgroundColor: '#0c9121',
-  //   borderRadius:20,
-  //   width:20,
-  //   alignItems:'center'
-  // },
-  // slideText:{
-  //   fontWeight:'bold',
-  //   color:'white'
-  // },
-  // slideButton:{
-  //   flex:1,
-  //   margin:6
-  // },
+  
   bottomContainer: {
     flex:1.2,
-    // flexDirection:"row",
-    // justifyContent:'space-around',
-    // position: 'absolute',
     borderTopRightRadius:20,
     borderTopLeftRadius:20,
     bottom: 0,
@@ -302,22 +193,6 @@ const styles = StyleSheet.create({
     paddingHorizontal:30,
     backgroundColor:'white',
   },
-  // skipButton: {
-  //   justifyContent:'center',
-  //   width:100,
-  //   height:40
-  // },
-  // nextButton: {
-  //   justifyContent:'center',
-  //   width:100,
-  //   height:40
-  // },
-  // skipButtonText: {
-  //   fontSize: 14,
-  //   color: '#fff',
-  //   lineHeight: 24,
-  //   textAlign: 'center',
-  // },
   top1:{
     flex:1,
     marginVertical:50

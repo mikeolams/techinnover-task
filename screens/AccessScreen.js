@@ -1,20 +1,10 @@
 import React, { useState, useEffect, Fragment} from 'react';
-import { Formik } from 'formik';
-import * as Yup from 'yup';
 import {
   Image,
-  Platform,
-  SafeAreaView,
   StyleSheet,
   Text,
   View,
-  AsyncStorage,
-  ImageBackground,
-  TouchableHighlight
 } from 'react-native';
-import FormButton from '../components/FormButton';
-import FormInput from '../components/FormInput';
-import ErrorMessage from '../components/ErrorMessage';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default function AccessScreen(props) {
@@ -98,7 +88,6 @@ export default function AccessScreen(props) {
           <Text style={{...styles.rText,textAlign:"justify"}}>A spectacular visual journey through 40 years of haute couture from one of the best-known and most trend-setting brands in fashion</Text>
         </View>
         <View style={styles.body4}>
-        {/* <TouchableOpacity style={styles.body4ConInner}> */}
           <View style={styles.body4Con}>
             
           <Image
@@ -109,7 +98,6 @@ export default function AccessScreen(props) {
           <Text>Preview</Text>
          
           </View>
-          {/* </TouchableOpacity> */}
           <View style={styles.body4Con}>
           <Image
             source={
@@ -145,13 +133,9 @@ const styles = StyleSheet.create({
    containerTop: {
      flex:0.9,
      flexDirection:"row",
-    // backgroundColor:"#a66"
   },
   containerBody: {
     flex:6,
-    // justifyContent:"center",
-    // alignItems:"center"
-    // backgroundColor:"#f16"
   },
   containerBottom: {
     flex:1,
@@ -177,7 +161,6 @@ const styles = StyleSheet.create({
       width: 16,
       height: 16,
       resizeMode: 'contain',
-      // marginBottom:30
     },
     bottomB:{
       backgroundColor:"#444",
@@ -196,7 +179,6 @@ body1:{
   justifyContent:"center",
   alignItems:"center",
   marginVertical:20,
-  // backgroundColor:"#33e",
 },
 body2:{
   flex:1,
@@ -209,9 +191,6 @@ body3:{
   flex:1,
   justifyContent:"center",
   paddingHorizontal:30,
-  // alignItems:"center",
-  // paddingVertical:10,
-  // backgroundColor:"#e2a",
 },
 body4:{
   flex:1,
@@ -225,23 +204,14 @@ rateContainer:{
   marginTop:20,
 },
 boldText: {
-  // fontSize: 16,
   fontWeight:'bold',
-  // color: '#000',
 },
 largeText: {
   fontSize: 23,
 },
 rText:{
   color:"#06070D",
-  // color:"#eee",#06070D
 },
-// body4ConInner:{
-//   flex:1,
-//   // flexDirection:"row",
-//   // alignItems:"center",
-//   // justifyContent:"space-between",
-// },
 body4Con:{
   flex:1,
   flexDirection:"row",
@@ -253,187 +223,5 @@ body4Con:{
   height:40,
   marginHorizontal:10
 },
-
-
-  // developmentModeText: {
-  //   marginBottom: 20,
-  //   color: 'rgba(0,0,0,0.4)',
-  //   fontSize: 14,
-  //   lineHeight: 19,
-  //   textAlign: 'center',
-  // },
-  // scrollContainer: {
-  //   marginTop: 30,
-  // },
-  // contentContainer: {
-  //   paddingTop: 30,
-  // },
-  // welcomeContainer: {
-  //   alignItems: 'center',
-  //   marginTop: 10,
-  //   marginBottom: 20,
-  // },
-  // welcomeImage: {
-  //   width: 100,
-  //   height: 80,
-  //   resizeMode: 'contain',
-  //   marginTop: 3,
-  //   marginLeft: -10,
-  // },
-  // getStartedContainer: {
-  //   alignItems: 'center',
-  //   marginHorizontal: 50,
-  // },
-  // homeScreenFilename: {
-  //   marginVertical: 7,
-  // },
-  // codeHighlightText: {
-  //   color: 'rgba(96,100,109, 0.8)',
-  // },
-  // codeHighlightContainer: {
-  //   borderRadius: 3,
-  //   paddingHorizontal: 4,
-  // },
-  // getStartedText: {
-  //   fontSize: 17,
-  //   color: 'rgba(96,100,109, 1)',
-  //   lineHeight: 24,
-  //   textAlign: 'center',
-  // },
-
-  // innerContainer: {
-  //   backgroundColor: '#ffffff',
-  //   flex:1,
-  //   justifyContent:'center',
-  //   alignItems: 'center',
-  // },
-  // mainAuthContainer:{
-  //   marginTop:90,
-  //   flex:1,
-  //   justifyContent:'center',
-  //   alignItems: 'center',
-  // },
-  // optionContainer:{
-  //   flexDirection:"row",
-  //   justifyContent:'center',
-  // },
-  // textHead: {
-  //   fontWeight:"bold",
-  //   height:30,
-  // },
-  // text: {
-  //   color:"#ccc",
-  // },
-  // dividerContainer:{
-  //   flexDirection:"row",
-  //   justifyContent:'center',
-  //   alignItems:"center",
-  //   marginVertical:20
-  // },
-  // line:{
-  //   borderBottomWidth:1,
-  //   borderBottomColor:'#ccc',
-  //   width:'40%',
-  //   marginHorizontal:5
-  // },
-  // authButtonContainer:{
-  //   justifyContent:'space-around',
-  //   alignItems: 'center',
-  //   paddingVertical: 20,
-  //   flexDirection: "row",
-  //   width:'70%'
-  // },
-  // formContainer: {
-  //   flex:5.4,
-  //   paddingBottom:80,
-  //   width:'86%'
-  // },
-  // buttonContainer: {
-  //   margin: 25
-  // },
-  // logoImage: {
-  //   width: 150,
-  //   height: 120,
-  //   resizeMode: 'contain',
-  //   marginBottom:30
-  // },
-  // circleContainer:{
-  //   flex:1,
-  //   justifyContent:'center',
-  //   backgroundColor: '#aca',
-  // },
-  // textContainer:{
-  //   flex:1,
-  //   justifyContent:'center',
-  //   paddingHorizontal:30,
-  //   backgroundColor: '#aaa',
-  // },
-  // slideContainer:{
-  //   paddingTop:70,
-  //   paddingBottom:10,
-  // },
-
-
-  // tabBarInfoContainer: {
-  //   flexDirection:"row",
-  //   justifyContent:'space-around',
-  //   position: 'absolute',
-  //   bottom: 0,
-  //   left: 0,
-  //   right: 0,
-  //   ...Platform.select({
-  //     ios: {
-  //       shadowColor: 'black',
-  //       shadowOffset: { width: 0, height: -3 },
-  //       shadowOpacity: 0.1,
-  //       shadowRadius: 3,
-  //     },
-  //     android: {
-  //       elevation: 20,
-  //     },
-  //   }),
-  //   alignItems: 'center',
-  //   paddingVertical: 20,
-  // },
-  // skipButton: {
-  //   justifyContent:'center',
-  //   backgroundColor: '#0c9121',
-  //   width:100,
-  //   height:40
-  // },
-  // nextButton: {
-  //   justifyContent:'center',
-  //   backgroundColor: '#fff',
-  //   width:100,
-  //   height:40,
-  //   borderColor:'#2e78b7',
-  //   borderWidth:1
-  // },
-  // skipButtonText: {
-  //   fontSize: 14,
-  //   color: '#fff',
-  //   lineHeight: 24,
-  //   textAlign: 'center',
-  // },
-  // tabBarInfoText: {
-  //   fontSize: 17,
-  //   color: 'rgba(96,100,109, 1)',
-  //   textAlign: 'center',
-  // },
-  // navigationFilename: {
-  //   marginTop: 5,
-  // },
-  // helpContainer: {
-  //   marginTop: 15,
-  //   alignItems: 'center',
-  // },
-  // helpLink: {
-  //   paddingVertical: 15,
-  // },
-  // helpLinkText: {
-  //   fontSize: 14,
-  //   color: '#2e78b7',
-  //   textAlign: 'center',
-  // },
 
 });

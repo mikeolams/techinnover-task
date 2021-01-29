@@ -1,10 +1,7 @@
-import * as WebBrowser from 'expo-web-browser';
 import React from 'react';
 import {
   Image,
-  ImageBackground,
   Platform,
-  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -13,15 +10,7 @@ import {
 
 export default function OnboardingTwoScreen(props) {
 
-  function handleNextPress() {
-    props.navigation.navigate('Auth')
-  }
-  function handleSkipPress() {
-    props.navigation.navigate('Auth')
-  }
-
   return (
-    // <ImageBackground source={require('../assets/images/centavest-onboarding-1.png')} style={styles.container}>
       <View style={styles.container}>
       <View style={styles.container1}>
       <View style={styles.content1}>
@@ -141,7 +130,6 @@ export default function OnboardingTwoScreen(props) {
             source={
               require('../assets/images/tec-vector5.png')
             }
-            // style={styles.logoImage}
           />
           </View>
           <View>
@@ -149,7 +137,6 @@ export default function OnboardingTwoScreen(props) {
             source={
               require('../assets/images/tec-star5.png')
             }
-            // style={styles.logoImage}
           />
           </View>
           </View>
@@ -163,7 +150,6 @@ export default function OnboardingTwoScreen(props) {
             source={
               require('../assets/images/tec-image17.png')
             }
-            // style={styles.logoImage}
           />
           </TouchableOpacity>
           </View>
@@ -180,7 +166,6 @@ export default function OnboardingTwoScreen(props) {
             source={
               require('../assets/images/tec-vector5.png')
             }
-            // style={styles.logoImage}
           />
           </View>
           
@@ -200,7 +185,6 @@ export default function OnboardingTwoScreen(props) {
             source={
               require('../assets/images/tec-vector.png')
             }
-            // style={styles.logoImage}
           />
           </TouchableOpacity>
           <TouchableOpacity>
@@ -208,7 +192,6 @@ export default function OnboardingTwoScreen(props) {
             source={
               require('../assets/images/tec-vector-buy.png')
             }
-            // style={styles.logoImage}
           />
           </TouchableOpacity>
           <TouchableOpacity>
@@ -216,43 +199,11 @@ export default function OnboardingTwoScreen(props) {
             source={
               require('../assets/images/tec-vector-set.png')
             }
-            // style={styles.logoImage}
           />
           </TouchableOpacity>
           
         </View>
-        {/* <View style={styles.logoContainer}>
-        <Image
-            source={
-              require('../assets/images/centavest-logo-sm.png')
-            }
-            style={styles.logoImage}
-          />
-        </View> */}
-       
-        {/* <View style={styles.textContainer}>
-          <Text style={styles.textOne}>Let Your Money Work For You</Text>
-          <Text style={styles.textTwo}>Your Partner In Sustainable Wealth Creation</Text>
-        </View> */}
-        {/* <View style={styles.buttonContainer}> */}
-        {/* <TouchableOpacity onPress={handleSkipPress} style={styles.regButton}>
-            <Text style={styles.regButtonText}>
-             Register
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity onPress={handleNextPress} style={styles.logButton}>
-            <Text style={styles.logButtonText}>
-             Login
-            </Text>
-          </TouchableOpacity> */}
         
-          
-         
-         
-        
-     
-     
-    {/* </ImageBackground> */}
     </View>
   );
 }
@@ -261,34 +212,6 @@ OnboardingTwoScreen.navigationOptions = {
   header: null,
 };
 
-function DevelopmentModeNotice() {
-  if (__DEV__) {
-    const learnMoreButton = (
-      <Text onPress={handleLearnMorePress} style={styles.helpLinkText}>
-        Learn more
-      </Text>
-    );
-
-    return (
-      <Text style={styles.developmentModeText}>
-        Development mode is enabled: your app will be slower but you can use
-        useful development tools. {learnMoreButton}
-      </Text>
-    );
-  } else {
-    return (
-      <Text style={styles.developmentModeText}>
-        You are not in development mode: your app will run at full speed.
-      </Text>
-    );
-  }
-}
-
-function handleLearnMorePress() {
-}
-
-function handleHelpPress() {
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -306,15 +229,9 @@ const styles = StyleSheet.create({
   },
   container2:{
     flex:2.3,
-    // backgroundColor:"#716"
   },
   container3:{
     flex:1.3,
-    // flex:0.8,
-    // flexDirection:"row",
-    // justifyContent:"space-between",
-    // alignItems:"center"
-    // backgroundColor:"#816"
   },
   container4:{
     flex:0.8,
