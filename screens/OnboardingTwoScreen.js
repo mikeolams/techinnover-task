@@ -51,7 +51,11 @@ export default function OnboardingTwoScreen(props) {
           </TouchableOpacity>
 
       </View>
-      {/* {console.log(apiBooks)} */}
+      {/* {apiBooks? console.log(
+        apiBooks.items[0], 
+        apiBooks.items[0].volumeInfo.authors[0],
+        apiBooks.items[0].volumeInfo.imageLinks.thumbnail
+        ):null} */}
 
       <View style={styles.container2}>
       <View>
@@ -62,35 +66,59 @@ export default function OnboardingTwoScreen(props) {
         <View style={styles.content3}>
         <View>
           <TouchableOpacity>
-        <Image
+        {!apiBooks?<Image
             source={
               require('../assets/images/tec-image-15.png')
             }
             style={styles.image2}
-          />
+          />:
+
+<Image  
+source={
+                 {uri:apiBooks.items[0].volumeInfo.imageLinks.thumbnail}
+               }
+               style={styles.image1}
+             />}
           </TouchableOpacity>
-          <Text style={styles.boldText}>
+          <View style={styles.textFrame}>
+          {!apiBooks?<Text style={styles.boldText}>
              Fashionopolis
-            </Text>
-            <Text style={styles.smallText}>
+            </Text>:<Text style={styles.boldText}>
+            {/* {apiBooks.items[0].volumeInfo.title} */}
+            </Text>}
+            {!apiBooks?<Text style={styles.smallText}>
              Dana Thomas
-            </Text>
+            </Text>: <Text style={styles.smallText}>{apiBooks.items[0].volumeInfo.authors[0]}</Text>}
+          </View>
+          
           </View>
           <View>
           <TouchableOpacity>
-        <Image
+          {!apiBooks?<Image
             source={
               require('../assets/images/tec-image-14.png')
             }
             style={styles.image2}
-          />
+          />:
+
+<Image  
+source={
+                 {uri:apiBooks.items[1].volumeInfo.imageLinks.thumbnail}
+               }
+               style={styles.image1}
+             />}  
           </TouchableOpacity>
-          <Text style={styles.boldText}>
+          <View style={styles.textFrame}>
+          {!apiBooks?<Text style={styles.boldText}>
              Chanel
-            </Text>
-            <Text style={styles.smallText}>
+            </Text>:<Text style={styles.boldText}>
+            {apiBooks.items[1].volumeInfo.title}
+            </Text>}
+            {!apiBooks?<Text style={styles.smallText}>
              Patrick Mauries
-            </Text>
+            </Text>: <Text style={styles.smallText}>{apiBooks.items[1].volumeInfo.authors[0]}</Text>}
+          </View>
+
           </View>
          
           </View>
@@ -269,6 +297,10 @@ const styles = StyleSheet.create({
     backgroundColor:"#fff",
     bottom:30
   },
+  textFrame:{
+    flexWrap:"wrap",
+    width:50,
+  },
   boldText:{
     fontSize: 17,
     textAlign: 'left',
@@ -281,6 +313,11 @@ const styles = StyleSheet.create({
   image3: {
     width: 100,
     height: 100,
+    resizeMode: 'contain',
+  },
+  image1: {
+    width: 130,
+    height: 200,
     resizeMode: 'contain',
   },
   content3:{
