@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect, Fragment} from 'react';
 import {
   Image,
   Platform,
@@ -10,18 +10,19 @@ import {
 
 export default function OnboardingTwoScreen(props) {
 
+  const [apiBooks, setApiBooks] = useState('');
 
-  // const loginCall= async (values)=> {
-  //   return await fetch('https://farmcenta.com/api/v1/login',{
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify(values)
-  //   })
-  //   .then(res => res.json())
-  //   .then(res => transactionsCall(res));
-  // },
+  const bookFetch = async (values)=> {
+    return await fetch('https://www.googleapis.com/books/v1/volumes?q=search+terms',{
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      // body: JSON.stringify(values)
+    })
+    .then(res => res.json())
+    .then(res => setApiBooks(res));
+  };
 
 
 
