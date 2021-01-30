@@ -24,6 +24,9 @@ export default function OnboardingTwoScreen(props) {
     .then(res => setApiBooks(res));
   };
 
+  useEffect(() => {
+    bookFetch();
+  }, []);
 
 
   return (
@@ -48,7 +51,7 @@ export default function OnboardingTwoScreen(props) {
           </TouchableOpacity>
 
       </View>
-
+      {/* {console.log(apiBooks)} */}
 
       <View style={styles.container2}>
       <View>
