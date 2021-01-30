@@ -10,6 +10,21 @@ import {
 
 export default function OnboardingTwoScreen(props) {
 
+
+  // const loginCall= async (values)=> {
+  //   return await fetch('https://farmcenta.com/api/v1/login',{
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-Type': 'application/json'
+  //     },
+  //     body: JSON.stringify(values)
+  //   })
+  //   .then(res => res.json())
+  //   .then(res => transactionsCall(res));
+  // },
+
+
+
   return (
       <View style={styles.container}>
       <View style={styles.container1}>
