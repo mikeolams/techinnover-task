@@ -80,16 +80,19 @@ source={
                style={styles.image1}
              />}
           </TouchableOpacity>
-          <View style={styles.textFrame}>
+          
           {!apiBooks?<Text style={styles.boldText}>
              Fashionopolis
-            </Text>:<Text style={styles.boldText}>
-            {/* {apiBooks.items[0].volumeInfo.title} */}
-            </Text>}
+            </Text>:<View style={styles.textFrame}>
+            <Text style={styles.boldText}>
+            {apiBooks.items[0].volumeInfo.title}
+            </Text>
+            </View>
+            }
             {!apiBooks?<Text style={styles.smallText}>
              Dana Thomas
             </Text>: <Text style={styles.smallText}>{apiBooks.items[0].volumeInfo.authors[0]}</Text>}
-          </View>
+         
           
           </View>
           <View>
@@ -116,7 +119,7 @@ source={
             </Text>}
             {!apiBooks?<Text style={styles.smallText}>
              Patrick Mauries
-            </Text>: <Text style={styles.smallText}>{apiBooks.items[1].volumeInfo.authors[0]}</Text>}
+            </Text>: <Text style={styles.smallText}>{apiBooks.items[3].volumeInfo.authors[0]}</Text>}
           </View>
 
           </View>
@@ -298,16 +301,16 @@ const styles = StyleSheet.create({
     bottom:30
   },
   textFrame:{
-    flexWrap:"wrap",
-    width:50,
+    // flexWrap:"wrap",
+    width:100,
   },
   boldText:{
-    fontSize: 17,
+    fontSize: 10,
     textAlign: 'left',
     fontWeight:"bold"
   },
   smallText:{
-    fontSize: 11,
+    fontSize: 9,
     textAlign: 'left',
   },
   image3: {
@@ -317,7 +320,7 @@ const styles = StyleSheet.create({
   },
   image1: {
     width: 130,
-    height: 200,
+    height: 180,
     resizeMode: 'contain',
   },
   content3:{
