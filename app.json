@@ -10,7 +10,8 @@
     ],
     "android": {
       "package": "com.GLT.centavest",
-      "versionCode": 1
+      "versionCode": 1,
+      "permissions": []
     },
     "version": "1.0.0",
     "orientation": "portrait",
