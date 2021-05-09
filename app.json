@@ -29,7 +29,7 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.GLT.centavest",
+      "bundleIdentifier": "com.GLT.Centavest",
       "buildNumber": "1.0.0"
     },
     "description": "An app use by investors in farming sponsor by Centavest"
